@@ -8,22 +8,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema jeuxVideo
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `jeuxVideo` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema jeuxVideo
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `jeuxVideo` DEFAULT CHARACTER SET utf8 ;
+USE `jeuxVideo` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Editeur`
+-- Table `jeuxVideo`.`Editeur`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Editeur` ;
+DROP TABLE IF EXISTS `jeuxVideo`.`Editeur` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Editeur` (
+CREATE TABLE IF NOT EXISTS `jeuxVideo`.`Editeur` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -33,11 +33,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Jeux`
+-- Table `jeuxVideo`.`Jeux`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Jeux` ;
+DROP TABLE IF EXISTS `jeuxVideo`.`Jeux` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Jeux` (
+CREATE TABLE IF NOT EXISTS `jeuxVideo`.`Jeux` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(100) NOT NULL,
   `Editeur_id` INT NOT NULL,
@@ -47,18 +47,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Jeux` (
   INDEX `fk_Jeux_Editeur1_idx` (`Editeur_id` ASC),
   CONSTRAINT `fk_Jeux_Editeur1`
     FOREIGN KEY (`Editeur_id`)
-    REFERENCES `mydb`.`Editeur` (`id`)
+    REFERENCES `jeuxVideo`.`Editeur` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Support`
+-- Table `jeuxVideo`.`Support`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Support` ;
+DROP TABLE IF EXISTS `jeuxVideo`.`Support` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Support` (
+CREATE TABLE IF NOT EXISTS `jeuxVideo`.`Support` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -68,11 +68,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`DLC`
+-- Table `jeuxVideo`.`DLC`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`DLC` ;
+DROP TABLE IF EXISTS `jeuxVideo`.`DLC` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`DLC` (
+CREATE TABLE IF NOT EXISTS `jeuxVideo`.`DLC` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(100) NOT NULL,
   `Editeur_id` INT NOT NULL,
@@ -82,18 +82,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`DLC` (
   INDEX `fk_DLC_Editeur1_idx` (`Editeur_id` ASC),
   CONSTRAINT `fk_DLC_Editeur1`
     FOREIGN KEY (`Editeur_id`)
-    REFERENCES `mydb`.`Editeur` (`id`)
+    REFERENCES `jeuxVideo`.`Editeur` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Jeux_has_Support`
+-- Table `jeuxVideo`.`Jeux_has_Support`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Jeux_has_Support` ;
+DROP TABLE IF EXISTS `jeuxVideo`.`Jeux_has_Support` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Jeux_has_Support` (
+CREATE TABLE IF NOT EXISTS `jeuxVideo`.`Jeux_has_Support` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Jeux_id` INT NOT NULL,
   `Support_id` INT NOT NULL,
@@ -105,17 +105,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Jeux_has_Support` (
   INDEX `fk_Jeux_has_Support_DLC1_idx` (`DLC_id` ASC),
   CONSTRAINT `fk_Jeux_has_Support_Jeux1`
     FOREIGN KEY (`Jeux_id`)
-    REFERENCES `mydb`.`Jeux` (`id`)
+    REFERENCES `jeuxVideo`.`Jeux` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Jeux_has_Support_Support1`
     FOREIGN KEY (`Support_id`)
-    REFERENCES `mydb`.`Support` (`id`)
+    REFERENCES `jeuxVideo`.`Support` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Jeux_has_Support_DLC1`
     FOREIGN KEY (`DLC_id`)
-    REFERENCES `mydb`.`DLC` (`id`)
+    REFERENCES `jeuxVideo`.`DLC` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
