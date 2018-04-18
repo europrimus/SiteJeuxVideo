@@ -1,8 +1,9 @@
 <?php
 include("../include/class.php");
+$page = new Page("THE Jeux Video DB","Création d'un DLC");
 include("../include/header.php"); ?>
 <main>
-	<h2>Création d'un DLC</h2>
+	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="" method="POST">
 		<label>Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
@@ -21,5 +22,3 @@ include("../include/header.php"); ?>
 	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
 <?php include("../include/footer.php"); ?>
-</body>
-</html>
