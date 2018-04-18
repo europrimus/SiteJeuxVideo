@@ -1,0 +1,12 @@
+# Exercice CRUD : site de jeux vidéo
+- Par groupes de 5 (attention, grosse gestion d'équipe, désignez intelligemment votre CDP), 6 quand les absents reviendront
+- Développement itératif avec Git
+- MCD évolutif avec le projet
+- 0 temps sur le design, faîtes du HTML tout moche
+- Visez loin, vous avez 6 jours devant vous pour créer le site de jeux vidéos le plus complet et le plus cool possible...
+- ...mais commencez petit, concentrez-vous sur un minuscule noyau fonctionnel (un listing de jeux par exemple), bâtissez un crud autour de cet objet, puis ajoutez la gestion des consoles, etc...
+- Committez aussi souvent que possible, il n'y a pas de concours du plus gros projet en le plus petit nombre de commits. Une fonctionnalité = un commit, une correction d'un bug = un commit
+- Tous les commits doivent représenter un état fonctionnel de votre projet (hors bug bien sûr), pas de fonctionnalité à moitié développée
+- Quand vous constatez des bugs, ouvrez des issues et résolvez-les en marquant quel commit résoud quel bug
+- Ne laissez personne derrière, tout le monde doit committer au moins 3 fois par jour
+- L'équipe qui sera allée le plus loin, avec un projet fonctionnel, un MCD à jour, des membres tous impliqués et occupés (et toujours vivants), des bugs ouverts puis corrigés gagnera un relooking de son projet pour en faire le joyau du portfolio de ses membres (ainsi que, pour tous les membres, un buffet à volonté dans le resto chinois de leur choix) (modifié)
