@@ -1,3 +1,6 @@
+<?php
+include("../include/class.php");
+include("../include/header.php"); ?>
 <main>
 	<h2>Création d'un jeu vidéo</h2>
 	<form action="" method="POST">
@@ -8,9 +11,12 @@
 		<label for="description">Description :</label>
 		<textarea id="description" name="description" placeholder="Ajouter une description du jeu ici..." required></textarea><br>
 
-		<label for="console">Console :</label>
+		<label for="date_sortie">Date de sortie :</label>
+		<input type="date" name="date_sortie" id="date_sortie" required><br>
+
+		<label for="console">Support :</label>
 		<select name="console">
-			<option selected disabled hidden value>Sélectionnez une console</option>
+			<option selected disabled hidden value>Sélectionnez un support</option>
 			<option value="valeur1">Valeur1</option>
 			<option value="valeur2">Valeur2</option>
 			<option value="valeur3">Valeur3</option>
@@ -27,7 +33,11 @@
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<ul>
-		<li><a href="creation_console.php">Créer une nouvelle console</a></li>
-		<li><a href="creation_editeur.php">Créer un nouvel éditeur</a></li>
+		<li><a href="support.php">Créer ou modifier un nouveau support</a></li>
+		<li><a href="editeur.php">Créer ou modifier un nouvel éditeur</a></li>
 	</ul>
+	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
+<?php include("../include/footer.php"); ?>
+</body>
+</html>
