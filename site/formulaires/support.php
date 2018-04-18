@@ -9,8 +9,6 @@ include("../include/header.php"); ?>
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<ul>
-		<li><a href="jeu.php">Créer ou modifier un jeu</a></li>
-		<li><a href="dlc.php">Créer ou modifier un DLC</a></li>
 	</ul>
 	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
