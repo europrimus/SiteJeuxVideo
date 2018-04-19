@@ -1,6 +1,11 @@
 <?php
+<<<<<<< Updated upstream
 class jeu {
 
+=======
+class jeu
+{
+>>>>>>> Stashed changes
   private $_id;
   private $_nom;
   private $_editeur;
