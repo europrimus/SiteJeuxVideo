@@ -3,17 +3,12 @@ include("../../include/class.php");
 include("../../include/header.php");
 ?>
 <main>
-	<h2>Fiche Nom DLC</h2>
+	<h2>Fiche nom Editeur</h2>
 	<h3>Informations</h3>
 	<ul>
-		<li>Nom : Nom du DLC</li>
-		<li>Jeu : Nom du jeu</li>
-		<li>Support : Nom du support</li>
-		<li>Editeur : Nom de l'éditeur</li>
-		<li>Date de sortie : Date de sortie</li>
+		<li>Nom : Nom de l'éditeur</li>
 	</ul>
-	<h3>Description</h3>
-	<p>Description du DLC</p>
+
 	<a href="../../index.php">Revenir sur la page d'accueil</a>
 </main>
 
