@@ -24,9 +24,9 @@ class EditeursManager {
   }
 
 
-  public function get($id){
-    $id = (int) $id;
-    $q = $this->_db->query('SELECT id, nom FROM editeur WHERE id = '.$id);
+  public function get($nom){
+    $nom = (int) $nom;
+    $q = $this->_db->query('SELECT id, nom FROM editeur WHERE nom = '.$nom);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     return new Editeur($donnees);
   }
@@ -34,7 +34,7 @@ class EditeursManager {
 
   public function getList(){
     $editeurs = [];
-    $q = $this->_db->query('SELECT id, nom FROM editeurs ORDER BY nom');
+    $q = $this->_db->query('SELECT id, nom FROM editeur ORDER BY nom');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){
       $editeurs[] = new Editeur($donnees);
@@ -47,8 +47,8 @@ class EditeursManager {
   public function update(Editeur $editeur){
     $q = $this->_db->prepare('UPDATE editeur SET nom = :nom WHERE id = :id');
 
-    $q->bindValue(':nom', $editeur->nom(), PDO::PARAM_INT);
     $q->bindValue(':id', $editeur->id(), PDO::PARAM_INT);
+    $q->bindValue(':nom', $editeur->nom(), PDO::PARAM_STR);
     $q->execute();
   }
 
