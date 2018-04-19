@@ -1,5 +1,9 @@
 <?php
 include("include/class.php");
+
+$page = new Page("THE Jeux Video DB","Acceuil");
+//var_dump($page);
+
 include("include/header.php");
 ?>
 <main>

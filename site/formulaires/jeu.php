@@ -1,8 +1,9 @@
 <?php
 include("../include/class.php");
+$page = new Page("THE Jeux Video DB","Ajout d'un jeux");
 include("../include/header.php"); ?>
 <main>
-	<h2>Création d'un jeu vidéo</h2>
+	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="" method="POST">
 
 		<label for="nom">Nom :</label>
@@ -31,5 +32,3 @@ include("../include/header.php"); ?>
 	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
 <?php include("../include/footer.php"); ?>
-</body>
-</html>
