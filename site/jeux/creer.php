@@ -1,6 +1,6 @@
 <?php
 include("../include/class.php");
-$page = new Page("THE Jeux Video DB","Ajout d'un jeux");
+$page = new Page("THE Jeux Video DB","Création d'un jeu");
 include("../include/header.php"); ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>

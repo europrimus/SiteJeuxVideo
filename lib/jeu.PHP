@@ -1,8 +1,11 @@
 <?php
+<<<<<<< Updated upstream
+class jeu {
 
-<?php
+=======
 class jeu
 {
+>>>>>>> Stashed changes
   private $_id;
   private $_nom;
   private $_editeur;
@@ -38,58 +41,43 @@ class jeu
         
   public function setNom($nom) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    // Dont la longueur est inférieure à 30 caractères.
-    if (is_string($nom) && strlen($nom) <= 30) {
+    // Dont la longueur est inférieure à 100 caractères.
+    if (is_string($nom) && strlen($nom) <= 100) {
       $this->_nom = $nom;
     }
   }
 
-  public function setEditeur($editeur)
-  {
-    $forcePerso = (int) $forcePerso;
-            
-    // On vérifie que la force passée est comprise entre 0 et 100.
-    if ($forcePerso >= 0 && $forcePerso <= 100)
-    {
-      $this->_forcePerso = $forcePerso;
+  public function setEditeur($editeur) {
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    // Dont la longueur est inférieure à 100 caractères.
+    if (is_string($editeur) && strlen($editeur) <= 100) {
+      $this->_editeur = $editeur;
     }
   }
 
-  public function setSupport($support)
-  {
-    $degats = (int) $degats;
-
-    // On vérifie que les dégâts passés sont compris entre 0 et 100.
-    if ($degats >= 0 && $degats <= 100)
-    {
-      $this->_degats = $degats;
+  public function setSupport($support) {
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    // Dont la longueur est inférieure à 100 caractères.
+    if (is_string($support) && strlen($support) <= 100) {
+      $this->_support = $support;
     }
   }
 
-  public function setDate($date)
-  {
-    $niveau = (int) $niveau;
+  public function setDate($date) {
+    // On vérifie qu'il s'agit bien d'une date.
 
-    // On vérifie que le niveau n'est pas négatif.
-    if ($niveau >= 0)
-    {
-      $this->_niveau = $niveau;
+  }
+
+  public function setDescription($description) {
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    // Dont la longueur est inférieure à 100 caractères.
+    if (is_string($description) && strlen($description) <= 100) {
+      $this->_description = $description;
     }
   }
 
-  public function setDescription($description)
-  {
-    $exp = (int) $exp;
-
-    // On vérifie que l'expérience est comprise entre 0 et 100.
-    if ($exp >= 0 && $exp <= 100)
-    {
-      $this->_experience = $exp;
-    }
+  public function __construct(array $donnees) {
+    $this->hydrate($donnees);
   }
 }
-
-
-
-
 ?>
