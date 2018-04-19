@@ -1,7 +1,7 @@
 <?php
 
 set_include_path(get_include_path() . PATH_SEPARATOR .SITE["installDir"].'include/');
-var_dump(get_include_path());
+// var_dump(get_include_path());
 
 // création de la classe page
 // Détient les infos sur la page
@@ -56,7 +56,7 @@ class Page{
 }
 
 function chargerClasse($class){
-	echo "chargerClasse : $class";
+	// echo "chargerClasse : $class";
 	require 'class_'.$class.'.php';
 }
 
