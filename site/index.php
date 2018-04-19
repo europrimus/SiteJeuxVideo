@@ -1,15 +1,15 @@
 <?php
-require ("include/config.php");
+require ("include/config_defaut.php");
 require ("include/class.php");
 
-$page = new Page("Acceuil");
+$page = new Page("Accueil");
 //var_dump($page);
 
 include("include/header.php");
 ?>
 <main>
 
-	<h2>Création ou modification d'un élément</h2>
+	<h2>Création d'un élément</h2>
 	<ul>
 		<li><a href="jeux/creer.php">Jeu</a></li>
 		<li><a href="supports/creer.php">Support</a></li>
@@ -17,15 +17,7 @@ include("include/header.php");
 		<li><a href="editeurs/creer.php">Editeur</a></li>
 	</ul>
 
-	<h2>Modification d'un élément</h2>
-	<ul>
-		<li><a href="jeux/modifier.php">Jeu</a></li>
-		<li><a href="supports/modifier.php">Support</a></li>
-		<li><a href="dlc/modifier.php">DLC</a></li>
-		<li><a href="editeurs/modifier.php">Editeur</a></li>
-	</ul>
-
-	<h2>Liste des élément</h2>
+	<h2>Liste des élément (Modification et fiche individuelle)</h2>
 	<ul>
 		<li><a href="jeux/index.php">Jeux</a></li>
 		<li><a href="supports/index.php">Supports</a></li>

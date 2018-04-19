@@ -1,5 +1,5 @@
 <?php
-require ("../include/config.php");
+require ("../include/config_defaut.php");
 require ("../include/class.php");
 $page = new Page("Création d'un éditeur");
 include("../include/header.php"); ?>
