@@ -27,9 +27,10 @@ define('DB_CHARSET', 'utf8_general_ci');
  * Configuration du site
  */
 define('SITE', array(
-"titreComplet" => "La base de données des Jeux Video", 
-"TitreCourt" => "LBDJV",
-"installDir" => "/home/didier/Documents/www/SiteJeuxVideo/site/",
+"titreComplet" => "La base de données des Jeux Video", 			// Le nom complet du site
+"TitreCourt" => "LBDJV",										// Le nom court, pour la balise <title>
+"installDir" => "Le répertoire d'installation coté serveur",	// Le répertoire d'installation coté serveur
+"baseUrl" => "l'url du site visible par l'utilisateur",			// l'url du site visible par l'utilisateur
  ) );
 
 ?>
