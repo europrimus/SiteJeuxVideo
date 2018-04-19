@@ -1,5 +1,9 @@
 <?php
 /*
+Renommer le fichier en config.php et éditer les infos relatives au serveur.
+*/
+
+/*
  * Configuration de la base de données
  */
 
@@ -18,5 +22,12 @@ define('DB_HOST', 'localhost');
 /** encodage */
 define('DB_CHARSET', 'utf8_general_ci');
 
+
+/*
+ * Configuration du site
+ */
+define('SITE', array(
+"titreComplet" => "La base de données des Jeux Video", 
+"TitreCourt" => "LBDJV" ) );
 
 ?>
