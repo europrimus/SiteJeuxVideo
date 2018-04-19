@@ -28,6 +28,8 @@ define('DB_CHARSET', 'utf8_general_ci');
  */
 define('SITE', array(
 "titreComplet" => "La base de données des Jeux Video", 
-"TitreCourt" => "LBDJV" ) );
+"TitreCourt" => "LBDJV",
+"installDir" => "/home/didier/Documents/www/SiteJeuxVideo/site/",
+ ) );
 
 ?>

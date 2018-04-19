@@ -1,8 +1,9 @@
 <?php
 require ("../include/config.php");
-require ("../include/class.php");
+require (SITE["installDir"]."/include/class.php");
 $page = new Page("Création d'un jeu");
-include("../include/header.php"); ?>
+include(SITE["installDir"]."/include/header.php"); 
+?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="objeux.php" method="POST">
@@ -32,4 +33,4 @@ include("../include/header.php"); ?>
 	<p><em>(Création dynamique si nouveau support ou éditeur et recherche autocompletion pour editeur)</em></p>
 	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
-<?php include("../include/footer.php"); ?>
+<?php include(SITE["installDir"]."/include/footer.php"); ?>
