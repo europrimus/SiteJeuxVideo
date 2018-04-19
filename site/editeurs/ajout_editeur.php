@@ -11,11 +11,11 @@ $erreur = "";
 $db = new PDO('mysql:host=localhost;dbname=jeuxvideo', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$manager = new EditeursManager($db);
-$editeurs = $manager->getList();
 
 // On vérifie que le nom a été tapé par l'utilisateur
 if(!empty($nom)){
+	$manager = new EditeursManager($db);
+	$editeurs = $manager->getList();
 	$new_editeur = new Editeur([
 		'nom' => $nom
 	]);

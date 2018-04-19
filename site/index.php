@@ -17,7 +17,7 @@ include("include/header.php");
 		<li><a href="editeurs/creer.php">Editeur</a></li>
 	</ul>
 
-	<h2>Liste des élément (Modification et fiche individuelle)</h2>
+	<h2>Liste des élément (Modification, suppression et fiche individuelle)</h2>
 	<ul>
 		<li><a href="jeux/index.php">Jeux</a></li>
 		<li><a href="supports/index.php">Supports</a></li>

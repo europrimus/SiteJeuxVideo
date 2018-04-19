@@ -22,6 +22,7 @@ $editeurs = $manager->getList();
 	    	<li>
 	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>"><?php echo htmlspecialchars($editeur->nom()); ?></a><br>
 	    		<a href="modifier.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>&id=<?php echo($editeur->id()); ?>"> Modifier </a>
+	    		<a href="supprimer.php?id=<?php echo $editeur->id(); ?>"> Supprimer</a>
 	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>"> Accéder à sa fiche </a>
 	    	</li>
 	    </ul>
