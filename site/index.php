@@ -2,7 +2,8 @@
 require ("include/config_defaut.php");
 require ("include/class.php");
 
-$page = new Page("Accueil");
+$page = new Page("Acceuil");
+$menu = new Menu("$page->getPage()");
 //var_dump($page);
 
 include("include/header.php");
