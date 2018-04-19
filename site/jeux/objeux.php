@@ -1,9 +1,10 @@
 <?php
 
-  
-  
-  
-  
+require ("../include/config.php");
+require (SITE["installDir"]."/include/class.php");
+$page = new Page("Création d'un jeu");
+include(SITE["installDir"]."/include/header.php");
+
 $donnees=array(
 'nom' =>$_POST['nom'],
 'editeur'=>$_POST['editeur'],
@@ -12,15 +13,6 @@ $donnees=array(
 'description'=>$_POST['description']
 
 );
-
- function chargerClasse($class){
-  
-require$class.'.php';
-
-}
-
-
-spl_autoload_register('chargerClasse'); // On enregistre la fonction en autoload pour qu'elle soit appelée dès qu'on instanciera une classe non déclarée.
 
 
 $esaye= new jeu($donnees);
@@ -31,6 +23,6 @@ print_r ($esaye);
 echo "</pre>";
 
 
-
+include(SITE["installDir"]."/include/footer.php");
 
 ?>
