@@ -1,10 +1,14 @@
 <?php
-require('../../lib/editeursManager.php');
-include('../include/config_defaut.php');
-include("../include/class.php");
+//require('../../lib/editeursManager.php');
+
+require('../include/config.php');
+require(SITE["installDir"]."/include/class.php");
+
 $page = new Page("THE Jeux Video DB","Liste des éditeurs");
-include("../include/header.php");
-$db = new PDO('mysql:host=localhost;dbname=jeuxvideo', 'root', '');
+
+include(SITE["installDir"]."/include/header.php");
+
+$db = new PDO('mysql:dbname='.DB_NAME.';host='.DB_HOST , DB_USER, DB_PASSWORD);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 

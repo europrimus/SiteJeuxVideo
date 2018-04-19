@@ -1,6 +1,6 @@
 <?php
-require ("include/config_defaut.php");
-require ("include/class.php");
+require ("include/config.php");
+require (SITE["installDir"]."include/class.php");
 
 $page = new Page("Acceuil");
 $menu = new Menu("$page->getPage()");
@@ -10,7 +10,7 @@ include("include/header.php");
 ?>
 <main>
 
-	<h2>Création d'un élément</h2>
+	<h2>Création ou modification d'un élément</h2>
 	<ul>
 		<li><a href="jeux/creer.php">Jeu</a></li>
 		<li><a href="supports/creer.php">Support</a></li>
