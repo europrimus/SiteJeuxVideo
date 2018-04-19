@@ -1,6 +1,7 @@
 <?php
-include("../include/class.php");
-$page = new Page("THE Jeux Video DB","Création d'un DLC");
+require ("../include/config.php");
+require ("../include/class.php");
+$page = new Page("Création d'un DLC");
 include("../include/header.php"); ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>

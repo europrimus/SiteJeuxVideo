@@ -1,6 +1,7 @@
 <?php
-include("../include/class.php");
-$page = new Page("THE Jeux Video DB","Informations sur un éditeur");
+require ("../include/config.php");
+require ("../include/class.php");
+$page = new Page("Informations sur un éditeur");
 include("../include/header.php");
 ?>
 <main>
