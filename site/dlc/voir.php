@@ -1,9 +1,9 @@
 <?php
-include("../../include/class.php");
-include("../../include/header.php");
+include("../include/class.php");
+$page = new Page("THE Jeux Video DB","Informations sur un DLC");
+include("../include/header.php");
 ?>
 <main>
-	<h2>Fiche Nom DLC</h2>
 	<h3>Informations</h3>
 	<ul>
 		<li>Nom : Nom du DLC</li>
@@ -14,11 +14,11 @@ include("../../include/header.php");
 	</ul>
 	<h3>Description</h3>
 	<p>Description du DLC</p>
-	<a href="../../index.php">Revenir sur la page d'accueil</a>
+	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
 
 <?php
-include("../../include/footer.php");
+include("../include/footer.php");
 ?>
 </body>
 </html>
