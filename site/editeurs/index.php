@@ -1,16 +1,17 @@
 <?php
-require ("../include/config.php");
-require ("../include/class.php");
-$page = new Page("Liste des éditeurs");
+require('../../lib/editeursManager.php');
+include("../include/class.php");
+$page = new Page("THE Jeux Video DB","Liste des éditeurs");
 include("../include/header.php");
+$editeurs->getList();
+
 ?>
 <main>
-	<ul>
-		<li><a href="voir.php">Editeur 1</a></li>
-		<li><a href="#">Editeur 2</a></li>
-		<li><a href="#">Editeur 3</a></li>
-	</ul>
-	<a href="../index.php">Revenir sur la page d'accueil</a>
+	<?php foreach ($editeurs as $editeur) {
+		echo "<ul><li><a href='voir.php?nom=".$editeur['nom']."'>".$editeur['nom']."</a></li></ul>";
+	} 
+	?>
+
 </main>
 
 <?php

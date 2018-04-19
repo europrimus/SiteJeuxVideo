@@ -5,7 +5,7 @@ $page = new Page("Création d'un éditeur");
 include("../include/header.php"); ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>
-	<form action="" method="POST">
+	<form action="ajout_editeur.php" method="POST">
 		<label>Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">

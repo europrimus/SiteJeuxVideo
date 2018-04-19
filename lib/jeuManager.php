@@ -1,5 +1,5 @@
 <?php
-class jeuManager
+class JeuManager
 
 {
   private $_db; // Instance de PDO.

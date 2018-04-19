@@ -1,11 +1,6 @@
 <?php
-<<<<<<< Updated upstream
-class jeu {
+class Jeu {
 
-=======
-class jeu
-{
->>>>>>> Stashed changes
   private $_id;
   private $_nom;
   private $_editeur;
@@ -35,7 +30,7 @@ class jeu
 
   public function setId($id)
   {
-    // L'identifiant du personnage sera, quoi qu'il arrive, un nombre entier.
+    // L'identifiant du jeu sera, quoi qu'il arrive, un nombre entier.
     $this->_id = (int) $id;
   }
         
