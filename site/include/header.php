@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-<title><?php echo $page->getTitre()." | ".$page->getPage(); ?></title>
+<title><?php echo $page->getTitreCourt()." | ".$page->getPage(); ?></title>
 <meta name="generator" content="Geany 1.27">
 <!-- Feuille de style -->
 	<!--<link rel="stylesheet" href="css/style.css">-->
