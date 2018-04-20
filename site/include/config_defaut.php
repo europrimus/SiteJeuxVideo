@@ -67,7 +67,8 @@ spl_autoload_register('chargerClasse');
  */
 
 // Connexion à la base de données
-$db = new PDO($DB['TYPE'].':host='.$DB['HOST'].';dbname='.$DB['NAME'].';charset='.$DB['CHARSET', $DB['USER'], $DB['PASSWORD']);
+$db = new PDO($DB['TYPE'].':host='.$DB['HOST'].';dbname='.$DB['NAME'].';charset='.$DB['CHARSET'], $DB['USER'], $DB['PASSWORD']);
+//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // on supprime la config de la basse de données
 unset($DB);
