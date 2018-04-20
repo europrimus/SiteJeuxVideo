@@ -1,9 +1,12 @@
 <?php
+// charge la configuration et renvoi un objet PDO $db
 require ("../include/config.php");
 
 $page = new Page("Création d'un DLC");
-include(SITE["installDir"]."include/header.php"); ?>
-<main>
+// charge le début de la page <html> à </header>
+include(SITE["installDir"]."include/header.php");
+?>
+<main class="container-fluid">
 	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="" method="POST">
 
@@ -17,21 +20,40 @@ include(SITE["installDir"]."include/header.php"); ?>
 		<input type="date" name="date_sortie" id="date_sortie" required><br>
 
 		<label for="editeur">Editeur</label>
-		<input type="search" name="editeur" id="editeur" required><br>
+		<select id="editeur" class="selectpicker" data-live-search="true">
+<?php
+$editeurManager=new EditeursManager($db);
+$editeurListe=$editeurManager->getList();
+//echo "editeurListe:<br><pre>";var_dump($editeurListe);echo "</pre>";
+foreach($editeurListe as $editeur)
+	{
+		echo '<option value="'.$editeur->id().'" data-tokens="'.$editeur->nom().'">'.$editeur->nom().'</option>';
+	}
+?>
+		</select>
+		<br>
 
 		<label for="jeu">Jeu</label>
-		<input type="search" name="jeu" id="jeu" required><br>
+		<select id="jeu" class="selectpicker" data-live-search="true">
+		  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+		  <option data-tokens="mustard">Burger, Shake and a Smile</option>
+		  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+		</select>
+		<br>
 
 		<label for="support" required>Support</label>
-		<select name="support" required>
-			<option selected disabled hidden value>Sélectionnez un support</option>
-			<option value="valeur1">Valeur1</option>
-			<option value="valeur2">Valeur2</option>
-			<option value="valeur3">Valeur3</option>
-		</select><br>
+		<select id="support" class="selectpicker" data-live-search="true">
+		  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+		  <option data-tokens="mustard">Burger, Shake and a Smile</option>
+		  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+		</select>
+		<br>
 
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<p><em>(autocompletion pour editeur et jeu et création dynamique si nouveau jeu, support ou éditeur)</em></p>
 </main>
-<?php include(SITE["installDir"]."include/footer.php"); ?>
+<?php 
+// charge la fin de la page de <footer> à </html>
+include(SITE["installDir"]."include/footer.php");
+?>

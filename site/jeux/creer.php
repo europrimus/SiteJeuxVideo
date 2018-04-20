@@ -17,9 +17,9 @@ $editeurs = $manager->getList();
 		<label for="editeur">Editeur :</label>
 		<select name="editeur">
 			<option selected disabled hidden value>Sélectionnez un éditeur dans la liste</option>
-			<?php foreach ($editeurs as $editeur) {	?>
-	    	<option value="<?php echo htmlspecialchars($editeur->nom()); ?>"><?php echo htmlspecialchars($editeur->nom()); ?></option>
-			<?php  } ?>
+			<?php foreach ($editeurs as $editeur): ?>
+	    	<option value="<?php echo htmlspecialchars($editeur->id()); ?>"><?php echo htmlspecialchars($editeur->nom()); ?></option>
+			<?php endforeach; ?>
 		</select><br>		
 
 		<label for="date_sortie">Date de sortie :</label>

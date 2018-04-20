@@ -68,7 +68,7 @@ class dlc {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 500 caractères.
     if (is_string($str) && strlen($str) <= 500) {
-      $this->_Description = strip_tags($str);
+      $this->_description = strip_tags($str);
     }
   }
 
@@ -136,8 +136,5 @@ class dlc {
 	return date( $format , $this->_date );
   }
 
-
-
 }
-
 ?>
