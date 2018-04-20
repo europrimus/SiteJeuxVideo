@@ -57,5 +57,11 @@ session_start();
   </div>
 </nav>
 
+<?php
+/*
+ * un menu automatique, mais moin beau
+echo $page->getNav();
+*/
+?>
 
 	</header>

@@ -65,6 +65,49 @@ class Page{
 	public function getPage(){
 		return $this->_page;
 	}
+	
+
+// Le menu
+	public function getNav(){
+		// ouverture des balises
+		$nav = '
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Menu principal">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="menuPrincipal">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="'.SITE["baseUrl"].'">Accueil</a>
+				</li>';
+
+		// dessin des éléments
+		foreach($this->_listePage as $page){
+			$nav .= '
+				<li class="nav-item">
+					<a class="nav-link" href="'.SITE["baseUrl"].$page.'">'.$page.'</a>
+				</li>';
+		}
+
+		// fermeture des balises
+		$nav .= '
+			</ul>';
+/*
+<!-- Formulaire de recherche encore non fonctionnelle
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+-->
+*/
+		$nav .= '
+		</div>
+	</nav>';
+		
+		return $nav;
+	}
 }
 
 ?>
