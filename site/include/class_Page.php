@@ -21,7 +21,8 @@ class Page{
 		//echo "<pre>";var_dump($this->_repSysteme);echo "</pre>";
 		foreach($reps as $rep)
 		{
-			$rep = array_pop(explode( DIRECTORY_SEPARATOR , $rep));
+			$rep = explode( DIRECTORY_SEPARATOR , $rep);
+			$rep = array_pop( $rep );
 			if(!in_array($rep, $this->_repSysteme))
 			{
 				$listPage[]=$rep;
