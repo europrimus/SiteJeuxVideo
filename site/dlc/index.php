@@ -17,6 +17,7 @@ $editeurs = $manager->getList();
 		<li><a href="#">DLC - Nom du jeu(support) 2</a></li>
 		<li><a href="#">DLC - Nom du jeu(support) 3</a></li>
 	</ul>
+	<a href="creer.php">Ajouter un DLC</a>
 </main>
 
 <?php
