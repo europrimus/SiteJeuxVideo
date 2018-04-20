@@ -1,8 +1,8 @@
 <?php
 require ("../include/config.php");
-require ("../include/class.php");
+
 $page = new Page("Création d'un Support");
-include("../include/header.php");
+include(SITE["installDir"]."include/header.php");
 ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>
@@ -13,6 +13,5 @@ include("../include/header.php");
 	</form>
 	<ul>
 	</ul>
-	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
-<?php include("../include/footer.php"); ?>
+<?php include(SITE["installDir"]."include/footer.php"); ?>

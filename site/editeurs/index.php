@@ -1,11 +1,13 @@
 <?php
 
 require('../include/config.php');
-$page = new Page("THE Jeux Video DB","Liste des éditeurs");
+// renvoi un objet PDO $db
 
-include(SITE["installDir"]."/include/header.php");
+$page = new Page("Liste des éditeurs");
 
-$db = new PDO('mysql:dbname='.DB_NAME.';host='.DB_HOST , DB_USER, DB_PASSWORD);
+// charge le début de la page <html> à </header>
+include(SITE["installDir"]."include/header.php");
+
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
@@ -35,7 +37,6 @@ $editeurs = $manager->getList();
 </main>
 
 <?php
-include("../include/footer.php");
+// charge la fin de la page de <footer> à </html>
+include(SITE["installDir"]."include/footer.php");
 ?>
-</body>
-</html>

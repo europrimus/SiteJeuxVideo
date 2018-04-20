@@ -1,8 +1,11 @@
 <?php
+// charge la configuration et renvoi un objet PDO $db
+require('../include/config.php');
 
-// Includes
-require ("../include/config.php");
+$page = new Page("Ajout d'un éditeur");
 
+// charge le début de la page <html> à </header>
+include(SITE["installDir"]."include/header.php");
 $nom = $_POST['nom'];
 $erreur = "";
 
@@ -37,4 +40,6 @@ if(!empty($nom)){
 	echo "Le champ non n'a pas été rempli";
 }
 
+// charge la fin de la page de <footer> à </html>
+include(SITE["installDir"]."include/footer.php");
 ?>

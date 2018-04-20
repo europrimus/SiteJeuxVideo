@@ -2,15 +2,16 @@
 
 // Includes
 require ("../include/config.php");
+// renvoi un objet PDO $db
 
+$page = new Page("Modifier un éditeur");
+
+// charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php");
 
 $nom = $_POST['nom'];
 $id = $_POST['id'];
 $erreur = "";
-// Accès base de donnéees
-$db = new PDO('mysql:host=localhost;dbname=jeuxvideo', 'root', '');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // On vérifie que le nom a été tapé par l'utilisateur
 if(!empty($nom) && !empty($id)){
@@ -40,5 +41,7 @@ if(!empty($nom) && !empty($id)){
 } else {
 	echo "Le champ non n'a pas été rempli";
 }
+
+// charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");
 ?>

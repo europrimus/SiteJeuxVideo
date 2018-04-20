@@ -1,6 +1,10 @@
 <?php
-require ("../include/config_defaut.php");
+// charge la configuration et renvoi un objet PDO $db
+require ("../include/config.php");
+
 $page = new Page("Modification d'un éditeur");
+
+// charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php"); 
 
 $nom = $_GET['nom'];
@@ -15,4 +19,7 @@ $id = $_GET['id'];
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 </main>
-<?php include(SITE["installDir"]."include/footer.php"); ?>
+<?php
+// charge la fin de la page de <footer> à </html>
+include(SITE["installDir"]."include/footer.php");
+?>

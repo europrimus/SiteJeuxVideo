@@ -1,9 +1,10 @@
 <?php
+// charge la configuration et renvoi un objet PDO $db
 require ("include/config.php");
-// renvoi un objet PDO $db
 
 $page = new Page("Acceuil");
 
+// charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php");
 ?>
 <main class="container-fluid">
@@ -34,5 +35,6 @@ include(SITE["installDir"]."include/header.php");
 </main>
 
 <?php
+// charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");
 ?>
