@@ -1,6 +1,12 @@
 <?php
 // charge la configuration et renvoi un objet PDO $db
-require ("include/config.php");
+$ok = include ("include/config.php");
+if (!$ok) {
+	echo "<h1>Erreur</h1>
+	<p>Impossible de trouver le fichier de configuration \"include/config.php\"<br>
+	Avez vous renommer le fichier \"include/config_defaut.php\" en \"include/config.php\" et modifier les paramètres propre à votre installation?</p>";
+	die;
+	}
 
 $page = new Page("Acceuil");
 
