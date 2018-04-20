@@ -1,13 +1,19 @@
 <?php
-require ("include/config.php");
-require ("include/class.php");
+// charge la configuration et renvoi un objet PDO $db
+$ok = include ("include/config.php");
+if (!$ok) {
+	echo "<h1>Erreur</h1>
+	<p>Impossible de trouver le fichier de configuration \"include/config.php\"<br>
+	Avez vous renommer le fichier \"include/config_defaut.php\" en \"include/config.php\" et modifier les paramètres propre à votre installation?</p>";
+	die;
+	}
 
 $page = new Page("Acceuil");
-//var_dump($page);
 
-include("include/header.php");
+// charge le début de la page <html> à </header>
+include(SITE["installDir"]."include/header.php");
 ?>
-<main>
+<main class="container-fluid">
 
 	<h2>Création ou modification d'un élément</h2>
 	<ul>
@@ -17,7 +23,7 @@ include("include/header.php");
 		<li><a href="editeurs/creer.php">Editeur</a></li>
 	</ul>
 
-	<h2>Modification d'un élément</h2>
+	<h2>Liste des élément (Modification, suppression et fiche individuelle)</h2>
 	<ul>
 		<li><a href="jeux/modifier.php">Jeu</a></li>
 		<li><a href="supports/modifier.php">Support</a></li>
@@ -35,7 +41,6 @@ include("include/header.php");
 </main>
 
 <?php
-include("include/footer.php");
+// charge la fin de la page de <footer> à </html>
+include(SITE["installDir"]."include/footer.php");
 ?>
-</body>
-</html>

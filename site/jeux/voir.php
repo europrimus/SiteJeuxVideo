@@ -1,8 +1,7 @@
 <?php
 require ("../include/config.php");
-require ("../include/class.php");
 $page = new Page("Informations sur un jeu");
-include("../include/header.php");
+include(SITE["installDir"]."include/header.php");
 ?>
 <main>
 	<h2>Fiche Nom Jeu</h2>
@@ -15,11 +14,8 @@ include("../include/header.php");
 	</ul>
 	<h3>Description</h3>
 	<p>Description du DLC</p>
-	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
 
 <?php
-include("../include/footer.php");
+include(SITE["installDir"]."include/footer.php");
 ?>
-</body>
-</html>

@@ -1,20 +1,17 @@
 <?php
 require ("../include/config.php");
-require ("../include/class.php");
+
 $page = new Page("Liste des Supports");
-include("../include/header.php");
+include(SITE["installDir"]."include/header.php");
 ?>
 <main>
 	<ul>
-		<li><a href="voir.php">Support 1</a></li>
+		<li><a href="voir.php?id=1">Support 1</a></li>
 		<li><a href="#">Support 2</a></li>
 		<li><a href="#">Support 3</a></li>
 	</ul>
-	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
 
 <?php
-include("../include/footer.php");
+include(SITE["installDir"]."include/footer.php");
 ?>
-</body>
-</html>

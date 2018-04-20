@@ -1,5 +1,5 @@
 <?php
-class Jeu {
+class jeu {
 
   private $_id;
   private $_nom;
@@ -30,7 +30,6 @@ class Jeu {
 
   public function setId($id)
   {
-    // L'identifiant du jeu sera, quoi qu'il arrive, un nombre entier.
     $this->_id = (int) $id;
   }
         
@@ -60,6 +59,7 @@ class Jeu {
 
   public function setDate($date) {
     // On vérifie qu'il s'agit bien d'une date.
+    $this->_date = $date;
 
   }
 

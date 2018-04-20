@@ -1,9 +1,8 @@
-	<footer>
-		<p>Page réalisé par : Melodie, Vincent, Julien, Didier et Luk</p>
+	<footer class="container-fluid">
+		<p>Page réalisée par : Melodie, Vincent, Julien, Didier et Luk</p>
 	</footer>
-
+<!-- Les script JavaScript -->
 </body>
 
-<!-- Les script JavaScript -->
 
 </html>
