@@ -1,7 +1,10 @@
 <?php
+// charge la configuration et renvoi un objet PDO $db
 require ("../include/config.php");
+
 $page = new Page("Liste de jeux");
 
+// charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php");
 
 // Accès base de donnéees
@@ -43,5 +46,6 @@ $jeux = $manager->getList();
 
 
 <?php
+// charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");
 ?>

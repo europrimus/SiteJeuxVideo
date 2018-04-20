@@ -9,18 +9,18 @@ session_start();
 <title><?php echo $page->getTitreCourt()." | ".$page->getPage(); ?></title>
 <meta name="generator" content="Geany 1.27">
 <!-- Feuille de style -->
-	<link rel="stylesheet" href="<?php echo SITE["baseUrl"]."css/bootstrap.min.css"; ?>">
+	<link rel="stylesheet" href="<?=SITE["baseUrl"]."css/bootstrap.min.css"; ?>">
 
 <!-- Open Graph (http://ogp.me/) -->
 	<meta property="og:title" content="<?php echo $page->getTitre()." | ".$page->getPage(); ?>">
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="">
+	<meta property="og:url" content="<?=SITE["baseUrl"]?>">
 	<meta property="og:image" content="">
 </head>
 
 <body>
 	<header class="container-fluid">
-		<a class="navbar-brand" href="<?php echo SITE["baseUrl"]; ?>"><h1><?php echo $page->getTitre(); ?></h1></a>
+		<a class="navbar-brand" href="<?=SITE["baseUrl"]; ?>"><h1><?=$page->getTitre(); ?></h1></a>
 		<h2><?php echo $page->getPage(); ?></h2>
 
 
@@ -32,19 +32,19 @@ session_start();
   <div class="collapse navbar-collapse" id="menuPrincipal">
     <ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo SITE["baseUrl"] ?>">Accueil</a>
+					<a class="nav-link" href="<?=SITE["baseUrl"] ?>">Accueil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo SITE["baseUrl"] ?>jeux">Jeux</a>
+					<a class="nav-link" href="<?=SITE["baseUrl"] ?>jeux">Jeux</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo SITE["baseUrl"] ?>dlc">DLC</a>
+					<a class="nav-link" href="<?=SITE["baseUrl"] ?>dlc">DLC</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo SITE["baseUrl"] ?>supports">Plate-forme</a>
+					<a class="nav-link" href="<?=SITE["baseUrl"] ?>supports">Plate-forme</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo SITE["baseUrl"] ?>editeurs">Éditeurs</a>
+					<a class="nav-link" href="<?=SITE["baseUrl"] ?>editeurs">Éditeurs</a>
 				</li>
     </ul>
 <!-- Formulaire de recherche encore non fonctionnelle

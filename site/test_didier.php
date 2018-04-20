@@ -1,13 +1,9 @@
 <?php
 require ("include/config.php");
-require (SITE["installDir"]."include/class.php");
 
 $page = new Page("Test Didier");
-$menu = new Menu("$page->getPage()");
-//var_dump($page);
 
-
-include("include/header.php");
+include(SITE["installDir"]."include/header.php");
 ?>
 <main>
 <h2>Teste de PDO</h2>
@@ -15,13 +11,8 @@ include("include/header.php");
 <?php
 /* Connexion à une base */
 
-try {
-    $dbh = new PDO( 'mysql:dbname='.DB_NAME.';host='.DB_HOST , DB_USER, DB_PASSWORD);
-} catch (PDOException $e) {
-    echo 'Connexion échouée : ' . $e->getMessage();
-}
 
-$sth = $dbh->prepare('SELECT
+$sth = $db->prepare('SELECT
 Jeux.id as id,
 Jeux.nom as nom,
 Jeux.description as description,
@@ -50,17 +41,31 @@ $listeJeux[]= new jeu($jeu);
 
 $sth->execute(array('Mario kart'));
 $jeu2 = $sth->fetchAll();
-
+/*
 echo "listeJeux : <pre>";var_dump($listeJeux);echo "</pre>";
 echo "jeu2 : <pre>";var_dump($jeu2);echo "</pre>";
+*/
+?>
+<h2>Formulaire de date</h2>
+<form action="" method="POST">
+	une date
+	<input type="date" name="date"><br>
+	<input type="submit" name="envoyer" value="envoyer" id="envoyer">
+</form>
+<?php
+if(isset($_POST["date"])){
+	echo "date : ";var_dump($_POST["date"]);
+	$dlc=new dlc(array("nom"=>"teste date","date"=>$_POST["date"]));
+	echo "dlc : <pre>";var_dump($dlc);echo "</pre>";
+echo "date:".$dlc->getDate()."<br>";
+echo "date:".$dlc->getDate("d/m/Y")."<br>";
+};
 
 ?>
-
-
 </main>
 
 <?php
-include("include/footer.php");
+include(SITE["installDir"]."include/footer.php");
 ?>
 </body>
 </html>
