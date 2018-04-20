@@ -5,13 +5,13 @@ class jeuManager  {
 
   public function add(jeu $game) {
     // Préparation de la requête d'insertion. Assignation des valeurs. Exécution de la requête.
-     $q = $this->_db->prepare('INSERT INTO jeux(nom, editeur, support, date, description) VALUES(:nom, :editeur, :support, :date, :description)');  
+     $q = $this->_db->prepare('INSERT INTO jeux(nom, description, support, date, editeur) VALUES(:nom, :description, :support, :date, :editeur)');  
 
     $q->bindValue(':nom', $game->nom(), PDO::PARAM_STR);
-    $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_STR);
+    $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
     $q->bindValue(':support', $game->support(), PDO::PARAM_STR);
     $q->bindValue(':date', $game->date(), PDO::PARAM_STR);
-    $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
+    $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_STR);
     $q->execute();
   }
 

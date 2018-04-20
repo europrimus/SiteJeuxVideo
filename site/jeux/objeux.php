@@ -10,15 +10,19 @@ $donnees=array(
 'support'=>$_POST['console'],
 'date'=>$_POST['date_sortie'],
 'description'=>$_POST['description']
-
 );
 
+// Accès base de donnéees
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$esaye= new jeu($donnees);
+$newJeu= new jeu($donnees);
+$manager = new jeuManager($db);
+$manager->add($newJeu);
+
 
 
 echo "<pre>";
-print_r ($esaye);
+print_r ($newJeu);
 echo "</pre>";
 
 
