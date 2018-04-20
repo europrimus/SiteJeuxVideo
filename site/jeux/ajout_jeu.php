@@ -19,7 +19,7 @@ $newJeu= new jeu($donnees);
 $manager = new jeuManager($db);
 $manager->add($newJeu);
 
-
+// A FAIRE LA VERIFICATION DE L'EXISTENCE PRECEDENTE DU JEU
 
 echo "<pre>";
 print_r ($newJeu);

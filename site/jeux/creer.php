@@ -5,7 +5,7 @@ include(SITE["installDir"]."/include/header.php");
 ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>
-	<form action="objeux.php" method="POST">
+	<form action="ajout_jeu.php" method="POST">
 
 		<label for="nom">Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
