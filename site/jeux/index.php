@@ -11,10 +11,8 @@ include(SITE["installDir"]."include/header.php");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-
 $manager = new jeuManager($db);
 $jeux = $manager->getList();
-
 ?>
 
 <main>
@@ -43,7 +41,6 @@ $jeux = $manager->getList();
 </table>
 
 </main>
-
 
 <?php
 // charge la fin de la page de <footer> à </html>
