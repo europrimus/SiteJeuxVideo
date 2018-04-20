@@ -1,6 +1,6 @@
 <?php
 require ("include/config.php");
-require ("include/class.php");
+require (SITE["installDir"]."include/class.php");
 
 $page = new Page("Test Didier");
 $menu = new Menu("$page->getPage()");

@@ -31,6 +31,5 @@ include(SITE["installDir"]."/include/header.php");
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<p><em>(Création dynamique si nouveau support ou éditeur et recherche autocompletion pour editeur)</em></p>
-	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
 <?php include(SITE["installDir"]."/include/footer.php"); ?>

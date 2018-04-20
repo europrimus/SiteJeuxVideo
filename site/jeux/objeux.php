@@ -1,7 +1,6 @@
 <?php
 
 require ("../include/config.php");
-require (SITE["installDir"]."/include/class.php");
 $page = new Page("Création d'un jeu");
 include(SITE["installDir"]."/include/header.php");
 

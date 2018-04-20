@@ -1,14 +1,12 @@
 <?php
 
 // Includes
-require('../../lib/editeursManager.php');
-require ("../include/config_defaut.php");
+require ("../include/config.php");
 
 $nom = $_POST['nom'];
 $erreur = "";
 
 // Accès base de donnéees
-$db = new PDO('mysql:host=localhost;dbname=jeuxvideo', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
@@ -40,5 +38,3 @@ if(!empty($nom)){
 }
 
 ?>
-
-<a href="../index.php">Revenir à la page d'accueil</a>

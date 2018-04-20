@@ -1,8 +1,10 @@
 <?php
 
 // Includes
-require('../../lib/editeursManager.php');
-require ("../include/config_defaut.php");
+require ("../include/config.php");
+
+include(SITE["installDir"]."include/header.php");
+
 $nom = $_POST['nom'];
 $id = $_POST['id'];
 $erreur = "";
@@ -38,7 +40,5 @@ if(!empty($nom) && !empty($id)){
 } else {
 	echo "Le champ non n'a pas été rempli";
 }
-
+include(SITE["installDir"]."include/footer.php");
 ?>
-
-<a href="../index.php">Revenir à la page d'accueil</a>

@@ -1,8 +1,8 @@
 <?php
 require ("../include/config.php");
-require ("../include/class.php");
+
 $page = new Page("Création d'un DLC");
-include("../include/header.php"); ?>
+include(SITE["installDir"]."include/header.php"); ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="" method="POST">
@@ -33,6 +33,5 @@ include("../include/header.php"); ?>
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<p><em>(autocompletion pour editeur et jeu et création dynamique si nouveau jeu, support ou éditeur)</em></p>
-	<a href="../index.php">Revenir sur la page d'accueil</a>
 </main>
-<?php include("../include/footer.php"); ?>
+<?php include(SITE["installDir"]."include/footer.php"); ?>

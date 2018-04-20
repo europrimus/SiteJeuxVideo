@@ -1,11 +1,10 @@
-<?php 
-require('../../lib/editeursManager.php');
+<?php
+require('../include/config.php');
 
 $id = $_GET['id'];
 
 if(isset($id)){
 	// Accès base de donnéees
-	$db = new PDO('mysql:host=localhost;dbname=jeuxvideo', 'root', '');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	$manager = new EditeursManager($db);

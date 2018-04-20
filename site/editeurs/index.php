@@ -1,9 +1,6 @@
 <?php
-//require('../../lib/editeursManager.php');
 
 require('../include/config.php');
-require(SITE["installDir"]."/include/class.php");
-
 $page = new Page("THE Jeux Video DB","Liste des éditeurs");
 
 include(SITE["installDir"]."/include/header.php");
@@ -34,7 +31,6 @@ $editeurs = $manager->getList();
 	  }
 	}
 	?>
-<a href="../index.php">Revenir sur la page d'accueil</a>
 
 </main>
 

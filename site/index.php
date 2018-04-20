@@ -1,14 +1,11 @@
 <?php
 require ("include/config.php");
-require (SITE["installDir"]."include/class.php");
-
 $page = new Page("Acceuil");
-$menu = new Menu("$page->getPage()");
 //var_dump($page);
 
-include("include/header.php");
+include(SITE["installDir"]."include/header.php");
 ?>
-<main>
+<main class="container-fluid">
 
 	<h2>Création ou modification d'un élément</h2>
 	<ul>
@@ -20,6 +17,14 @@ include("include/header.php");
 
 	<h2>Liste des élément (Modification, suppression et fiche individuelle)</h2>
 	<ul>
+		<li><a href="jeux/modifier.php">Jeu</a></li>
+		<li><a href="supports/modifier.php">Support</a></li>
+		<li><a href="dlc/modifier.php">DLC</a></li>
+		<li><a href="editeurs/modifier.php">Editeur</a></li>
+	</ul>
+
+	<h2>Liste des élément</h2>
+	<ul>
 		<li><a href="jeux/index.php">Jeux</a></li>
 		<li><a href="supports/index.php">Supports</a></li>
 		<li><a href="dlc/index.php">DLC</a></li>
@@ -28,7 +33,5 @@ include("include/header.php");
 </main>
 
 <?php
-include("include/footer.php");
+include(SITE["installDir"]."include/footer.php");
 ?>
-</body>
-</html>
