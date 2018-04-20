@@ -1,7 +1,8 @@
 <?php
 require ("include/config.php");
+// renvoi un objet PDO $db
+
 $page = new Page("Acceuil");
-//var_dump($page);
 
 include(SITE["installDir"]."include/header.php");
 ?>
