@@ -1,5 +1,5 @@
 	<footer class="container-fluid">
-		<p>Page réalisé par : Melodie, Vincent, Julien, Didier et Luk</p>
+		<p>Page réalisée par : Melodie, Vincent, Julien, Didier et Luk</p>
 	</footer>
 <!-- Les script JavaScript -->
 </body>
