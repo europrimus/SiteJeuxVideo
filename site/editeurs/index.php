@@ -16,7 +16,7 @@ $manager = new EditeursManager($db);
 $editeurs = $manager->getList();
 ?>
 
-<main>
+<main class="container-fluid">
 	<?php
 	if(!empty($editeurs)){
 	  foreach ($editeurs as $editeur) {
@@ -34,7 +34,7 @@ $editeurs = $manager->getList();
 	  }
 	}
 	?>
-
+<a href="creer.php">Créer un éditeur</a>
 </main>
 
 <?php
