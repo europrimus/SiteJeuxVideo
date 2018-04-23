@@ -20,7 +20,7 @@ class supportManager {
 
 
   public function delete(Support $support){
-    $this->_db->exec('DELETE FROM supportr WHERE id = '.$support->id());
+    $this->_db->exec('DELETE FROM support WHERE id = '.$support->id());
   }
 
 
@@ -37,7 +37,7 @@ class supportManager {
     $q = $this->_db->query('SELECT id, nom FROM support ORDER BY nom');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){
-      $editeurs[] = new Editeur($donnees);
+      $support[] = new support($donnees);
     }
 
     return $support;
@@ -47,7 +47,7 @@ class supportManager {
   public function update(Support $support){
     $q = $this->_db->prepare('UPDATE support SET nom = :nom WHERE id = :id');
 
-    $q->bindValue(':nom', $suppoort->nom(), PDO::PARAM_INT);
+    $q->bindValue(':nom', $support->nom(), PDO::PARAM_INT);
     $q->bindValue(':id', $support->id(), PDO::PARAM_INT);
     $q->execute();
   }
