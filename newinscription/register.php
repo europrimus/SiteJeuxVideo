@@ -11,23 +11,23 @@ if ($id!=0) erreur(ERR_IS_CO);
 <?php
 if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer qu'on est sur la page de formulaire
 {
-	echo '<h1>Inscription 1/2</h1>';
-	echo '<form method="post" action="register.php" enctype="multipart/form-data">
-	<fieldset><legend>Identifiants</legend>
-	<label for="pseudo">* Pseudo :</label>  <input name="pseudo" type="text" id="pseudo" /> (le pseudo doit contenir entre 3 et 15 caractères)<br />
-	<label for="password">* Mot de Passe :</label><input type="password" name="password" id="password" /><br />
-	<label for="confirm">* Confirmer le mot de passe :</label><input type="password" name="confirm" id="confirm" />
-	</fieldset>
-	<fieldset><legend>Contacts</legend>
-	<label for="email">* Votre adresse Mail :</label><input type="text" name="email" id="email" /><br />
-	</fieldset>
-	<p>Les champs précédés d un * sont obligatoires</p>
-	<p><input type="submit" value="S\'inscrire" /></p></form>
-	</div>
-	</body>
-	</html>';
-	
-	
+    echo '<h1>Inscription 1/2</h1>';
+    echo '<form method="post" action="register.php" enctype="multipart/form-data">
+    <fieldset><legend>Identifiants</legend>
+    <label for="pseudo">* Pseudo :</label>  <input name="pseudo" type="text" id="pseudo" /> (le pseudo doit contenir entre 3 et 15 caractères)<br />
+    <label for="password">* Mot de Passe :</label><input type="password" name="password" id="password" /><br />
+    <label for="confirm">* Confirmer le mot de passe :</label><input type="password" name="confirm" id="confirm" />
+    </fieldset>
+    <fieldset><legend>Contacts</legend>
+    <label for="email">* Votre adresse Mail :</label><input type="text" name="email" id="email" /><br />
+    </fieldset>
+    <p>Les champs précédés d un * sont obligatoires</p>
+    <p><input type="submit" value="S\'inscrire" /></p></form>
+    </div>
+    </body>
+    </html>';
+    
+    
 } //Fin de la partie formulaire
 else //On est dans le cas traitement
 {
@@ -44,10 +44,10 @@ else //On est dans le cas traitement
     $pass = $_POST['password'];
     $confirm = $_POST['confirm'];
     $email = $_POST['email'];
-	$hash = password_hash($pass, PASSWORD_DEFAULT);
-	
+    $hash = password_hash($pass, PASSWORD_DEFAULT);
+    
     //Vérification du pseudo
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM forum_membres WHERE membre_pseudo =:pseudo');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE pseudo =:pseudo');
     $query->bindValue(':pseudo',$pseudo, PDO::PARAM_STR);
     $query->execute();
     $pseudo_free=($query->fetchColumn()==0)?1:0;
@@ -73,7 +73,7 @@ else //On est dans le cas traitement
     //Vérification de l'adresse email
 
     //Il faut que l'adresse email n'ait jamais été utilisée
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM forum_membres WHERE membre_email =:mail');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE email =:mail');
     $query->bindValue(':mail',$email, PDO::PARAM_STR);
     $query->execute();
     $mail_free=($query->fetchColumn()==0)?1:0;
@@ -93,18 +93,18 @@ else //On est dans le cas traitement
 
    if ($i==0)
    {
-	echo'<h1>Inscription terminée</h1>';
+    echo'<h1>Inscription terminée</h1>';
         echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit sur le forum</p>
-	<p>Cliquez <a href="./connexion.php">ici</a> pour aller à la page de connexion</p>';
+    <p>Cliquez <a href="./connexion.php">ici</a> pour aller à la page de connexion</p>';
 
-        $query=$db->prepare('INSERT INTO forum_membres (membre_pseudo, membre_mdp, membre_email)
+        $query=$db->prepare('INSERT INTO Utilisateurs (pseudo, motPass, email)
         VALUES (:pseudo, :hash, :email)');
-	$query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-	$query->bindValue(':hash', $hash, PDO::PARAM_STR);
-	$query->bindValue(':email', $email, PDO::PARAM_STR);
+    $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+    $query->bindValue(':hash', $hash, PDO::PARAM_STR);
+    $query->bindValue(':email', $email, PDO::PARAM_STR);
     $query->execute();
 
-	//Et on définit les variables de sessions
+    //Et on définit les variables de sessions
         $_SESSION['pseudo'] = $pseudo;
         $_SESSION['id'] = $db->lastInsertId(); ;
         $_SESSION['level'] = 2;
