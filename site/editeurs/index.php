@@ -23,10 +23,11 @@ $editeurs = $manager->getList();
 	?>
 	    <ul>
 	    	<li>
-	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>"><?php echo htmlspecialchars($editeur->nom()); ?></a><br>
-	    		<a href="modifier.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>&id=<?php echo($editeur->id()); ?>"> Modifier </a>
-	    		<a href="supprimer.php?id=<?php echo $editeur->id(); ?>"> Supprimer</a>
-	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>"> Accéder à sa fiche </a>
+	    		<?php echo htmlspecialchars($editeur->nom()); ?><br>
+	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>" style="text-decoration: none"><input type="button" value="Accéder à sa fiche" /></a>
+	    		<a href="modifier.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>&id=<?php echo($editeur->id()); ?>" style="text-decoration: none"><input type="button" value="Modifier" /></a>
+	    		<a href="supprimer.php?id=<?php echo $editeur->id(); ?>" style="text-decoration: none"><input type="button" value="Supprimer" /></a>
+	    		
 	    	</li>
 	    </ul>
 	  <?php
