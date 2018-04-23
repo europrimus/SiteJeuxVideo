@@ -39,18 +39,18 @@ else
     }
     else //On check le mot de passe
     {
-        $query=$db->prepare('SELECT membre_mdp, membre_id, membre_rang, membre_pseudo
-        FROM forum_membres WHERE membre_pseudo = :pseudo');
+        $query=$db->prepare('SELECT motPass, id, droits, pseudo
+        FROM Utilisateurs WHERE pseudo = :pseudo');
         $query->bindValue(':pseudo',$_POST['pseudo'], PDO::PARAM_STR);
         $query->execute();
         $data=$query->fetch();
-        $hash=$data['membre_mdp'];
+        $hash=$data['motPass'];
 		if (password_verify($_POST['password'], $hash)) // Acces OK !
 		{
-		    $_SESSION['pseudo'] = $data['membre_pseudo'];
-		    $_SESSION['level'] = $data['membre_rang'];
-		    $_SESSION['id'] = $data['membre_id'];
-		    $message = '<p>Bienvenue '.$data['membre_pseudo'].', 
+		    $_SESSION['pseudo'] = $data['pseudo'];
+		    $_SESSION['level'] = $data['droits'];
+		    $_SESSION['id'] = $data['id'];
+		    $message = '<p>Bienvenue '.$data['pseudo'].', 
 				vous êtes maintenant connecté!</p>
 				<p>Cliquez <a href="./index.php">ici</a> 
 				pour revenir à la page d accueil</p>';  
