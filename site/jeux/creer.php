@@ -15,18 +15,19 @@ $editeurs = $manager->getList();
 		<input type="text" name="nom" id="nom" required><br>
 
 		<label for="editeur">Editeur :</label>
-		<select name="editeur">
+		<select name="editeur" required>
 			<option selected disabled hidden value>Sélectionnez un éditeur dans la liste</option>
 			<?php foreach ($editeurs as $editeur): ?>
-	    	<option value="<?php echo htmlspecialchars($editeur->id()); ?>"><?php echo htmlspecialchars($editeur->nom()); ?></option>
+	    	<option value="<?php ($editeur->id()); ?>"><?= htmlspecialchars($editeur->nom()); ?></option>
 			<?php endforeach; ?>
-		</select><br>		
+		</select>
+		<a href="..\editeurs\creer.php" style="text-decoration: none"><input type="button" value="Ajouter un nouvel éditeur"/></a><br>
 
 		<label for="date_sortie">Date de sortie :</label>
 		<input type="date" name="date_sortie" id="date_sortie" required><br>
 
 		<label for="console">Support :</label>
-		<select name="console">
+		<select name="console" required>
 			<option selected disabled hidden value>Sélectionnez un support dans la liste</option>
 			<option value="valeur1">Valeur1</option>
 			<option value="valeur2">Valeur2</option>

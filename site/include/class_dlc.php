@@ -7,8 +7,13 @@ class dlc {
   private $_nom;
   private $_description;
   private $_editeur;
-  private $_console;
+  private $_editeurId;
+  private $_plateforme;
+  private $_plateformeId;
   private $_jeu;
+  private $_jeuId;
+  private $_jeuSupportId;
+  private $_lien;
   private $_date; // en timestamp
   
   
@@ -17,7 +22,7 @@ class dlc {
 
 // les fonctions:
 // le constructeur
-  public function __construct(array $donnees) {
+  public function __construct($donnees) {
 	if(is_array($donnees)){
 		$this->hydrate($donnees);
 	}else{
@@ -34,17 +39,21 @@ class dlc {
     if (method_exists($this, $method)) {
       // On appelle le setter.
       $this->$method($value);
-    }
+    }else{
+		echo "rien à faire pour : $method => $value<br>";
+	}
    }
   }
 
 
 // les fonctions d'écritures
-  public function setId($id)
+  public function setId(int $id)
   {
     // on vérifie si c'est un int et si l'id n'est pas déjà défini.
     if ( is_int($id) and !isset($this->_id) ){
 		$this->_id = $id;
+	}else{
+		echo "erreur id: ";var_dump($id);
 	};
   }
 
@@ -56,14 +65,6 @@ class dlc {
     }
   }
 
-  public function setEditeur($str) {
-    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    // Dont la longueur est inférieure à 100 caractères.
-    if (is_string($str) && strlen($str) <= 100) {
-      $this->_editeur = strip_tags($str);
-    }
-  }
-
   public function setDescription($str) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 500 caractères.
@@ -72,14 +73,39 @@ class dlc {
     }
   }
 
-  public function setConsole($str) {
+// Editeur
+  public function setEditeur($str) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
     if (is_string($str) && strlen($str) <= 100) {
-      $this->_console = strip_tags($str);
+      $this->_editeur = strip_tags($str);
     }
   }
 
+  public function setEditeurId(int $int) {
+    // On vérifie qu'il s'agit bien d'un nombre
+    if (is_int($int)) {
+      $this->_editeurId = $int;
+    }
+  }
+
+// Support , Plateforme, console
+  public function setPlateforme($str) {
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    // Dont la longueur est inférieure à 100 caractères.
+    if (is_string($str) && strlen($str) <= 100) {
+      $this->_plateforme = strip_tags($str);
+    }
+  }
+
+  public function setPlateformeId(int $int) {
+    // On vérifie qu'il s'agit bien d'un nombre
+    if (is_int($int)) {
+      $this->_plateformeId = $int;
+    }
+  }
+
+// Jeu
   public function setJeu($str) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
@@ -88,6 +114,31 @@ class dlc {
     }
   }
 
+  public function setJeuId(int $int) {
+    // On vérifie qu'il s'agit bien d'un nombre
+    if (is_int($int)) {
+      $this->_jeuId = $int;
+    }
+  }
+
+// JeuSupportId
+  public function setJeuSupportId(int $int) {
+    // On vérifie qu'il s'agit bien d'un nombre
+    if (is_int($int)) {
+      $this->_jeuSupportId = $int;
+    }
+  }
+  
+// Lien
+  public function setLien($str) {
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    // Dont la longueur est inférieure à 250 caractères.
+    if (is_string($str) && strlen($str) <= 250) {
+      $this->_lien = strip_tags($str);
+    }
+  }
+
+// La date de sortie
   public function setDate($dateIn) {
 	$out=False;
 	$date = new DateTime();
@@ -125,13 +176,18 @@ class dlc {
   public function getNom() { return $this->_nom; }
   public function getDescription() { return $this->_description; }
   public function getEditeur() { return $this->_editeur; }
-  public function getConsole() { return $this->_console; }
+  public function getEditeurId() { return $this->_editeurId; }
+  public function getPlateforme() { return $this->_plateforme; }
+  public function getPlateformeId() { return $this->_plateformeId; }
   public function getJeu() { return $this->_jeu; }
+  public function getJeuId() { return $this->_jeuId; }
+  public function getJeuSupportId() { return $this->_jeuSupportId; }
+  public function getLien() { return $this->_lien; }
   
 // retourne la date en timestamp
   public function getTimestamp() { return $this->_date; }
 
-// retourne la date formaté: "d/m/Y" => 01/05/2015 ou "j/n/Y" => 1/5/2015
+// retourne la date formaté: "d/m/Y" => 01/05/2015 ou "j/n/Y" => 1/5/2015 ou "Y/m/d" => 2015/05/01 
   public function getDate($format = "j/n/Y") {
 	return date( $format , $this->_date );
   }

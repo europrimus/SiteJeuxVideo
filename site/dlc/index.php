@@ -8,16 +8,30 @@ $page = new Page("Liste des DLC");
 include(SITE["installDir"]."include/header.php");
 
 $manager = new dlcManager($db);
-$editeurs = $manager->getList();
+$dlcList = $manager->getList();
 
 ?>
 <main class="container-fluid">
-	<ul>
-		<li><a href="voir.php">DLC - Nom du jeu(support) 1</a></li>
-		<li><a href="#">DLC - Nom du jeu(support) 2</a></li>
-		<li><a href="#">DLC - Nom du jeu(support) 3</a></li>
-	</ul>
-	<a href="creer.php">Ajouter un DLC</a>
+<?php if($dlcList):?>
+	<table>
+		<tr><th>Nom</th><th>Jeu</th><th>Plateforme</th><th>Editeur</th><th>Date</th></tr>
+
+<?php
+foreach($dlcList as $dlc):
+//echo "foreach(dlcList as dlc) : <pre>";var_dump($dlc);echo "</pre>";
+?>
+		<tr>
+			<td><a href="voir.php?id=<?=$dlc->getId()?>"><?=$dlc->getNom()?></a></td>
+			<td><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></td>
+			<td><a href="../supports/voir.php?id=<?=$dlc->getPlateformeId()?>"><?=$dlc->getPlateforme()?></a></td>
+			<td><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></td>
+			<td><?=$dlc->getDate()?></td>
+		</tr>
+<?php endforeach;?>
+	</table>
+<?php endif;?>
+
+	<p><a href="creer.php">Ajouter un DLC</a></p>
 </main>
 
 <?php
