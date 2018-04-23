@@ -138,7 +138,7 @@ FROM DLC
 	};
   }
 
-  public function getFromId($id){
+  public function getFromId(int $id){
     if(!is_int($id)){
 		return False;
 	}else{

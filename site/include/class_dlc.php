@@ -22,7 +22,7 @@ class dlc {
 
 // les fonctions:
 // le constructeur
-  public function __construct(array $donnees) {
+  public function __construct($donnees) {
 	if(is_array($donnees)){
 		$this->hydrate($donnees);
 	}else{

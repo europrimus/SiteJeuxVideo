@@ -8,15 +8,29 @@ include(SITE["installDir"]."include/header.php");
 ?>
 <main class="container-fluid">
 	<h3>Informations</h3>
-	<ul>
-		<li>Nom : Nom du DLC</li>
-		<li>Jeu : Nom du jeu</li>
-		<li>Support : Nom du support</li>
-		<li>Editeur : Nom de l'éditeur</li>
-		<li>Date de sortie : Date de sortie</li>
-	</ul>
-	<h3>Description</h3>
-	<p>Description du DLC</p>
+<?php
+$erreur=True;
+if( isset($_REQUEST['id']) ) :
+$manager = new dlcManager($db);
+$dlc = $manager->getFromId($_REQUEST['id']);
+//echo "dlc : <pre>";var_dump($dlc);echo "</pre>";
+	if ($dlc->getId() != Null):
+	$erreur=False;
+?>
+
+	<dl>
+		<dt>Nom</dt><dd><?=$dlc->getNom()?></dd>
+		<dt>Jeu</dt><dd><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></dd>
+		<dt>Plate-forme</dt><dd><a href="../supports/voir.php?id=<?=$dlc->getPlateformeId()?>"><?=$dlc->getPlateforme()?></a></dd>
+		<dt>Editeur</dt><dd><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></dd>
+		<dt>Date de sortie</dt><dd><?=$dlc->getDate()?></dd>
+		<dt>Description</dt><dd><?=$dlc->getDescription()?></dd>
+	</dl>
+<?php
+	endif;
+endif;
+if($erreur){echo '<p>DLC non trouvé, vous pouvez  retourner à la <a href="./">liste des DLC</a> ou le <a href="creer.php">créer</a>.</p>';};
+?>
 </main>
 
 <?php
