@@ -51,13 +51,13 @@ class jeu {
    $this->_editeur = (int) $editeur;
   }
 
-  public function setSupportStr($support) {
+/*  public function setSupportStr($support) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
     if (is_string($support) && strlen($support) <= 100) {
       $this->_support = $support;
     }
-  }
+  }*/
 
   public function setSupport($array) {
 	//array( idsupport => "id"=>id, "nom"=>nom, "date"=>date )
