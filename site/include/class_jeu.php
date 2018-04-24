@@ -7,6 +7,8 @@ class jeu {
   private $_support;
   private $_date;
   private $_description;
+  private $_pegi;
+  private $_lien;
 
   // Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
   public function hydrate(array $donnees) {
@@ -27,6 +29,8 @@ class jeu {
   public function support() { return $this->_support; }
   public function date() { return $this->_date; }
   public function description() { return $this->_description; }
+  public function pegi() { return $this->_pegi; }
+  public function lien() { return $this->_lien; }
 
   public function setId($id)
   {
@@ -44,9 +48,7 @@ class jeu {
   public function setEditeur($editeur) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
-    if (is_string($editeur) && strlen($editeur) <= 100) {
-      $this->_editeur = $editeur;
-    }
+   $this->_editeur = (int) $editeur;
   }
 
   public function setSupport($support) {
@@ -65,11 +67,24 @@ class jeu {
 
   public function setDescription($description) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    // Dont la longueur est inférieure à 100 caractères.
-    if (is_string($description) && strlen($description) <= 100) {
+    // Dont la longueur est inférieure à 500 caractères.
+    if (is_string($description) && strlen($description) <= 500) {
       $this->_description = $description;
     }
   }
+
+  public function setPegi($pegi)
+  {
+    $this->_pegi = (int) $pegi;
+  }
+
+  public function setLien($lien) {
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    // Dont la longueur est inférieure à 250 caractères.
+    if (is_string($lien) && strlen($lien) <= 250) {
+      $this->_lien = $lien;
+    }
+  }  
 
   public function __construct(array $donnees) {
     $this->hydrate($donnees);
