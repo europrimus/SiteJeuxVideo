@@ -6,7 +6,7 @@ class jeuManager  {
   public function add(jeu $game) {
     // Préparation de la requête d'insertion. Assignation des valeurs. Exécution de la requête.
     $q = $this->_db->prepare(
-     'INSERT INTO jeux(nom, Editeur_id, description, pegi, lien) VALUES(:nom, :editeur, :description, :pegi, :lien);');    
+     'INSERT INTO jeux(nom, editeur_id, description, pegi, lien) VALUES(:nom, :editeur, :description, :pegi, :lien);');    
     $q->bindValue(':nom', $game->nom(), PDO::PARAM_STR);
     $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_INT);    
     $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
@@ -43,11 +43,7 @@ class jeuManager  {
     $jeux = [];
     $q = $this->_db->query('SELECT * FROM jeux JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-      var_dump($donnees);
-      $manager = new EditeursManager($this->_db);
-      $editeurs = $manager->getbyId($donnees['Editeur_id']);
-
-
+      //var_dump($donnees);
       $jeux[] = new jeu($donnees);
     }
     return $jeux;

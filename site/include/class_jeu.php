@@ -4,7 +4,7 @@ class jeu {
   private $_id;
   private $_nom;
   private $_editeur;
-  private $_support;d	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
+  private $_support;	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
 //  private $_date;		// passé dans le support
   private $_description;
   private $_pegi;
@@ -27,7 +27,7 @@ class jeu {
   public function nom() { return $this->_nom; }
   public function editeur() { return $this->_editeur; }
   public function support() { return $this->_support; }
-  public function date() { return $this->_date; }
+  //public function date() { return $this->_date; }
   public function description() { return $this->_description; }
   public function pegi() { return $this->_pegi; }
   public function lien() { return $this->_lien; }

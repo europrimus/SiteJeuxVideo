@@ -7,17 +7,11 @@ $page = new Page("Liste de jeux");
 // charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php");
 
-// Accès base de donnéees
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
 $manager = new jeuManager($db);
 $jeux = $manager->getList();
 
 
-echo "<pre>";
-print_r ($jeux);
-echo "</pre>";
+//echo "jeux : <pre>";print_r ($jeux);echo "</pre>";
 
 ?>
 
