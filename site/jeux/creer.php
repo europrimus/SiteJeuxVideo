@@ -4,12 +4,9 @@ $page = new Page("Création d'un jeu");
 include(SITE["installDir"]."/include/header.php");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-$managerEditeurs = new EditeursManager($db);
-$managerSupports = new SupportManager($db);
+$managerEditeurs = new editeursManager($db);
+$managerSupports = new supportManager($db);
 $editeurs = $managerEditeurs->getList();
-echo "<pre>";
-print_r ($editeurs);
-echo "</pre>";
 $supports = $managerSupports->getList(); 
 ?>
 <main>
@@ -31,11 +28,6 @@ $supports = $managerSupports->getList();
 		</select>
 		<a href="..\editeurs\creer.php" style="text-decoration: none"><input type="button" value="Ajouter un nouvel éditeur"/></a>
 		</p>
-       
-		<p>
-		<label for="date_sortie">Date de sortie :</label>
-		<input type="date" name="date_sortie" id="date_sortie" required>
-		</p>
 
 		<p>
 		<label for="lien">Lien vers le site du jeu :</label>
@@ -43,16 +35,14 @@ $supports = $managerSupports->getList();
 		</p>
 
 		<p>
-		<label for="support">Support :</label>
-		<select name="support" required>
- 			<option selected disabled hidden value>Sélectionnez une plateforme dans la liste</option>
+		<label for="support">Support :</label><br>
 			<?php foreach ($supports as $support): ?>
-	    	<option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>
-			<?php endforeach; ?>			
-<!--  			<option value="1">Valeur1</option>
-			<option value="2">Valeur2</option>
-			<option value="3">Valeur3</option>  -->
-		</select>
+			<label for="date_sortie[<?= $support->id(); ?>]">Sortie le </label>
+			<input type="date" name="date_sortie[<?= $support->id(); ?>]" id="date_sortie[<?= $support->id(); ?>]">
+			sur <input name="support[<?= $support->id(); ?>]" id="support[<?= $support->id(); ?>]" type="checkbox"><?= htmlspecialchars($support->nom()); ?>
+			<br>
+			<?php endforeach; ?>
+
 		</p>
 
 		<p>

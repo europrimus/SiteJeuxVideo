@@ -4,8 +4,8 @@ class jeu {
   private $_id;
   private $_nom;
   private $_editeur;
-  private $_support;
-  private $_date;
+  private $_support;	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
+//  private $_date;		// passé dans le support
   private $_description;
   private $_pegi;
   private $_lien;
@@ -51,11 +51,24 @@ class jeu {
    $this->_editeur = (int) $editeur;
   }
 
-  public function setSupport($support) {
+/*  public function setSupportStr($support) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
     if (is_string($support) && strlen($support) <= 100) {
       $this->_support = $support;
+    }
+  }*/
+
+  public function setSupport($array) {
+	//array( idsupport => "id"=>id, "nom"=>nom, "date"=>date )
+    // On vérifie qu'il s'agit bien d'un tableau
+    if ( is_array($array) ) {
+		foreach($array as $key => $val){
+			if( is_int($key) AND isset($val["date"]) ){
+				$retour[$key]=array( "id"=>$key, "nom"=>$val["nom"],"date"=>$val["date"] );
+			}
+		}
+      $this->_support = $retour;
     }
   }
 
