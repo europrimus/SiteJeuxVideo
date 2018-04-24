@@ -23,9 +23,16 @@ session_start();
 		<a class="navbar-brand" href="<?=SITE["baseUrl"]; ?>"><h1><?=$page->getTitre(); ?></h1></a>
 		<h2><?php echo $page->getPage(); ?></h2>
 		<ul>
-			<li><a href="../newinscription/connexion.php">Connexion</a></li>
-			<li><a href="../newinscription/register.php">Inscription</a></li>
-			<li><a href="../newinscription/deconnexion.php">Déconnexion</a></li>
+			<?php
+			if (empty($_SESSION)) {
+				echo "<li><a href=\"../newinscription/connexion.php\">Connexion</a></li>
+			<li><a href=\"../newinscription/register.php\">Inscription</a></li>";
+			}else{
+				$name=$_SESSION['pseudo'];
+				echo "<p>Bonjour " , $name, " !</p>
+				<li><a href=\"../newinscription/deconnexion.php\">Déconnexion</a></li>";
+			}
+			?>
 		</ul>
 
 

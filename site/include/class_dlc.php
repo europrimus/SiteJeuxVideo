@@ -14,6 +14,7 @@ class dlc {
   private $_jeu;
   private $_jeuId;
   private $_jeuSupportId;
+  private $_jeuSupportDlcId;
   private $_lien;
   private $_date; // en timestamp
   
@@ -129,6 +130,14 @@ class dlc {
       $this->_jeuSupportId = $int;
     }
   }
+
+// JeuSupporDlctId
+  public function setJeuSupportDlcId(int $int) {
+    // On vérifie qu'il s'agit bien d'un nombre
+    if (is_int($int)) {
+      $this->_jeuSupportDlcId = $int;
+    }
+  }
   
 // Lien
   public function setLien($str) {
@@ -183,6 +192,7 @@ class dlc {
   public function getJeu() { return $this->_jeu; }
   public function getJeuId() { return $this->_jeuId; }
   public function getJeuSupportId() { return $this->_jeuSupportId; }
+  public function getJeuSupportDlcId() { return $this->_jeuSupportDlcId; }
   public function getLien() { return $this->_lien; }
   
 // retourne la date en timestamp

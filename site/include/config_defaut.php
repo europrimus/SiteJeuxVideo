@@ -8,7 +8,7 @@ Renommer le fichier en config.php et éditer les infos relatives au serveur.
  */
 
 /** Nom */
-$DB['NAME'] = 'jeuxVideo';
+$DB['NAME'] = 'jeuxvideo';
 
 /** Utilisateur */
 $DB['USER'] = '';

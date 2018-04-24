@@ -95,7 +95,7 @@ else //On est dans le cas traitement
    {
     echo'<h1>Inscription terminée</h1>';
         echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit et connecté sur le forum</p>
-    <p>Cliquez <a href="./connexion.php">ici</a> pour aller à la page de connexion</p>';
+    <p>Cliquez <a href="../site/index.php">ici</a> pour retourner à la page d\'accueil</p>';
 
         $query=$db->prepare('INSERT INTO utilisateurs (pseudo, motPass, email)
         VALUES (:pseudo, :hash, :email)');

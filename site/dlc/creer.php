@@ -23,7 +23,7 @@ include(SITE["installDir"]."include/header.php");
 		<select id="editeurId" class="" data-live-search="true"><!-- selectpicker -->
 			<option selected disabled hidden value>Sélectionnez ...</option>
 <?php
-$editeurManager=new EditeursManager($db);
+$editeurManager=new editeursManager($db);
 $editeurListe=$editeurManager->getList();
 //echo "editeurListe:<br><pre>";var_dump($editeurListe);echo "</pre>";
 foreach($editeurListe as $editeur)
@@ -34,26 +34,23 @@ foreach($editeurListe as $editeur)
 		</select>
 		<br>
 
-		<label for="jeuId">Jeu</label>
-		<select id="jeuId" class="" data-live-search="true"><!-- selectpicker -->
-			<option selected disabled hidden value>Sélectionnez ...</option>
+		<label for="jeuxSupportId">Jeux pour la plate-forme :</label><br>
 <?php
-/*
 $jeuxManager=new jeuManager($db);
 $jeuxListe=$jeuxManager->getList();
-foreach($jeuxListe as $jeu)
-	{
-		echo '<option value="'.$jeu->id().'" data-tokens="'.$jeu->nom().'">'.$jeu->nom().'</option>';
-	}
-*/
+foreach($jeuxListe as $jeu):
+echo "jeu : <pre>";var_dump($jeu);echo "</pre>";
 ?>
-			<option value="1" data-tokens="Mon premier jeu">Mon premier jeu</option>
-		</select>
-<select id="monselect">
-  <option value="valeur1">Valeur 1</option> 
-  <option value="valeur2" selected>Valeur 2</option>
-  <option value="valeur3">Valeur 3</option>
-</select>
+
+			<label for="date_sortie[jeuxSupportId]">Sortie le </label>
+			<input type="date" name="date_sortie[jeuxSupportId]" id="date_sortie[jeuxSupportId]">
+			sur <input name="jeuxSupport[jeuxSupportId]" id="jeuxSupport[jeuxSupportId]" type="checkbox">jeuxNom - Plate-formeNom
+			<br>
+
+<?php
+endforeach;
+?>
+
 		<br>
 
 		<label for="plateformeId" required>Plate-forme</label>
