@@ -29,12 +29,6 @@ $supports = $managerSupports->getList();
 		<a href="..\editeurs\creer.php" style="text-decoration: none"><input type="button" value="Ajouter un nouvel éditeur"/></a>
 		</p>
 
-<!-- déplacer vers support
-		<p>
-		<label for="date_sortie">Date de sortie :</label>
-		<input type="date" name="date_sortie" id="date_sortie" required>
-		</p>
--->
 		<p>
 		<label for="lien">Lien vers le site du jeu :</label>
 		<input type="url" name="lien" id="lien" placeholder="(champ obligatoire)" required>
@@ -42,19 +36,13 @@ $supports = $managerSupports->getList();
 
 		<p>
 		<label for="support">Support :</label><br>
-<!--
-		<select name="support" required>
- 			<option selected disabled hidden value>Sélectionnez une plateforme dans la liste</option>
--->
 			<?php foreach ($supports as $support): ?>
-			<input name="support[<?= $support->id(); ?>]" id="support[<?= $support->id(); ?>]" type="checkbox"><?= htmlspecialchars($support->nom()); ?>
-			<label for="date_sortie[<?= $support->id(); ?>]">Date de sortie :</label>
-			<input type="date" name="date_sortie[<?= $support->id(); ?>]" id="date_sortie[<?= $support->id(); ?>]"><br>
-	    	<!--<option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>-->
+			<label for="date_sortie[<?= $support->id(); ?>]">Sortie le </label>
+			<input type="date" name="date_sortie[<?= $support->id(); ?>]" id="date_sortie[<?= $support->id(); ?>]">
+			sur <input name="support[<?= $support->id(); ?>]" id="support[<?= $support->id(); ?>]" type="checkbox"><?= htmlspecialchars($support->nom()); ?>
+			<br>
 			<?php endforeach; ?>
-<!--
-		</select>
--->
+
 		</p>
 
 		<p>
