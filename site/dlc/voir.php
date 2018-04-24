@@ -10,24 +10,35 @@ include(SITE["installDir"]."include/header.php");
 	<h3>Informations</h3>
 <?php
 $erreur=True;
-if( isset($_REQUEST['id']) ) :
 $manager = new dlcManager($db);
-$dlc = $manager->getFromId($_REQUEST['id']);
+
+if( isset($_REQUEST['id']) ) {
+	if ($_REQUEST['id'] != Null) {
+		$dlc = $manager->getFromId($_REQUEST['id']);
+		if($dlc->getId() != Null) {$erreur=False;};
+	};
+}elseif( isset($_REQUEST['nom']) ){
+	if ($_REQUEST['nom'] != Null) {
+		$dlc = $manager->getFromNom($_REQUEST['nom']);
+		if($dlc->getId() != Null) {$erreur=False;};
+	};
+};
+
 //echo "dlc : <pre>";var_dump($dlc);echo "</pre>";
-	if ($dlc->getId() != Null):
-	$erreur=False;
+if (!$erreur):
 ?>
 
 	<dl>
 		<dt>Nom</dt><dd><?=$dlc->getNom()?></dd>
-		<dt>Jeu</dt><dd><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></dd>
+		<dt>Pour le jeu</dt><dd><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></dd>
 		<dt>Plate-forme</dt><dd><a href="../supports/voir.php?id=<?=$dlc->getPlateformeId()?>"><?=$dlc->getPlateforme()?></a></dd>
-		<dt>Editeur</dt><dd><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></dd>
+		<dt>Éditeur</dt><dd><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></dd>
 		<dt>Date de sortie</dt><dd><?=$dlc->getDate()?></dd>
 		<dt>Description</dt><dd><?=$dlc->getDescription()?></dd>
 	</dl>
+	<p><a href="modifier.php?id=<?=$dlc->getId()?>">Modifier</a> | 
+	<a href="supprimer.php?id=<?=$dlc->getId()?>">Supprimer</a></p>
 <?php
-	endif;
 endif;
 if($erreur){echo '<p>DLC non trouvé, vous pouvez  retourner à la <a href="./">liste des DLC</a> ou le <a href="creer.php">créer</a>.</p>';};
 ?>

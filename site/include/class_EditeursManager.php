@@ -1,6 +1,6 @@
 <?php
 
-class EditeursManager {
+class editeursManager {
 
   private $_db; // Instance de PDO
 
@@ -9,24 +9,30 @@ class EditeursManager {
   }
 
 
-  public function add(Editeur $editeur){
+  public function add(editeur $editeur){
 
-  $q = $this->_db->prepare('INSERT INTO Editeur(nom) VALUES(:nom)');
+  $q = $this->_db->prepare('INSERT INTO editeur(nom) VALUES(:nom)');
 
   $q->bindValue(':nom', $editeur->nom());
   $q->execute();
 
   }
 
+<<<<<<< HEAD:site/include/class_EditeursManager.php
   public function delete(Editeur $editeur){
     $this->_db->exec('DELETE FROM Editeur WHERE id = '.$editeur->id());
+=======
+
+  public function delete(editeur $editeur){
+    $this->_db->exec('DELETE FROM editeur WHERE id = '.$editeur->id());
+>>>>>>> dev:site/include/class_editeursManager.php
   }
 
   public function get($nom){
     $nom = (int) $nom;
-    $q = $this->_db->query('SELECT id, nom FROM Editeur WHERE nom = '.$nom);
+    $q = $this->_db->query('SELECT id, nom FROM editeur WHERE nom = '.$nom);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    return new Editeur($donnees);
+    return new editeur($donnees);
   }
 
   public function getbyId($id){
@@ -38,18 +44,18 @@ class EditeursManager {
 
   public function getList(){
     $editeurs = [];
-    $q = $this->_db->query('SELECT id, nom FROM Editeur ORDER BY nom');
+    $q = $this->_db->query('SELECT id, nom FROM editeur ORDER BY nom');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){
-      $editeurs[] = new Editeur($donnees);
+      $editeurs[] = new editeur($donnees);
     }
 
     return $editeurs;
   }
 
 
-  public function update(Editeur $editeur){
-    $q = $this->_db->prepare('UPDATE Editeur SET nom = :nom WHERE id = :id');
+  public function update(editeur $editeur){
+    $q = $this->_db->prepare('UPDATE editeur SET nom = :nom WHERE id = :id');
 
     $q->bindValue(':id', $editeur->id(), PDO::PARAM_INT);
     $q->bindValue(':nom', $editeur->nom(), PDO::PARAM_STR);

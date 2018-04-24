@@ -6,18 +6,36 @@ class jeuManager  {
   public function add(jeu $game) {
     // Préparation de la requête d'insertion. Assignation des valeurs. Exécution de la requête.
     $q = $this->_db->prepare(
-     'INSERT INTO jeux(nom, Editeur_id, description, pegi, lien) VALUES(:nom, :editeur, :description, :pegi, :lien);
-      INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(LAST_INSERT_ID(), :Support_id, :DateSortie);');    
+     'INSERT INTO jeux(nom, Editeur_id, description, pegi, lien) VALUES(:nom, :editeur, :description, :pegi, :lien);');    
     $q->bindValue(':nom', $game->nom(), PDO::PARAM_STR);
     $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_INT);    
     $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
     $q->bindValue(':pegi', $game->pegi(), PDO::PARAM_INT);
     $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
-    $q->bindValue(':Support_id', $game->support(), PDO::PARAM_INT);    
-    $q->bindValue(':DateSortie', $game->date(), PDO::PARAM_STR);
     $q->execute();
+//var_dump($jeuid);
+	$jeuid = $this->_db->lastInsertId();
+//var_dump($jeuid);
+	foreach($game->support() as $idsupport => $tableau){
+		$q = $this->_db->prepare('INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(:jeuid, :Support_id, :DateSortie);');     
+		$q->bindValue(':jeuid', $jeuid, PDO::PARAM_INT);    
+		$q->bindValue(':Support_id', $idsupport, PDO::PARAM_INT);    
+		$q->bindValue(':DateSortie', $tableau["date"], PDO::PARAM_STR);
+		$q->execute();
+	}
   }
 
+
+/*
+[Tue Apr 24 12:00:22.509593 2018] [:error] [pid 4337] [client 172.29.100.121:55480] 
+PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error in /home/didier/Documents/www/SiteJeuxVideo/site/include/class_jeuManager.php:18\n
+Stack trace:\n
+#0 /home/didier/Documents/www/SiteJeuxVideo/site/include/class_jeuManager.php(18): PDOStatement->fetch()\n
+#1 /home/didier/Documents/www/SiteJeuxVideo/site/jeux/ajout_jeu.php(35): jeuManager->add(Object(jeu))\n
+#2 {main}\n
+  thrown in /home/didier/Documents/www/SiteJeuxVideo/site/include/class_jeuManager.php on line 18, referer: http://172.29.100.125/SiteJeuxVideo/site/jeux/creer.php
+
+*/
   public function delete(jeu $game) {
     // Exécute une requête de type DELETE.
     $this->_db->exec('DELETE FROM jeux WHERE nom = '.$game->nom());

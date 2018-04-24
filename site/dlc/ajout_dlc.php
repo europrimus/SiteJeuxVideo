@@ -2,22 +2,45 @@
 // charge la configuration et renvoi un objet PDO $db
 require('../include/config.php');
 
-$page = new Page("Ajout d'un éditeur");
+$page = new Page("Ajout d'un DLC");
 
 // charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php");
-$nom = $_POST['nom'];
-$erreur = "";
+/*
+"id","nom","description","editeur","editeurId","plateforme","plateformeId","jeu","jeuId","jeuSupportId","lien","date"
+ */ 
+/*
+$dlc=new dlc(array(
+"id"=>$_POST['id'],
+"nom"=>$_POST['nom'],
+"description"=>$_POST['description'],
+//"editeur"=>$_POST['editeur'],
+"editeurId"=>$_POST['editeurId'],
+//"plateforme"=>$_POST['plateforme'],
+"plateformeId"=>$_POST['plateformeId'],
+"jeu"=>$_POST['jeu'],
+"jeuId"=>$_POST['jeuId'],
+"jeuSupportId"=>$_POST['jeuSupportId'],
+"lien"=>$_POST['lien'],
+"date"=>$_POST['date'],
+));
 
-// Accès base de donnéees
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+echo "dlc  array post: <pre>";var_dump($dlc);echo "</pre>";
+*/
+echo "post: <pre>";var_dump($dlc);echo "</pre>";
+$dlc=new dlc($_POST);
+echo "dlc  post: <pre>";var_dump($dlc);echo "</pre>";
+
+die();
+
+$erreur = "";
 
 
 // On vérifie que le nom a été tapé par l'utilisateur
 if(!empty($nom)){
-	$manager = new editeursManager($db);
+	$manager = new EditeursManager($db);
 	$editeurs = $manager->getList();
-	$new_editeur = new editeur([
+	$new_editeur = new Editeur([
 		'nom' => $nom
 	]);
 
