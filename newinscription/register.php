@@ -11,7 +11,7 @@ if ($id!=0) erreur(ERR_IS_CO);
 <?php
 if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer qu'on est sur la page de formulaire
 {
-    echo '<h1>Inscription 1/2</h1>';
+    echo '<h1>Inscription</h1>';
     echo '<form method="post" action="register.php" enctype="multipart/form-data">
     <fieldset><legend>Identifiants</legend>
     <label for="pseudo">* Pseudo :</label>  <input name="pseudo" type="text" id="pseudo" /> (le pseudo doit contenir entre 3 et 15 caractères)<br />
