@@ -11,6 +11,7 @@ include(SITE["installDir"]."include/header.php");
 
 $nom = $_POST['nom'];
 $id = $_POST['id'];
+$datee = $_POST['sorti'];
 $erreur = "";
 
 // On vérifie que le nom a été tapé par l'utilisateur
@@ -20,7 +21,8 @@ if(!empty($nom) && !empty($id)){
 	$supports = $manager->getList();
 	$new_support = new support([
 		'id' => $id,
-		'nom' => $nom
+		'nom' => $nom,
+		'DateSortie' =>$datee
 	]);
 
 	foreach ($supports as $support) {
@@ -32,9 +34,10 @@ if(!empty($nom) && !empty($id)){
 	}
 
 	if(!$erreur){
-
+var_dump($new_support);
 		$manager->update($new_support);
-		echo "L'support " . $nom . " a été ajouté avec succès";
+		
+		echo "Le support " . $nom . " a été modifier avec succès";
 	}
 
 

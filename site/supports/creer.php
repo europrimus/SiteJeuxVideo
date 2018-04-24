@@ -9,6 +9,7 @@ include(SITE["installDir"]."include/header.php");
 	<form action="traitement.php" method="POST">
 		<label>Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
+		<input type="date" name="sorti">
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<ul>
