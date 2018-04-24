@@ -14,7 +14,7 @@ class jeuManager  {
     $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
     $q->execute();
 //var_dump($jeuid);
-	$jeuid = $this->_db->lastInsertId();
+	  $jeuid = $this->_db->lastInsertId();
 //var_dump($jeuid);
 	foreach($game->support() as $idsupport => $tableau){
 		$q = $this->_db->prepare('INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(:jeuid, :Support_id, :DateSortie);');     
@@ -41,10 +41,18 @@ class jeuManager  {
   public function getList() {
     // Retourne la liste de tous les jeux dans un tableau d'objets jeu
     $jeux = [];
-    $q = $this->_db->query('SELECT * FROM jeux JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id ORDER BY nom');
-    while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-      //var_dump($donnees);
-      $jeux[] = new jeu($donnees);
+    $q = $this->_db->query('SELECT jeux.id, jeux.nom, jeux.Editeur_id as editeur, description, pegi, jeux.lien, Support_id as support
+      FROM jeux INNER JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id 
+      INNER JOIN support ON jeux_has_support.id = support.id
+      ORDER BY jeux.nom;');
+
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+    
+        $jeux[] = new jeu($donnees);
+/*          echo "<pre>";
+          var_dump($jeux);
+          echo "</pre>";
+*/
     }
     return $jeux;
   }

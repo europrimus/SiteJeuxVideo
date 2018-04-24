@@ -19,7 +19,6 @@ class editeursManager {
   }
 
 
-
   public function delete(editeur $editeur){
     $this->_db->exec('DELETE FROM editeur WHERE id = '.$editeur->id());
   }

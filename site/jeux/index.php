@@ -9,10 +9,6 @@ include(SITE["installDir"]."include/header.php");
 
 $manager = new jeuManager($db);
 $jeux = $manager->getList();
-
-
-//echo "jeux : <pre>";print_r ($jeux);echo "</pre>";
-
 ?>
 
 <main>
@@ -28,12 +24,15 @@ $jeux = $manager->getList();
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($jeux as $jeu): ?>
+		<?php foreach ($jeux as $jeu): 
+			$manager = new EditeursManager($db);
+			$editeurs = $manager->getbyId($jeu->editeur());
+			$editeurs->nom(); ?>
 		<tr>
 			<td><?=$jeu->nom()?></td>
-			<td><?=$jeu->editeur()?></td>
-			<td><?=$jeu->support()?></td>
-			<td><?=$jeu->date()?></td>
+			<td><?=$editeurs->nom()?></td>
+<!-- 			<td><?=$jeu->support()?></td>
+			<td><?=$jeu->date()?></td> -->
 			<td><?=$jeu->description()?></td>
 		</tr>
 		<?php endforeach; ?>
