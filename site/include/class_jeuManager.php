@@ -34,7 +34,7 @@ class jeuManager  {
   public function getList() {
     // Retourne la liste de tous les jeux dans un tableau d'objets jeu
     $jeux = [];
-    $q = $this->_db->query('SELECT id, nom, editeur, support, date, description FROM jeux ORDER BY nom');
+    $q = $this->_db->query('SELECT * FROM jeux JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
       $jeux[] = new jeu($donnees);
     }

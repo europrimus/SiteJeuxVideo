@@ -7,9 +7,6 @@ $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 $managerEditeurs = new EditeursManager($db);
 $managerSupports = new SupportManager($db);
 $editeurs = $managerEditeurs->getList();
-echo "<pre>";
-print_r ($editeurs);
-echo "</pre>";
 $supports = $managerSupports->getList(); 
 ?>
 <main>
@@ -49,10 +46,8 @@ $supports = $managerSupports->getList();
 			<?php foreach ($supports as $support): ?>
 	    	<option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>
 			<?php endforeach; ?>			
-<!--  			<option value="1">Valeur1</option>
-			<option value="2">Valeur2</option>
-			<option value="3">Valeur3</option>  -->
 		</select>
+		<a href="..\supports\creer.php" style="text-decoration: none"><input type="button" value="Ajouter une nouvelle plateforme"/></a>
 		</p>
 
 		<p>
