@@ -42,7 +42,7 @@ $supports = $managerSupports->getList();
 			sur <input name="support[<?= $support->id(); ?>]" id="support[<?= $support->id(); ?>]" type="checkbox"><?= htmlspecialchars($support->nom()); ?>
 			<br>
 			<?php endforeach; ?>
-
+			<a href="..\supports\creer.php" style="text-decoration: none"><input type="button" value="Ajouter un nouveau support"/></a>
 		</p>
 
 		<p>

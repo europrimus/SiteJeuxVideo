@@ -18,14 +18,8 @@ class editeursManager {
 
   }
 
-<<<<<<< HEAD:site/include/class_EditeursManager.php
-  public function delete(Editeur $editeur){
-    $this->_db->exec('DELETE FROM Editeur WHERE id = '.$editeur->id());
-=======
-
   public function delete(editeur $editeur){
     $this->_db->exec('DELETE FROM editeur WHERE id = '.$editeur->id());
->>>>>>> dev:site/include/class_editeursManager.php
   }
 
   public function get($nom){

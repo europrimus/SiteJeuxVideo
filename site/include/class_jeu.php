@@ -3,12 +3,14 @@ class jeu {
 
   private $_id;
   private $_nom;
-  private $_editeur;
-  private $_support;d	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
-//  private $_date;		// passé dans le support
+  private $_editeur;  // ID de l'éditeur !!!!!!!
   private $_description;
   private $_pegi;
   private $_lien;
+  private $_support;	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
+//  private $_date;		// passé dans le support
+
+
 
   // Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
   public function hydrate(array $donnees) {
@@ -27,7 +29,7 @@ class jeu {
   public function nom() { return $this->_nom; }
   public function editeur() { return $this->_editeur; }
   public function support() { return $this->_support; }
-  public function date() { return $this->_date; }
+/*  public function date() { return $this->_date; }*/
   public function description() { return $this->_description; }
   public function pegi() { return $this->_pegi; }
   public function lien() { return $this->_lien; }
@@ -46,9 +48,7 @@ class jeu {
   }
 
   public function setEditeur($editeur) {
-    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    // Dont la longueur est inférieure à 100 caractères.
-   $this->_editeur = (int) $editeur;
+    $this->_editeur = (int) $editeur;
   }
 
 /*  public function setSupportStr($support) {
@@ -72,11 +72,11 @@ class jeu {
     }
   }
 
-  public function setDate($date) {
+/*  public function setDate($date) {
     // On vérifie qu'il s'agit bien d'une date.
     $this->_date = $date;
 
-  }
+  }*/
 
   public function setDescription($description) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
@@ -86,8 +86,7 @@ class jeu {
     }
   }
 
-  public function setPegi($pegi)
-  {
+  public function setPegi($pegi) {
     $this->_pegi = (int) $pegi;
   }
 
