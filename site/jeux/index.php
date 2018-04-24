@@ -13,6 +13,12 @@ $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
 $manager = new jeuManager($db);
 $jeux = $manager->getList();
+
+
+echo "<pre>";
+print_r ($jeux);
+echo "</pre>";
+
 ?>
 
 <main>

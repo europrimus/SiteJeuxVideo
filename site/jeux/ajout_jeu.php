@@ -14,10 +14,6 @@ $donnees=array(
 'lien'=>$_POST['lien']
 );
 
-echo "<pre>";
-print_r ($donnees);
-echo "</pre>";
-
 // Accès base de donnéees
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -26,11 +22,6 @@ $manager = new jeuManager($db);
 $manager->add($newJeu);
 
 // A FAIRE LA VERIFICATION DE L'EXISTENCE PRECEDENTE DU JEU
-
-echo "<pre>";
-print_r ($newJeu);
-echo "</pre>";
-
 
 include(SITE["installDir"]."/include/footer.php");
 
