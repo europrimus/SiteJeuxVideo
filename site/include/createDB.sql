@@ -45,7 +45,6 @@ CREATE TABLE `dlc` (
   `nom` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
   `editeur_id` int(11) NOT NULL,
-  `datesortie` date NOT NULL,
   `id_jeuxsupport` int(11) NOT NULL,
   `lien` varchar(250)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,6 +131,19 @@ CREATE TABLE `utilisateurs` (
   `datenaissance` date
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- -------------------------------------------------------
+
+--
+-- Structure de la table `jeuxSupportDLC`
+--
+
+CREATE TABLE `jeuxsupportdlc` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id_jeuxsupport` int(11) NOT NULL UNIQUE,
+  `id_dlc` int(11) NOT NULL UNIQUE,
+  `datesortie` date
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ***************************************************
 -- *
 -- * Clefs étrangères des tables
@@ -180,4 +192,13 @@ ALTER TABLE `tests`
   ADD FOREIGN KEY (`id_dlc`) REFERENCES `dlc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD FOREIGN KEY (`id_jeuxsupport`) REFERENCES `jeux_has_support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD FOREIGN KEY (`idutilisateurs`) REFERENCES `utilisateurs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  ;
+
+
+--
+-- Index pour la table `jeuxSupportDLC`
+--
+ALTER TABLE `jeuxsupportdlc`
+  ADD FOREIGN KEY (`id_dlc`) REFERENCES `dlc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD FOREIGN KEY (`id_jeuxsupport`) REFERENCES `jeux_has_support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
   ;
