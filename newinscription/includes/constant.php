@@ -1,6 +1,7 @@
 <?php
-define('VISITEUR',1);
-define('INSCRIT',2);
+define('VISITEUR',0);
+define('MEMBRE',1);
+define('AUTEUR',2);
 define('MODO',3);
 define('ADMIN',4);
 ?>
