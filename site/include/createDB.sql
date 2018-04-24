@@ -45,7 +45,6 @@ CREATE TABLE `dlc` (
   `nom` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
   `editeur_id` int(11) NOT NULL,
-  `id_jeuxsupport` int(11) NOT NULL,
   `lien` varchar(250)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -139,8 +138,8 @@ CREATE TABLE `utilisateurs` (
 
 CREATE TABLE `jeuxsupportdlc` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `id_jeuxsupport` int(11) NOT NULL UNIQUE,
-  `id_dlc` int(11) NOT NULL UNIQUE,
+  `id_jeuxsupport` int(11) NOT NULL,
+  `id_dlc` int(11) NOT NULL,
   `datesortie` date
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -165,8 +164,7 @@ ALTER TABLE `avis`
 -- Index pour la table `DLC`
 --
 ALTER TABLE `dlc`
-  ADD FOREIGN KEY (`editeur_id`) REFERENCES `editeur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD FOREIGN KEY (`id_jeuxsupport`) REFERENCES `jeux_has_support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  ADD FOREIGN KEY (`editeur_id`) REFERENCES `editeur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
   ;
 
 --
@@ -181,7 +179,8 @@ ALTER TABLE `jeux`
 --
 ALTER TABLE `jeux_has_support`
   ADD FOREIGN KEY (`jeux_id`) REFERENCES `jeux` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD FOREIGN KEY (`support_id`) REFERENCES `support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  ADD FOREIGN KEY (`support_id`) REFERENCES `support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD UNIQUE (`jeux_id`,`support_id`)
   ;
 
 
@@ -200,5 +199,6 @@ ALTER TABLE `tests`
 --
 ALTER TABLE `jeuxsupportdlc`
   ADD FOREIGN KEY (`id_dlc`) REFERENCES `dlc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD FOREIGN KEY (`id_jeuxsupport`) REFERENCES `jeux_has_support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  ADD FOREIGN KEY (`id_jeuxsupport`) REFERENCES `jeux_has_support` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD UNIQUE (`id_dlc`,`id_jeuxsupport`)
   ;
