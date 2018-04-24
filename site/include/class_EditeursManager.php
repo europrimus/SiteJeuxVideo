@@ -18,11 +18,9 @@ class EditeursManager {
 
   }
 
-
   public function delete(Editeur $editeur){
     $this->_db->exec('DELETE FROM Editeur WHERE id = '.$editeur->id());
   }
-
 
   public function get($nom){
     $nom = (int) $nom;
@@ -31,6 +29,12 @@ class EditeursManager {
     return new Editeur($donnees);
   }
 
+  public function getbyId($id){
+    $id = (int) $id;
+    $q = $this->_db->query('SELECT id, nom FROM Editeur WHERE id = '.$id);
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    return new Editeur($donnees);
+  }
 
   public function getList(){
     $editeurs = [];
