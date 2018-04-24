@@ -1,10 +1,10 @@
 <?php
 session_start();
 $titre="Enregistrement";
-include("includes/identifiantdb.php");
+include("../site/include/config.php");
 include("includes/debut.php");
 include("includes/menu.php");
-echo '<p>Vous êtes ici : <a href="./index.php">Index du forum</a> --> Enregistrement';
+echo '<p>Vous êtes ici : <a href="../site/index.php">Index du forum</a> --> Enregistrement';
 
 if ($id!=0) erreur(ERR_IS_CO);
 ?>
@@ -94,10 +94,10 @@ else //On est dans le cas traitement
    if ($i==0)
    {
     echo'<h1>Inscription terminée</h1>';
-        echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit sur le forum</p>
+        echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit et connecté sur le forum</p>
     <p>Cliquez <a href="./connexion.php">ici</a> pour aller à la page de connexion</p>';
 
-        $query=$db->prepare('INSERT INTO Utilisateurs (pseudo, motPass, email)
+        $query=$db->prepare('INSERT INTO utilisateurs (pseudo, motPass, email)
         VALUES (:pseudo, :hash, :email)');
     $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $query->bindValue(':hash', $hash, PDO::PARAM_STR);

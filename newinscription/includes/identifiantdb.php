@@ -1,7 +1,7 @@
 <?php
 try
 {
-$db = new PDO('mysql:host=localhost;dbname=newinscription', 'root', '');
+$db = new PDO('mysql:host=localhost;dbname=jeuxvideo', 'root', '');
 }
 catch (Exception $e)
 {

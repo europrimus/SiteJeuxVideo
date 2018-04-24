@@ -127,7 +127,7 @@ CREATE TABLE `Utilisateurs` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `droits` int(11) NOT NULL DEFAULT '1',
   `pseudo` varchar(100) NOT NULL,
-  `motPass` varchar(255) NOT NULL,
+  `motPass` varchar(606) NOT NULL,
   `email` varchar(160) NOT NULL,
   `dateNaissance` date
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

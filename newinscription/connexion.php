@@ -1,10 +1,10 @@
 <?php
 session_start();
 $titre="Connexion";
-include("includes/identifiantdb.php");
+include("../site/include/config.php");
 include("includes/debut.php");
 include("includes/menu.php");
-echo '<p>Vous êtes ici : <a href="./index.php">Index du forum</a> --> Connexion';
+echo '<p>Vous êtes ici : <a href="../site/index.php">Index du forum</a> --> Connexion';
 ?>
 <?php
 echo '<h1>Connexion</h1>';
@@ -52,7 +52,7 @@ else
 		    $_SESSION['id'] = $data['id'];
 		    $message = '<p>Bienvenue '.$data['pseudo'].', 
 				vous êtes maintenant connecté!</p>
-				<p>Cliquez <a href="./index.php">ici</a> 
+				<p>Cliquez <a href="../site/index.php">ici</a> 
 				pour revenir à la page d accueil</p>';  
 		}
 		else // Acces pas OK !
@@ -61,7 +61,7 @@ else
 		    pendant votre identification.<br /> Le mot de passe ou le pseudo 
 	            entré n\'est pas correcte.</p><p>Cliquez <a href="./connexion.php">ici</a> 
 		    pour revenir à la page précédente
-		    <br /><br />Cliquez <a href="./index.php">ici</a> 
+		    <br /><br />Cliquez <a href="../site/index.php">ici</a> 
 		    pour revenir à la page d accueil</p>';
 		}
 	    $query->CloseCursor();
