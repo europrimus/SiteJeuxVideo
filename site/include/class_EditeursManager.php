@@ -47,6 +47,7 @@ class EditeursManager {
   public function update(Editeur $editeur){
     $q = $this->_db->prepare('UPDATE Editeur SET nom = :nom WHERE id = :id');
 
+    $q->bindValue(':id', $editeur->id(), PDO::PARAM_INT);
     $q->bindValue(':nom', $editeur->nom(), PDO::PARAM_STR);
     $q->execute();
   }

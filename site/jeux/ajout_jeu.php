@@ -7,10 +7,16 @@ include(SITE["installDir"]."/include/header.php");
 $donnees=array(
 'nom' =>$_POST['nom'],
 'editeur'=>$_POST['editeur'],
-'support'=>$_POST['console'],
+'support'=>$_POST['support'],
 'date'=>$_POST['date_sortie'],
-'description'=>$_POST['description']
+'description'=>$_POST['description'],
+'pegi'=>$_POST['pegi'],
+'lien'=>$_POST['lien']
 );
+
+echo "<pre>";
+print_r ($donnees);
+echo "</pre>";
 
 // Accès base de donnéees
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
