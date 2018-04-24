@@ -8,9 +8,6 @@ $page = new Page("Liste des éditeurs");
 // charge le début de la page <html> à </header>
 include(SITE["installDir"]."include/header.php");
 
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
 
 $manager = new editeursManager($db);
 $editeurs = $manager->getList();

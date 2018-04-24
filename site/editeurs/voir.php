@@ -7,7 +7,7 @@ $page = new Page("Informations sur un éditeur");
 include(SITE["installDir"]."include/header.php");
 
 $nom = $_GET['nom'];
-$manager = new EditeursManager($db);
+$manager = new editeursManager($db);
 
 $editeur = $manager->get($nom);
 ?>

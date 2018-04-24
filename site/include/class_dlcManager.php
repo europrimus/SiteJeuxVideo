@@ -53,7 +53,7 @@ class dlcManager {
   }
 
 // Lire - Read
-// id , nom , description , editeur , editeurId , plateforme , plateformeId , jeu , jeuId , jeuSupportId , lien , date
+// id , nom , description , editeur , editeurId , plateforme , plateformeId , jeu , jeuId , jeuSupportId , jeuSupportDlcId , lien , date
 
 /*
 SELECT 
@@ -66,37 +66,42 @@ SELECT
 		support.id as plateformeId, 
 		jeux.nom as jeu, 
 		jeux.id as jeuId, 
-		dlc.id_jeuxsupport as jeuSupportId , 
+		jeux_has_support.id as jeuSupportId , 
+		jeuxsupportdlc.id as jeuSupportDlcId , 
 		dlc.lien, 
-		dlc.datesortie as date
+		jeuxsupportdlc.datesortie as date
 FROM dlc 
 		JOIN editeur ON editeur_id = editeur.id
-		JOIN jeux_has_support ON id_jeuxsupport = jeux_has_support.id
+        JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
+		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
 		JOIN support ON jeux_has_support.support_id = support.id
 		JOIN jeux ON jeux.id = jeux_has_support.jeux_id
- */
+*/
   public function getFromNom($nom){
     if(!is_string($nom)){
 		return False;
 	}else{
 		$q = $this->_db->query('SELECT 
-		dlc.id as id,
+		dlc.id as id ,
 		dlc.nom as nom, 
-		dlc.description as description, 
+		dlc.Description as description , 
 		editeur.nom as editeur, 
 		dlc.editeur_id as editeurId, 
 		support.nom as plateforme, 
 		support.id as plateformeId, 
 		jeux.nom as jeu, 
 		jeux.id as jeuId, 
-		dlc.id_Jeuxsupport as jeuSupportId, 
+		jeux_has_support.id as jeuSupportId , 
+		jeuxsupportdlc.id as jeuSupportDlcId , 
 		dlc.lien, 
-		dlc.datesortie as date
-	FROM dlc 
-		JOIN editeur ON dlc.editeur_id = editeur.id AND dlc.nom = '.$nom.'
-		JOIN jeux_has_support ON id_jeuxsupport = jeux_has_support.id
+		jeuxsupportdlc.datesortie as date
+FROM dlc 
+		JOIN editeur ON editeur_id = editeur.id AND dlc.nom = '.$nom.'
+        JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
+		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
 		JOIN support ON jeux_has_support.support_id = support.id
-		JOIN jeux ON jeux.id = jeux_has_support.jeux_id' );
+		JOIN jeux ON jeux.id = jeux_has_support.jeux_id
+		' );
 		//echo "getFromNom($nom):<pre>";var_dump($q);echo "</pre>";
 		$donnees = $q->fetch(PDO::FETCH_ASSOC);
 		return new dlc($donnees);
@@ -118,14 +123,17 @@ FROM dlc
 		support.id as plateformeId, 
 		jeux.nom as jeu, 
 		jeux.id as jeuId, 
-		dlc.id_jeuxsupport as jeuSupportId , 
+		jeux_has_support.id as jeuSupportId , 
+		jeuxsupportdlc.id as jeuSupportDlcId , 
 		dlc.lien, 
-		dlc.datesortie as date
-	FROM dlc 
-		JOIN editeur ON dlc.editeur_id = editeur.id AND dlc.id = '.$id.'
-		JOIN jeux_has_support ON id_jeuxsupport = jeux_has_support.id
+		jeuxsupportdlc.datesortie as date
+FROM dlc 
+		JOIN editeur ON editeur_id = editeur.id AND dlc.id = '.$id.'
+        JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
+		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
 		JOIN support ON jeux_has_support.support_id = support.id
-		JOIN jeux ON jeux.id = jeux_has_support.jeux_id');
+		JOIN jeux ON jeux.id = jeux_has_support.jeux_id
+		');
 		$donnees = $q->fetch(PDO::FETCH_ASSOC);
 		return new dlc($donnees);
 	};
@@ -174,12 +182,14 @@ FROM dlc
 		support.id as plateformeId, 
 		jeux.nom as jeu, 
 		jeux.id as jeuId, 
-		dlc.id_jeuxsupport as jeuSupportId , 
+		jeux_has_support.id as jeuSupportId , 
+		jeuxsupportdlc.id as jeuSupportDlcId , 
 		dlc.lien, 
-		dlc.datesortie as date
-	FROM dlc 
+		jeuxsupportdlc.datesortie as date
+FROM dlc 
 		JOIN editeur ON editeur_id = editeur.id
-		JOIN jeux_has_support ON id_jeuxsupport = jeux_has_support.id
+        JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
+		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
 		JOIN support ON jeux_has_support.support_id = support.id
 		JOIN jeux ON jeux.id = jeux_has_support.jeux_id LIMIT '.$debut.' , '.$fin);
 
