@@ -2,6 +2,7 @@
 class dlc {
 
 // les variables
+// "id","nom","description","editeur","editeurId","plateforme","plateformeId","jeu","jeuId","jeuSupportId","lien","date"
 // privées
   private $_id;
   private $_nom;

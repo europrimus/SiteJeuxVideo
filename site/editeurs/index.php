@@ -12,7 +12,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
 
-$manager = new EditeursManager($db);
+$manager = new editeursManager($db);
 $editeurs = $manager->getList();
 ?>
 

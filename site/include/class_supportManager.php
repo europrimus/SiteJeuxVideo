@@ -1,6 +1,6 @@
 <?php
 
-class supportManager {
+class SupportManager {
 
   private $_db; // Instance de PDO
 

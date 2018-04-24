@@ -1,5 +1,5 @@
 <?php
-class Editeur {
+class editeur {
 
   private $_id;
   private $_nom;

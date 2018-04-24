@@ -4,8 +4,8 @@ $page = new Page("Création d'un jeu");
 include(SITE["installDir"]."/include/header.php");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-$managerEditeurs = new EditeursManager($db);
-$managerSupports = new SupportManager($db);
+$managerEditeurs = new editeursManager($db);
+$managerSupports = new supportManager($db);
 $editeurs = $managerEditeurs->getList();
 $supports = $managerSupports->getList(); 
 ?>
@@ -28,26 +28,33 @@ $supports = $managerSupports->getList();
 		</select>
 		<a href="..\editeurs\creer.php" style="text-decoration: none"><input type="button" value="Ajouter un nouvel éditeur"/></a>
 		</p>
-       
+
+<!-- déplacer vers support
 		<p>
 		<label for="date_sortie">Date de sortie :</label>
 		<input type="date" name="date_sortie" id="date_sortie" required>
 		</p>
-
+-->
 		<p>
 		<label for="lien">Lien vers le site du jeu :</label>
 		<input type="url" name="lien" id="lien" placeholder="(champ obligatoire)" required>
 		</p>
 
 		<p>
-		<label for="support">Support :</label>
+		<label for="support">Support :</label><br>
+<!--
 		<select name="support" required>
  			<option selected disabled hidden value>Sélectionnez une plateforme dans la liste</option>
+-->
 			<?php foreach ($supports as $support): ?>
-	    	<option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>
-			<?php endforeach; ?>			
+			<input name="support[<?= $support->id(); ?>]" id="support[<?= $support->id(); ?>]" type="checkbox"><?= htmlspecialchars($support->nom()); ?>
+			<label for="date_sortie[<?= $support->id(); ?>]">Date de sortie :</label>
+			<input type="date" name="date_sortie[<?= $support->id(); ?>]" id="date_sortie[<?= $support->id(); ?>]"><br>
+	    	<!--<option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>-->
+			<?php endforeach; ?>
+<!--
 		</select>
-		<a href="..\supports\creer.php" style="text-decoration: none"><input type="button" value="Ajouter une nouvelle plateforme"/></a>
+-->
 		</p>
 
 		<p>
