@@ -1,5 +1,5 @@
 <?php
-require ("../include/config.php");
+require_once ("../include/config.php");
 
 $page = new Page("Informations sur ");
 

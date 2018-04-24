@@ -4,9 +4,7 @@ require ("../include/config.php");
 $page = new Page("Création d'un jeu");
 include(SITE["installDir"]."/include/header.php");
 
-echo "request <pre>";
-print_r ($_REQUEST);
-echo "</pre>";
+//echo "request <pre>";print_r ($_REQUEST);echo "</pre>";
 
 
 $donnees=array(
@@ -23,9 +21,7 @@ foreach($_POST["support"] as $supportid => $on){
 	$donnees['support'][$supportid]= array( "id"=>$supportid, "nom"=>"", "date"=>$_POST["date_sortie"][$supportid] );
 }
 
-echo "données <pre>";
-print_r ($donnees);
-echo "</pre>";
+//echo "données <pre>";print_r ($donnees);echo "</pre>";
 
 // Accès base de donnéees
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

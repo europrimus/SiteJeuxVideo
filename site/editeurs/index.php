@@ -1,6 +1,6 @@
 <?php
 
-require('../include/config.php');
+require_once('../include/config.php');
 // renvoi un objet PDO $db
 
 $page = new Page("Liste des éditeurs");

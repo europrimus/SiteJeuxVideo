@@ -25,17 +25,6 @@ class jeuManager  {
 	}
   }
 
-
-/*
-[Tue Apr 24 12:00:22.509593 2018] [:error] [pid 4337] [client 172.29.100.121:55480] 
-PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error in /home/didier/Documents/www/SiteJeuxVideo/site/include/class_jeuManager.php:18\n
-Stack trace:\n
-#0 /home/didier/Documents/www/SiteJeuxVideo/site/include/class_jeuManager.php(18): PDOStatement->fetch()\n
-#1 /home/didier/Documents/www/SiteJeuxVideo/site/jeux/ajout_jeu.php(35): jeuManager->add(Object(jeu))\n
-#2 {main}\n
-  thrown in /home/didier/Documents/www/SiteJeuxVideo/site/include/class_jeuManager.php on line 18, referer: http://172.29.100.125/SiteJeuxVideo/site/jeux/creer.php
-
-*/
   public function delete(jeu $game) {
     // Exécute une requête de type DELETE.
     $this->_db->exec('DELETE FROM jeux WHERE nom = '.$game->nom());
@@ -54,6 +43,11 @@ Stack trace:\n
     $jeux = [];
     $q = $this->_db->query('SELECT * FROM jeux JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+      var_dump($donnees);
+      $manager = new EditeursManager($this->_db);
+      $editeurs = $manager->getbyId($donnees['Editeur_id']);
+
+
       $jeux[] = new jeu($donnees);
     }
     return $jeux;
