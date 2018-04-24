@@ -4,7 +4,7 @@ class jeu {
   private $_id;
   private $_nom;
   private $_editeur;
-  private $_support;	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
+  private $_support;d	// un tableau array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
 //  private $_date;		// passé dans le support
   private $_description;
   private $_pegi;

@@ -7,12 +7,15 @@ $page = new Page("Informations sur un éditeur");
 include(SITE["installDir"]."include/header.php");
 
 $nom = $_GET['nom'];
+$manager = new EditeursManager($db);
+
+$editeur = $manager->get($nom);
 ?>
 <main>
 	<?php if(!empty($nom)){ ?>
 		<h3>Informations</h3>
 		<ul>
-			<li>Nom : <?php echo $nom; ?></li>
+			<li>Nom : <?php echo $editeur->nom(); ?></li>
 		</ul>
 	<?php } ?>
 </main>
