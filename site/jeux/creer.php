@@ -45,13 +45,13 @@ $supports = $managerSupports->getList();
 		<p>
 		<label for="support">Support :</label>
 		<select name="support" required>
-<!-- 			<option selected disabled hidden value>Sélectionnez une plateforme dans la liste</option>
+ 			<option selected disabled hidden value>Sélectionnez une plateforme dans la liste</option>
 			<?php foreach ($supports as $support): ?>
-	    	<option value="<?php ($support->id()); ?>"><?= htmlspecialchars($support->nom()); ?></option>
-			<?php endforeach; ?>	 -->		
- 			<option value="1">Valeur1</option>
+	    	<option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>
+			<?php endforeach; ?>			
+<!--  			<option value="1">Valeur1</option>
 			<option value="2">Valeur2</option>
-			<option value="3">Valeur3</option> 
+			<option value="3">Valeur3</option>  -->
 		</select>
 		</p>
 

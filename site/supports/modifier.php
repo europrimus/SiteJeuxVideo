@@ -16,6 +16,7 @@ $id = $_GET['id'];
 		<label>Nom :</label>
 		<input type="text" name="id" id="id" value="<?php echo $id; ?>" hidden>
 		<input type="text" name="nom" id="nom" required value="<?php echo $nom; ?>"><br>
+		<input type="date" name="sorti">
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 </main>

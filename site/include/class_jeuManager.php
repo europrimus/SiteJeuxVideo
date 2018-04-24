@@ -7,21 +7,15 @@ class jeuManager  {
     // Préparation de la requête d'insertion. Assignation des valeurs. Exécution de la requête.
     $q = $this->_db->prepare(
      'INSERT INTO jeux(nom, Editeur_id, description, pegi, lien) VALUES(:nom, :editeur, :description, :pegi, :lien);
-      INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(LAST_INSERT_ID(), :Support_id, :DateSortie);'); 
-$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);       
+      INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(LAST_INSERT_ID(), :Support_id, :DateSortie);');    
     $q->bindValue(':nom', $game->nom(), PDO::PARAM_STR);
     $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_INT);    
     $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
     $q->bindValue(':pegi', $game->pegi(), PDO::PARAM_INT);
     $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
-    //$q->execute();
-   // $q = $this->_db->prepare('INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(LAST_INSERT_ID(), :Support_id, :DateSortie)'); 
     $q->bindValue(':Support_id', $game->support(), PDO::PARAM_INT);    
     $q->bindValue(':DateSortie', $game->date(), PDO::PARAM_STR);
-    var_dump($q);
-    $r=$q->execute();
-    var_dump($r);
-       print_r($this->_db->errorInfo());
+    $q->execute();
   }
 
   public function delete(jeu $game) {
