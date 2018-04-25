@@ -31,7 +31,7 @@ $editeurs = $manager->getList();
 	  }
 	}
 	?>
-<a href="creer.php">Créer un éditeur</a>
+<?php if (!empty($_SESSION)): ?><a href="creer.php">Créer un éditeur</a><?php endif; ?>
 </main>
 
 <?php
