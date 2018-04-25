@@ -4,7 +4,7 @@ $titre="Connexion";
 include("../include/config.php");
 include("includes/debut.php");
 include("includes/menu.php");
-echo '<a href="'.SITE["baseUrl"].'index.php">Index du forum</a><p>Vous êtes ici : Connexion';
+echo '<a href="'.SITE["baseUrl"].'index.php">Accueil</a><p>Vous êtes ici : Connexion';
 ?>
 <?php
 echo '<h1>Connexion</h1>';
