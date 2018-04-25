@@ -14,7 +14,7 @@ $jeux = $manager->getListSimple();
 <main>
 
 <table>
-	<thead>
+	<thead class="table table-bordered">
 		<tr>
 			<th>Nom du jeu</th>
 			<th>Editeur</th>
@@ -25,7 +25,7 @@ $jeux = $manager->getListSimple();
 			<th>Date de sortie</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody class="table table-bordered">
 		<?php foreach ($jeux as $jeu):?>
 		<tr>
 			<td><?=$jeu['jeux']?></td>
