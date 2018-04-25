@@ -38,14 +38,21 @@ class jeuManager  {
     return new jeu($donnees);
     }
 
+  public function getbyId($id){
+    $id = (int) $id;
+    $q = $this->_db->query('SELECT id, nom, editeur , description, pegi, lien, support FROM jeux WHERE id = '.$id);
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    return new jeu($donnees);
+  }    
+
     public function getListSimple() {
     // Retourne la liste de tous les jeux dans un tableau
     $result = [];
-      $q = $this->_db->query('SELECT jeux.nom as jeux, editeur.nom as editeur, pegi, description, jeux.lien, support.nom as plateforme, jeux_has_support.DateSortie
-      FROM jeux INNER JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id 
-      INNER JOIN support ON jeux_has_support.id = support.id
-      INNER JOIN editeur ON jeux.Editeur_id = editeur.id
-      ORDER BY jeux.nom;');
+      $q = $this->_db->query('SELECT jeux.id as id, jeux.nom as jeux, editeur.nom as editeur, pegi, description, jeux.lien, support.nom as plateforme, jeux_has_support.DateSortie
+      FROM jeux LEFT JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id
+      JOIN editeur ON jeux.Editeur_id = editeur.id
+      JOIN support ON jeux_has_support.Support_id = support.id
+      ORDER by jeux.nom;');
 
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
       $result[] = $donnees;
@@ -62,8 +69,7 @@ class jeuManager  {
       ORDER BY jeux.nom;');
 
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-    
-        $jeux[] = new jeu($donnees);
+       $jeux[] = new jeu($donnees);
     }
     return $jeux;
   }

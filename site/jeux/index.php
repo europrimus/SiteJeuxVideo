@@ -23,6 +23,8 @@ $jeux = $manager->getListSimple();
 			<th>Lien vers le site du jeu</th>
 			<th>Plateforme</th>
 			<th>Date de sortie</th>
+			<th>Modification</th>
+
 		</tr>
 	</thead>
 	<tbody class="table table-bordered">
@@ -35,7 +37,9 @@ $jeux = $manager->getListSimple();
 			<td><?=$jeu['lien']?></td>
 			<td><?=$jeu['plateforme']?></td>
 			<td><?=$jeu['DateSortie']?></td>
+			<td><a href="voir.php?id=<?=$jeu['id']?>" style="text-decoration: none"><input type="button" value="Accéder à sa fiche" /></a></td>		
 		</tr>
+
 		<?php endforeach; ?>
 	</tbody>
 </table>
