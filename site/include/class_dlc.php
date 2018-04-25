@@ -2,7 +2,7 @@
 class dlc {
 
 // les variables
-// "id","nom","description","editeur","editeurId","plateforme","plateformeId","jeu","jeuId","jeuSupportId","lien","date"
+// "id","nom","description","editeur","editeurId","plateforme","plateformeId","jeu","jeuId","jeuSupportId","jeuSupportDlcId","lien","date"
 // privées
   private $_id;
   private $_nom;
@@ -42,7 +42,7 @@ class dlc {
       // On appelle le setter.
       $this->$method($value);
     }else{
-		echo "rien à faire pour : $method => $value<br>";
+		echo "<!--rien à faire pour : $method => <pre>"; var_dump($value);echo "</pre><br>-->".PHP_EOL;
 	}
    }
   }
@@ -198,7 +198,7 @@ class dlc {
 // retourne la date en timestamp
   public function getTimestamp() { return $this->_date; }
 
-// retourne la date formaté: "d/m/Y" => 01/05/2015 ou "j/n/Y" => 1/5/2015 ou "Y/m/d" => 2015/05/01 
+// retourne la date formaté: "d/m/Y" => 01/05/2015 ou "j/n/Y" => 1/5/2015 ou "Y-m-d" => 2015-05-01 
   public function getDate($format = "j/n/Y") {
 	return date( $format , $this->_date );
   }

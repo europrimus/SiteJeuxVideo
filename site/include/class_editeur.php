@@ -21,6 +21,7 @@ class editeur {
   public function nom() { return $this->_nom; }
 
 
+
   public function setId($id)
   {
     // L'identifiant du éditeur sera, quoi qu'il arrive, un nombre entier.
@@ -31,7 +32,7 @@ class editeur {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
     if (is_string($nom) && strlen($nom) <= 100) {
-      $this->_nom = $nom;
+      $this->_nom = strip_tags($nom);
     }
   }
 
