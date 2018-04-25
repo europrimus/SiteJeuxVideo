@@ -13,10 +13,8 @@ class jeuManager  {
     $q->bindValue(':pegi', $game->pegi(), PDO::PARAM_INT);
     $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
     $q->execute();
-//var_dump($jeuid);
 	  $jeuid = $this->_db->lastInsertId();
-//var_dump($jeuid);
-	foreach($game->support() as $idsupport => $tableau){
+	  foreach($game->support() as $idsupport => $tableau){
 		$q = $this->_db->prepare('INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(:jeuid, :Support_id, :DateSortie);');     
 		$q->bindValue(':jeuid', $jeuid, PDO::PARAM_INT);    
 		$q->bindValue(':Support_id', $idsupport, PDO::PARAM_INT);    
@@ -40,9 +38,15 @@ class jeuManager  {
 
   public function getbyId($id){
     $id = (int) $id;
-    $q = $this->_db->query('SELECT id, nom, editeur , description, pegi, lien, support FROM jeux WHERE id = '.$id);
+    $q = $this->_db->query('SELECT jeux.id as id, jeux.nom as nom, Editeur_id as editeur, description, pegi, lien, Support_id, support.nom, support.DateSortie
+      FROM jeux LEFT JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id
+      JOIN support ON jeux_has_support.Support_id = support.id
+      WHERE jeux.id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     return new jeu($donnees);
+//    echo '<pre>';
+//    var_dump($donnees);
+//    echo '</pre>';*/
   }    
 
     public function getListSimple() {
