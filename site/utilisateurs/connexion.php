@@ -1,10 +1,10 @@
 <?php
 session_start();
 $titre="Connexion";
-include("../site/include/config.php");
+include("../include/config.php");
 include("includes/debut.php");
 include("includes/menu.php");
-echo '<p>Vous êtes ici : <a href="../site/index.php">Index du forum</a> --> Connexion';
+echo '<a href="'.SITE["baseUrl"].'index.php">Accueil</a><p>Vous êtes ici : Connexion';
 ?>
 <?php
 echo '<h1>Connexion</h1>';
@@ -40,7 +40,7 @@ else
     else //On check le mot de passe
     {
         $query=$db->prepare('SELECT motPass, id, droits, pseudo
-        FROM Utilisateurs WHERE pseudo = :pseudo');
+        FROM utilisateurs WHERE pseudo = :pseudo');
         $query->bindValue(':pseudo',$_POST['pseudo'], PDO::PARAM_STR);
         $query->execute();
         $data=$query->fetch();
@@ -52,17 +52,14 @@ else
 		    $_SESSION['id'] = $data['id'];
 		    $message = '<p>Bienvenue '.$data['pseudo'].', 
 				vous êtes maintenant connecté!</p>
-				<p>Cliquez <a href="../site/index.php">ici</a> 
-				pour revenir à la page d accueil</p>';  
+				<p>Cliquez <a href="'.SITE["baseUrl"].'index.php">ici</a> 
+				pour revenir à la page d accueil</p>';
 		}
 		else // Acces pas OK !
 		{
 		    $message = '<p>Une erreur s\'est produite 
 		    pendant votre identification.<br /> Le mot de passe ou le pseudo 
-	            entré n\'est pas correcte.</p><p>Cliquez <a href="./connexion.php">ici</a> 
-		    pour revenir à la page précédente
-		    <br /><br />Cliquez <a href="../site/index.php">ici</a> 
-		    pour revenir à la page d accueil</p>';
+	            entré n\'est pas correcte.</p><p>Cliquez <a href="./connexion.php">ici</a> pour revenir</p>';
 		}
 	    $query->CloseCursor();
     }

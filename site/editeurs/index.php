@@ -21,9 +21,9 @@ $editeurs = $manager->getList();
 	    <ul>
 	    	<li>
 	    		<?php echo htmlspecialchars($editeur->nom()); ?><br>
-	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>" style="text-decoration: none"><input type="button" value="Accéder à sa fiche" /></a>
-	    		<a href="modifier.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>&id=<?php echo($editeur->id()); ?>" style="text-decoration: none"><input type="button" value="Modifier" /></a>
-	    		<a href="supprimer.php?id=<?php echo $editeur->id(); ?>" style="text-decoration: none"><input type="button" value="Supprimer" /></a>
+	    		<a href="voir.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>" style="text-decoration: none"><?php if (!empty($_SESSION)): ?><input type="button" value="Accéder à sa fiche" /><?php endif; ?></a>
+	    		<a href="modifier.php?nom=<?php echo htmlspecialchars($editeur->nom()); ?>&id=<?php echo($editeur->id()); ?>" style="text-decoration: none"><?php if (!empty($_SESSION)): ?><input type="button" value="Modifier" /><?php endif; ?></a>
+	    		<a href="supprimer.php?id=<?php echo $editeur->id(); ?>" style="text-decoration: none"><?php if (!empty($_SESSION)): ?><input type="button" value="Supprimer" /><?php endif; ?></a>
 	    		
 	    	</li>
 	    </ul>

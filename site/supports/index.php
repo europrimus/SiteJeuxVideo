@@ -16,26 +16,31 @@ $manager = new supportManager($db);
 $supports = $manager->getList();
 ?>
 
-<main>
+<main class="container">
+	
 	<?php
 	if(!empty($supports)){
 	  foreach ($supports as $support) {
 	?>
-	    <ul>
-	    	<li>
-	    		<a href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"><?php echo htmlspecialchars($support->nom()); ?></a><br>
-	    		<a href="modifier.php?nom=<?php echo htmlspecialchars($support->nom()); ?>&id=<?php echo($support->id()); ?>"> Modifier </a>
-	    		<a href="supprimer.php?id=<?php echo $support->id(); ?>"> Supprimer</a>
-	    		<a href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"> Accéder à sa fiche </a>
-	    	</li>
+	
+	    <ul >
+			
+				<li  >
+				
+	    		<a  href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"><?php echo htmlspecialchars($support->nom()); ?><br>
+	    		<a  href="modifier.php?nom=<?php echo htmlspecialchars($support->nom()); ?>&id=<?php echo($support->id()); ?>"><?php if (!empty($_SESSION)): ?>  <input type="button" value="Modifier" /></a><?php endif; ?>
+	    		<a  href="supprimer.php?id=<?php echo $support->id(); ?>"><?php if (!empty($_SESSION)): ?> <input type="button" value="suprimer" /><?php endif; ?></a>
+	    		<a  href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"><?php if (!empty($_SESSION)): ?><input type="button" value="Accéder à sa fiche" /><?php endif; ?></a>
+				</li>
+	    	
 	    </ul>
 	  <?php
 	  }
 	}
 	?>
-
+	
 </main>
-
+<a href="creer.php">Créer une plateforme</a>
 <?php
 // charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");

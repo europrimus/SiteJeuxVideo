@@ -125,7 +125,7 @@ CREATE TABLE `Tests` (
 
 CREATE TABLE `Utilisateurs` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `droits` int(11) NOT NULL DEFAULT '1',
+  `droits` int(11) NOT NULL DEFAULT '4',
   `pseudo` varchar(100) NOT NULL,
   `motPass` varchar(606) NOT NULL,
   `email` varchar(160) NOT NULL,

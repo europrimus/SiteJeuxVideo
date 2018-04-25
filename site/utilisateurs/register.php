@@ -1,10 +1,10 @@
 <?php
 session_start();
 $titre="Enregistrement";
-include("../site/include/config.php");
+include("../include/config.php");
 include("includes/debut.php");
 include("includes/menu.php");
-echo '<p>Vous êtes ici : <a href="../site/index.php">Index du forum</a> --> Enregistrement';
+echo '<a href="'.SITE["baseUrl"].'index.php">Accueil</a><p>Vous êtes ici : Enregistrement';
 
 if ($id!=0) erreur(ERR_IS_CO);
 ?>
@@ -47,7 +47,7 @@ else //On est dans le cas traitement
     $hash = password_hash($pass, PASSWORD_DEFAULT);
     
     //Vérification du pseudo
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE pseudo =:pseudo');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM utilisateurs WHERE pseudo =:pseudo');
     $query->bindValue(':pseudo',$pseudo, PDO::PARAM_STR);
     $query->execute();
     $pseudo_free=($query->fetchColumn()==0)?1:0;
@@ -95,7 +95,7 @@ else //On est dans le cas traitement
    {
     echo'<h1>Inscription terminée</h1>';
         echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit et connecté sur le forum</p>
-    <p>Cliquez <a href="../site/index.php">ici</a> pour retourner à la page d\'accueil</p>';
+    <p>Cliquez <a href="'.SITE["baseUrl"].'index.php">ici</a> pour retourner à la page d\'accueil</p>';
 
         $query=$db->prepare('INSERT INTO utilisateurs (pseudo, motPass, email)
         VALUES (:pseudo, :hash, :email)');
