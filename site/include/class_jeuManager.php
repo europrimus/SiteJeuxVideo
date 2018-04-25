@@ -41,6 +41,8 @@ class jeuManager  {
   public function getbyId($id){
     $id = (int) $id;
     $q = $this->_db->query('SELECT id, nom, editeur , description, pegi, lien, support FROM jeux WHERE id = '.$id);
+
+    if (!$q) {return False; }
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     return new jeu($donnees);
   }    
