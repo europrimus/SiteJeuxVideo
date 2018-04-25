@@ -30,10 +30,13 @@ if (!$erreur):
 
 	<dl>
 		<dt>Nom</dt><dd><?=$dlc->getNom()?></dd>
-		<dt>Pour le jeu</dt><dd><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></dd>
-		<dt>Plate-forme</dt><dd><a href="../supports/voir.php?id=<?=$dlc->getPlateformeId()?>"><?=$dlc->getPlateforme()?></a></dd>
+		<dt>Pour le jeu</dt><dd><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>&nom=<?=$dlc->getJeu()?>"><?=$dlc->getJeu()?></a></dd>
+		<dt>Plate-forme</dt><dd>
+<?php foreach($dlc->getListeSupport() as $val):?>
+			<a href="../supports/voir.php?id=<?=$val["plateformeId"]?>&nom=<?=$val["plateforme"]?>"><?=$val["plateforme"]?></a> sortie le <?=$val["dateSortie"]?><br>
+<?php endforeach;?>
+			</dd>
 		<dt>Éditeur</dt><dd><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></dd>
-		<dt>Date de sortie</dt><dd><?=$dlc->getDate()?></dd>
 		<dt>Description</dt><dd><?=$dlc->getDescription()?></dd>
 	</dl>
 	<p><a href="modifier.php?id=<?=$dlc->getId()?>">Modifier</a> | 

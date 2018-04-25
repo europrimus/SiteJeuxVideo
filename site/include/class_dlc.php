@@ -9,14 +9,15 @@ class dlc {
   private $_description;
   private $_editeur;
   private $_editeurId;
-  private $_plateforme;
-  private $_plateformeId;
+//  private $_plateforme;
+//  private $_plateformeId;
   private $_jeu;
   private $_jeuId;
-  private $_jeuSupportId;
-  private $_jeuSupportDlcId;
+  private $_listeSupport; // _listeSupport[jeuSupportDlcId] = array ("jeuSupportDlcId" => , "jeuSupportId" => , "plateforme" =>, "plateformeId" => , "dateSortie" => )
+//  private $_jeuSupportId;
+//  private $_jeuSupportDlcId;
   private $_lien;
-  private $_date; // en timestamp
+//  private $_date; // en timestamp
   
   
 // publiques
@@ -24,12 +25,11 @@ class dlc {
 
 // les fonctions:
 // le constructeur
-  public function __construct($donnees) {
-	if(is_array($donnees)){
-		$this->hydrate($donnees);
-	}else{
-		return false;
-	};
+  public function __construct($donnees=false) {
+	//echo "dlc > __construct : donnees: <pre>";var_dump($donnees);echo "</pre>";
+	if(!$donnees){return false;};
+	if(!is_array($donnees)){return false;};
+	$this->hydrate($donnees);
   }
 
 // Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
@@ -42,7 +42,7 @@ class dlc {
       // On appelle le setter.
       $this->$method($value);
     }else{
-		echo "<!--rien à faire pour : $method => <pre>"; var_dump($value);echo "</pre><br>-->".PHP_EOL;
+		//echo "rien à faire pour : $method => <pre>"; var_dump($value);echo "</pre><br>".PHP_EOL;
 	}
    }
   }
@@ -85,25 +85,51 @@ class dlc {
   }
 
   public function setEditeurId(int $int) {
+    if (is_string($int)){$int=intval($int);}
     // On vérifie qu'il s'agit bien d'un nombre
     if (is_int($int)) {
       $this->_editeurId = $int;
     }
   }
+  
+
+// il faudra vérifier les champs !!
+  public function setListeSupport($array){
+	//echo "dlc > setListeSupport : array:<pre>";var_dump($array);echo "</pre>";
+	if(!is_array($array)){return False;};
+	if(isset($array[0])){
+		foreach($array as $subarray){
+			$this->setListeSupport($subarray);
+		};
+	}
+	if(!array_key_exists("jeuSupportId" , $array ) OR !array_key_exists("dateSortie" , $array ) ){
+		//echo "<p>pas de jeuSupportId (".$array["jeuSupportId"].") ou de dateSortie(".$array["dateSortie"].")</p>";
+		return False;
+	};
+	
+	$this->_listeSupport[] = array (
+	"jeuSupportDlcId" => $this->_formatJeuSupportDlcId($array["jeuSupportDlcId"]), 
+	"jeuSupportId" => $this->_formatJeuSupportId($array["jeuSupportId"]), 
+	"plateforme" => $this->_formatPlateforme($array["plateforme"]), 
+	"plateformeId" => $this->_formatPlateformeId($array["plateformeId"]), 
+	"dateSortie" => $this->_formatDate($array["dateSortie"]),
+	);
+  }
 
 // Support , Plateforme, console
-  public function setPlateforme($str) {
+  private function _formatPlateforme($str) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
     if (is_string($str) && strlen($str) <= 100) {
-      $this->_plateforme = strip_tags($str);
+      return strip_tags($str);
     }
   }
 
-  public function setPlateformeId(int $int) {
+  private function _formatPlateformeId($int) {
+    if (is_string($int)){$int=intval($int);}
     // On vérifie qu'il s'agit bien d'un nombre
     if (is_int($int)) {
-      $this->_plateformeId = $int;
+      return $int;
     }
   }
 
@@ -116,7 +142,8 @@ class dlc {
     }
   }
 
-  public function setJeuId(int $int) {
+  public function setJeuId($int) {
+    if (is_string($int)){$int=intval($int);}
     // On vérifie qu'il s'agit bien d'un nombre
     if (is_int($int)) {
       $this->_jeuId = $int;
@@ -124,21 +151,23 @@ class dlc {
   }
 
 // JeuSupportId
-  public function setJeuSupportId(int $int) {
+  private function _formatJeuSupportId($int) {
+    if (is_string($int)){$int=intval($int);}
     // On vérifie qu'il s'agit bien d'un nombre
     if (is_int($int)) {
-      $this->_jeuSupportId = $int;
+      return $int;
     }
   }
 
 // JeuSupporDlctId
-  public function setJeuSupportDlcId(int $int) {
+  private function _formatJeuSupportDlcId($int) {
+    if (is_string($int)){$int=intval($int);}
     // On vérifie qu'il s'agit bien d'un nombre
     if (is_int($int)) {
-      $this->_jeuSupportDlcId = $int;
+      return $int;
     }
   }
-  
+
 // Lien
   public function setLien($str) {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
@@ -149,7 +178,7 @@ class dlc {
   }
 
 // La date de sortie
-  public function setDate($dateIn) {
+  private function _formatDate($dateIn) {
 	$out=False;
 	$date = new DateTime();
 // on regarde si c'est une string
@@ -176,7 +205,7 @@ class dlc {
 	}
 // si on a une date, on la renvoi
   if($out){
-		$this->_date = $date->getTimestamp();
+		return $date->getTimestamp();
 	};
   }
 
@@ -187,21 +216,35 @@ class dlc {
   public function getDescription() { return $this->_description; }
   public function getEditeur() { return $this->_editeur; }
   public function getEditeurId() { return $this->_editeurId; }
-  public function getPlateforme() { return $this->_plateforme; }
-  public function getPlateformeId() { return $this->_plateformeId; }
+// dans le tableau _listeSupport
+//  public function getPlateforme() { return $this->_plateforme; }
+//  public function getPlateformeId() { return $this->_plateformeId; }
   public function getJeu() { return $this->_jeu; }
   public function getJeuId() { return $this->_jeuId; }
-  public function getJeuSupportId() { return $this->_jeuSupportId; }
-  public function getJeuSupportDlcId() { return $this->_jeuSupportDlcId; }
+//  public function getJeuSupportId() { return $this->_jeuSupportId; }
+//  public function getJeuSupportDlcId() { return $this->_jeuSupportDlcId; }
   public function getLien() { return $this->_lien; }
-  
+
+  public function getListeSupport($formatDate="d/m/Y"){
+	  $retour=$this->_listeSupport;
+	  if($formatDate == "timestamp")
+		{return $retour;}
+	  else{
+		  foreach($retour as $key => $val){
+			  $retour[$key]["dateSortie"] = date( $formatDate , $val["dateSortie"] );
+		  }
+	  }
+	  return $retour;
+  }
+
 // retourne la date en timestamp
-  public function getTimestamp() { return $this->_date; }
+//  public function getTimestamp() { return $this->_date; }
 
 // retourne la date formaté: "d/m/Y" => 01/05/2015 ou "j/n/Y" => 1/5/2015 ou "Y-m-d" => 2015-05-01 
+/*
   public function getDate($format = "j/n/Y") {
 	return date( $format , $this->_date );
   }
-
+*/
 }
 ?>

@@ -73,7 +73,7 @@ else //On est dans le cas traitement
     //Vérification de l'adresse email
 
     //Il faut que l'adresse email n'ait jamais été utilisée
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE email =:mail');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM utilisateurs WHERE email =:mail');
     $query->bindValue(':mail',$email, PDO::PARAM_STR);
     $query->execute();
     $mail_free=($query->fetchColumn()==0)?1:0;
@@ -94,7 +94,7 @@ else //On est dans le cas traitement
    if ($i==0)
    {
     echo'<h1>Inscription terminée</h1>';
-        echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit et connecté sur le forum</p>
+        echo'<p>Bienvenue '.stripslashes(htmlspecialchars($_POST['pseudo'])).' vous êtes maintenant inscrit et connecté</p>
     <p>Cliquez <a href="'.SITE["baseUrl"].'index.php">ici</a> pour retourner à la page d\'accueil</p>';
 
         $query=$db->prepare('INSERT INTO utilisateurs (pseudo, motPass, email)
