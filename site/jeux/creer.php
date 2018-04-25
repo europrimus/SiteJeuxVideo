@@ -9,6 +9,7 @@ $managerSupports = new supportManager($db);
 $editeurs = $managerEditeurs->getList();
 $supports = $managerSupports->getList(); 
 ?>
+<?php if (!empty($_SESSION)): ?>
 <main>
 	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="ajout_jeu.php" method="POST">
@@ -63,4 +64,5 @@ $supports = $managerSupports->getList();
 	</form>
 	<p><em>(Création dynamique si nouveau support ou éditeur et recherche autocompletion pour editeur (fait pour éditeur))</em></p>
 </main>
+<?php endif; ?>
 <?php include(SITE["installDir"]."/include/footer.php"); ?>

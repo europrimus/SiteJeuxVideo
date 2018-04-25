@@ -2,6 +2,17 @@
 require ("../include/config.php");
 $page = new Page("Informations sur un jeu");
 include(SITE["installDir"]."include/header.php");
+
+$id = $_GET['id'];
+$managerjeu = new jeuManager($db);
+$jeu = $managerjeu->getbyId($id);
+
+/*$managerEditeur = new editeursManager($db);
+$managerSupport = new supportManager($db);
+
+$editeur = $managerEditeur->getList();
+$support = $managerSupport->getList(); */
+
 ?>
 <main>
 	<h2>Fiche Nom Jeu</h2>

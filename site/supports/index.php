@@ -28,9 +28,9 @@ $supports = $manager->getList();
 				<li  >
 				
 	    		<a  href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"><?php echo htmlspecialchars($support->nom()); ?><br>
-	    		<a  href="modifier.php?nom=<?php echo htmlspecialchars($support->nom()); ?>&id=<?php echo($support->id()); ?>">  <input type="button" value="Modifier" /></a>
-	    		<a  href="supprimer.php?id=<?php echo $support->id(); ?>"> <input type="button" value="suprimer" /></a>
-	    		<a  href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"><input type="button" value="Accéder à sa fiche" /></a>
+	    		<a  href="modifier.php?nom=<?php echo htmlspecialchars($support->nom()); ?>&id=<?php echo($support->id()); ?>"><?php if (!empty($_SESSION)): ?>  <input type="button" value="Modifier" /></a><?php endif; ?>
+	    		<a  href="supprimer.php?id=<?php echo $support->id(); ?>"><?php if (!empty($_SESSION)): ?> <input type="button" value="suprimer" /><?php endif; ?></a>
+	    		<a  href="voir.php?nom=<?php echo htmlspecialchars($support->nom()); ?>"><?php if (!empty($_SESSION)): ?><input type="button" value="Accéder à sa fiche" /><?php endif; ?></a>
 				</li>
 	    	
 	    </ul>
@@ -40,7 +40,7 @@ $supports = $manager->getList();
 	?>
 	
 </main>
-<a href="creer.php">Créer une plateforme</a>
+<?php if (!empty($_SESSION)): ?><a href="creer.php">Créer une plateforme</a><?php endif; ?>
 <?php
 // charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");

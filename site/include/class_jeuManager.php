@@ -13,10 +13,8 @@ class jeuManager  {
     $q->bindValue(':pegi', $game->pegi(), PDO::PARAM_INT);
     $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
     $q->execute();
-//var_dump($jeuid);
 	  $jeuid = $this->_db->lastInsertId();
-//var_dump($jeuid);
-	foreach($game->support() as $idsupport => $tableau){
+	  foreach($game->support() as $idsupport => $tableau){
 		$q = $this->_db->prepare('INSERT INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(:jeuid, :Support_id, :DateSortie);');     
 		$q->bindValue(':jeuid', $jeuid, PDO::PARAM_INT);    
 		$q->bindValue(':Support_id', $idsupport, PDO::PARAM_INT);    
@@ -38,14 +36,27 @@ class jeuManager  {
     return new jeu($donnees);
     }
 
+  public function getbyId($id){
+    $id = (int) $id;
+    $q = $this->_db->query('SELECT jeux.id as id, jeux.nom as nom, Editeur_id as editeur, description, pegi, lien, Support_id, support.nom, support.DateSortie
+      FROM jeux LEFT JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id
+      JOIN support ON jeux_has_support.Support_id = support.id
+      WHERE jeux.id = '.$id);
+   $donnees = $q->fetch(PDO::FETCH_ASSOC);
+   return new jeu($donnees);
+    echo '<pre>';
+    var_dump($donnees);
+    echo '</pre>';
+  }    
+
     public function getListSimple() {
     // Retourne la liste de tous les jeux dans un tableau
     $result = [];
-      $q = $this->_db->query('SELECT jeux.nom as jeux, editeur.nom as editeur, pegi, description, jeux.lien, support.nom as plateforme, jeux_has_support.DateSortie
-      FROM jeux INNER JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id 
-      INNER JOIN support ON jeux_has_support.id = support.id
-      INNER JOIN editeur ON jeux.Editeur_id = editeur.id
-      ORDER BY jeux.nom;');
+      $q = $this->_db->query('SELECT jeux.id as id, jeux.nom as jeux, editeur.nom as editeur, pegi, description, jeux.lien, support.nom as plateforme, jeux_has_support.DateSortie
+      FROM jeux LEFT JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id
+      JOIN editeur ON jeux.Editeur_id = editeur.id
+      JOIN support ON jeux_has_support.Support_id = support.id
+      ORDER by jeux.nom;');
 
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
       $result[] = $donnees;
@@ -62,8 +73,7 @@ class jeuManager  {
       ORDER BY jeux.nom;');
 
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-    
-        $jeux[] = new jeu($donnees);
+       $jeux[] = new jeu($donnees);
     }
     return $jeux;
   }

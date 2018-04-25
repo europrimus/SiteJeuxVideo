@@ -238,6 +238,8 @@ FROM dlc
 		JOIN support ON jeux_has_support.support_id = support.id
 		JOIN jeux ON jeux.id = jeux_has_support.jeux_id LIMIT '.$debut.' , '.$fin);
 
+		
+		if(!$q) {return False; }
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){
 		  //echo "function getList , donnees : <pre>";var_dump($donnees);echo "</pre>";
 		  $liste[] = new dlc($donnees);
