@@ -44,6 +44,10 @@ $jeux = $manager->getListSimple();
 	</tbody>
 </table>
 
+<?php if (!empty($_SESSION)): ?>
+	<p><a href="creer.php">Créer un jeu</a></p>
+<?php endif; ?>
+
 </main>
 
 <?php
