@@ -47,7 +47,7 @@ else //On est dans le cas traitement
     $hash = password_hash($pass, PASSWORD_DEFAULT);
     
     //Vérification du pseudo
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE pseudo =:pseudo');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM utilisateurs WHERE pseudo =:pseudo');
     $query->bindValue(':pseudo',$pseudo, PDO::PARAM_STR);
     $query->execute();
     $pseudo_free=($query->fetchColumn()==0)?1:0;
@@ -73,7 +73,7 @@ else //On est dans le cas traitement
     //Vérification de l'adresse email
 
     //Il faut que l'adresse email n'ait jamais été utilisée
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE email =:mail');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM utilisateurs WHERE email =:mail');
     $query->bindValue(':mail',$email, PDO::PARAM_STR);
     $query->execute();
     $mail_free=($query->fetchColumn()==0)?1:0;
