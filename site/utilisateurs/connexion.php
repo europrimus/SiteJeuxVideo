@@ -40,7 +40,7 @@ else
     else //On check le mot de passe
     {
         $query=$db->prepare('SELECT motPass, id, droits, pseudo
-        FROM Utilisateurs WHERE pseudo = :pseudo');
+        FROM utilisateurs WHERE pseudo = :pseudo');
         $query->bindValue(':pseudo',$_POST['pseudo'], PDO::PARAM_STR);
         $query->execute();
         $data=$query->fetch();
@@ -53,7 +53,7 @@ else
 		    $message = '<p>Bienvenue '.$data['pseudo'].', 
 				vous êtes maintenant connecté!</p>
 				<p>Cliquez <a href="'.SITE["baseUrl"].'index.php">ici</a> 
-				pour revenir à la page d accueil</p>';  
+				pour revenir à la page d accueil</p>';
 		}
 		else // Acces pas OK !
 		{
