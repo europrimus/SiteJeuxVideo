@@ -30,7 +30,7 @@ $DB['TYPE'] = 'mysql';
  */
 define('SITE', array(
 // Le nom complet du site
-"titreComplet" => "La base de données des Jeux Video",
+"titreComplet" => "La base de données des Jeux Vidéos",
 // Le nom court, pour la balise <title>
 "TitreCourt" => "LBDJV",
 // Le répertoire d'installation coté serveur avec le / ou \ de fin
