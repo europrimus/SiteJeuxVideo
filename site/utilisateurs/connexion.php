@@ -69,6 +69,7 @@ else
 ?>
 <input type="hidden" name="page" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
 <!-- <?php
-$page = htmlspecialchars($_POST['page']);
+$page= htmlspecialchars($_POST['page']);
+var_dump($page); 
 echo 'Cliquez <a href="'.$page.'">ici</a> pour revenir à la page précédente';
 ?> -->

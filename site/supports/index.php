@@ -16,7 +16,7 @@ $manager = new supportManager($db);
 $supports = $manager->getList();
 ?>
 
-<main class="container">
+<main class="container-fluid">
 	
 	<?php
 	if(!empty($supports)){
