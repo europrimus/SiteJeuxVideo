@@ -1,5 +1,5 @@
 	<footer class="container-fluid">
-		<p>Site réalisée par : Melodie, Vincent, Julien, Didier et Luk</p>
+		<p>Site réalisé par : Melodie, Vincent, Julien, Didier et Luk</p>
 	</footer>
 <!-- Les script JavaScript -->
 	<script src="<?=SITE["baseUrl"]?>js/jquery-3.3.1.min.js" ></script>
