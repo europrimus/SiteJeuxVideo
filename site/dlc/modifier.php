@@ -81,12 +81,12 @@ if( isset($dlcSupports[$jeu["jeuxSupportId"]]) )
 
 //echo "jeu : <pre>";var_dump($jeu);echo "</pre>";
 ?>
-			<label for="date_sortie[<?=$jeu["jeuxSupportId"]?>]">Sortie le </label>
-			<input type="date" name="date_sortie[<?=$jeu["jeuxSupportId"]?>]" id="date_sortie[<?=$jeu["jeuxSupportId"]?>]" 
+			<label for="listeSupport[<?=$jeu["jeuxSupportId"]?>][dateSortie]"</label>Sortie le </label>
+			<input type="hidden" name="listeSupport[<?=$jeu["jeuxSupportId"]?>][jeuId]" value="<?=$jeu["jeuId"]?>">
+			<input type="date" name="listeSupport[<?=$jeu["jeuxSupportId"]?>][dateSortie]" id="listeSupport[<?=$jeu["jeuxSupportId"]?>][dateSortie]"
 			<?php if($checked ){echo ' value="'.$dlcSupports[$jeu["jeuxSupportId"]].'"';}; ?> >
-			sur <input name="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" id="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" type="checkbox"
-			<?php if($checked ){echo " checked ";}; ?>
-			>
+			sur <input name="listeSupport[<?=$jeu["jeuxSupportId"]?>][checkbox]" id="listeSupport[<?=$jeu["jeuxSupportId"]?>][checkbox]" type="checkbox"
+			<?php if($checked ){echo " checked ";}; ?> >
 			<strong><?=$jeu["jeuNom"]?></strong> sur <strong><?=$jeu["plateformeNom"]?></strong>
 			<br>
 
