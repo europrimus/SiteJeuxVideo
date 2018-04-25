@@ -6,6 +6,7 @@ include(SITE["installDir"]."include/header.php");
 $id = $_GET['id'];
 $managerjeu = new jeuManager($db);
 $jeu = $managerjeu->getbyId($id);
+$support=$jeu->support();
 
 /*$managerEditeur = new editeursManager($db);
 $managerSupport = new supportManager($db);
@@ -18,10 +19,29 @@ $support = $managerSupport->getList(); */
 	<h2>Fiche Nom Jeu</h2>
 	<h3>Informations</h3>
 	<ul>
-		<li>Nom : Nom du jeu</li>
-		<li>Support : Nom du support</li>
-		<li>Editeur : Nom de l'éditeur</li>
-		<li>Date de sortie : Date de sortie</li>
+		<table>
+		<thead">
+			<tr>
+				<th>Nom de la plateforme</th>
+				<th>Date de sortie du jeu</th>
+			</tr>
+		</thead>
+		<tbody>
+		<li>Nom : <?=$jeu->nom()?></li>
+		<li>Editeur : <?=$jeu->editeur()?></li>
+		<li>Description : <?=$jeu->description()?></li>
+		<li>Pegi : <?=$jeu-> pegi()?></li>
+		<li>Lien : <?=$jeu->lien() ?></li>
+		<li>Versions :
+			<?php foreach ($support as $value):?>
+			<tr>
+				<td><?=$value['nom']?></td>
+				<td><?=$value['date']?></td>
+			</tr>
+		<?php endforeach; ?>
+		</li>
+		</tbody>
+		</table>
 	</ul>
 	<h3>Description</h3>
 	<p>Description du DLC</p>
