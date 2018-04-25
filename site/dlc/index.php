@@ -31,7 +31,10 @@ foreach($dlcList as $dlc):
 	</table>
 <?php endif;?>
 
+
+<?php if (!empty($_SESSION)): ?>
 	<p><a href="creer.php">Ajouter un DLC</a></p>
+<?php endif; ?>
 </main>
 
 <?php
