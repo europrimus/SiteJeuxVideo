@@ -8,7 +8,7 @@ $page = new Page("Liste de jeux");
 include(SITE["installDir"]."include/header.php");
 
 $manager = new jeuManager($db);
-$jeux = $manager->getList();
+$jeux = $manager->getListSimple();
 ?>
 
 <main>
@@ -18,22 +18,23 @@ $jeux = $manager->getList();
 		<tr>
 			<th>Nom du jeu</th>
 			<th>Editeur</th>
-			<th>Support</th>
-			<th>Date de sortie</th>
+			<th>PEGI</th>
 			<th>Description</th>
+			<th>Lien vers le site du jeu</th>
+			<th>Plateforme</th>
+			<th>Date de sortie</th>
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($jeux as $jeu): 
-			$manager = new EditeursManager($db);
-			$editeurs = $manager->getbyId($jeu->editeur());
-			$editeurs->nom(); ?>
+		<?php foreach ($jeux as $jeu):?>
 		<tr>
-			<td><?=$jeu->nom()?></td>
-			<td><?=$editeurs->nom()?></td>
-<!-- 			<td><?=$jeu->support()?></td>
-			<td><?=$jeu->date()?></td> -->
-			<td><?=$jeu->description()?></td>
+			<td><?=$jeu['jeux']?></td>
+			<td><?=$jeu['editeur']?></td>
+			<td>PEGI <?=$jeu['pegi']?></td>
+			<td><?=$jeu['description']?></td>
+			<td><?=$jeu['lien']?></td>
+			<td><?=$jeu['plateforme']?></td>
+			<td><?=$jeu['DateSortie']?></td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>

@@ -38,6 +38,21 @@ class jeuManager  {
     return new jeu($donnees);
     }
 
+    public function getListSimple() {
+    // Retourne la liste de tous les jeux dans un tableau
+    $result = [];
+      $q = $this->_db->query('SELECT jeux.nom as jeux, editeur.nom as editeur, pegi, description, jeux.lien, support.nom as plateforme, jeux_has_support.DateSortie
+      FROM jeux INNER JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id 
+      INNER JOIN support ON jeux_has_support.id = support.id
+      INNER JOIN editeur ON jeux.Editeur_id = editeur.id
+      ORDER BY jeux.nom;');
+
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+      $result[] = $donnees;
+    }
+      return $result;
+  }
+
   public function getList() {
     // Retourne la liste de tous les jeux dans un tableau d'objets jeu
     $jeux = [];
@@ -49,10 +64,6 @@ class jeuManager  {
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
     
         $jeux[] = new jeu($donnees);
-/*          echo "<pre>";
-          var_dump($jeux);
-          echo "</pre>";
-*/
     }
     return $jeux;
   }
