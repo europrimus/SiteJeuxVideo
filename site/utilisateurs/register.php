@@ -47,7 +47,7 @@ else //On est dans le cas traitement
     $hash = password_hash($pass, PASSWORD_DEFAULT);
     
     //Vérification du pseudo
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM Utilisateurs WHERE pseudo =:pseudo');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM utilisateurs WHERE pseudo =:pseudo');
     $query->bindValue(':pseudo',$pseudo, PDO::PARAM_STR);
     $query->execute();
     $pseudo_free=($query->fetchColumn()==0)?1:0;
