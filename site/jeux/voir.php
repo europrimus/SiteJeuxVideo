@@ -11,7 +11,7 @@ $managerSupport = new supportManager($db);
 
 $editeur = $managerEditeur->getList();
 $support = $managerSupport->getList(); 
-var_dump($jeu);
+// var_dump($jeu);
 ?>
 <main>
 	<h2>Fiche Nom Jeu</h2>
