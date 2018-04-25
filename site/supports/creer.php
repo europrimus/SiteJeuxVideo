@@ -1,11 +1,13 @@
 <?php
 require ("../include/config.php");
 
-$page = new Page("Création d'un Support");
+$page = new Page("Création d'une Plateforme");
 include(SITE["installDir"]."include/header.php");
 ?>
-<main>
-	<h2><?php echo $page->getPage(); ?></h2>
+<main >
+	<h2></h2>
+	<p>Entrer les informations de la nouvel plateforme</p>
+	
 	<form action="traitement.php" method="POST">
 		<label>Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
