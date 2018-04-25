@@ -1,11 +1,10 @@
 <?php
 
 require ("../include/config.php");
-$page = new Page("Création d'un jeu");
+$page = new Page("Jeu modifié");
 include(SITE["installDir"]."/include/header.php");
 
 //echo "request <pre>";print_r ($_REQUEST);echo "</pre>";
-
 
 $donnees=array(
 'id' =>$_POST['id'],
@@ -16,7 +15,19 @@ $donnees=array(
 'lien'=>$_POST['lien']
 );
 
-echo "données <pre>";print_r ($donnees);echo "</pre>"; 
+$id= $donnees['id'];
+$managerjeu = new jeuManager($db);
+$jeu = $managerjeu->getbyId($id);
+
+
+
+$jeu->setNom($donnees['nom']);
+$jeu->setEditeur($donnees['editeur']);
+$jeu->setDescription($donnees['description']);
+$jeu->setPegi($donnees['pegi']);
+$jeu->setLien($donnees['lien']);
+
+
 
 // Accès base de donnéees
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

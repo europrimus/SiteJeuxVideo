@@ -80,11 +80,12 @@ class jeuManager  {
 
   public function update(jeu $game) { 
     // Prépare une requête de type UPDATE. Assignation des valeurs à la requête. Exécution de la requête.
-    $q = $this->_db->prepare('UPDATE jeux SET editeur = :editeur, support = :support, date = :date, description = :description WHERE nom = :nom');
+    $q = $this->_db->prepare('UPDATE jeux SET nom = : nom, editeur = :editeur, description = :description, pegi = :pegi, lien = :lien WHERE id = :id');
+    $q->bindValue(':nom', $game->nom(), PDO::PARAM_STR);
     $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_STR);
-    $q->bindValue(':support', $game->support(), PDO::PARAM_STR);
-    $q->bindValue(':date', $game->date(), PDO::PARAM_STR);
     $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
+    $q->bindValue(':pegi', $game->pegi(), PDO::PARAM_STR);
+    $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
     $q->execute();
   }
 
