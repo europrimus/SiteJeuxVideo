@@ -21,9 +21,9 @@ foreach($dlcList as $dlc):
 //echo "foreach(dlcList as dlc) : <pre>";var_dump($dlc);echo "</pre>";
 ?>
 		<tr>
-			<td><a href="voir.php?id=<?=$dlc->getId()?>"><?=$dlc->getNom()?></a></td>
-			<td><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></td>
-			<td><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></td>
+			<td><a href="voir.php?id=<?=$dlc->getId()?>&nom=<?=$dlc->getNom()?>"><?=$dlc->getNom()?></a></td>
+			<td><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>&nom=<?=$dlc->getJeu()?>"><?=$dlc->getJeu()?></a></td>
+			<td><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>&nom=<?=$dlc->getEditeur()?>"><?=$dlc->getEditeur()?></a></td>
 		</tr>
 <?php endforeach;?>
 	</table>
