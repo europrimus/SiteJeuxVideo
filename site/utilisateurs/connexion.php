@@ -40,7 +40,7 @@ else
     else //On check le mot de passe
     {
         $query=$db->prepare('SELECT motPass, id, droits, pseudo
-        FROM Utilisateurs WHERE pseudo = :pseudo');
+        FROM utilisateurs WHERE pseudo = :pseudo');
         $query->bindValue(':pseudo',$_POST['pseudo'], PDO::PARAM_STR);
         $query->execute();
         $data=$query->fetch();
