@@ -2,6 +2,7 @@
 session_start();
 session_destroy();
 $titre="Déconnexion";
+include("../include/config.php");
 include("includes/debut.php");
 include("includes/menu.php");
 
