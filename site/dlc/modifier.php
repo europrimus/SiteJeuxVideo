@@ -24,10 +24,10 @@ if( isset($_REQUEST['id']) ) {
 	};
 };
 
-echo "dlc : <pre>";var_dump($dlc);echo "</pre>";
+//echo "dlc : <pre>";var_dump($dlc);echo "</pre>";
 if(!$erreur):
 ?>
-	<form action="modif.php" method="POST">
+	<form action="traitement.php" method="POST">
 		<input type="hidden" name="id" value="<?=$dlc->getId()?>">
 		<label>Nom :</label>
 		<input type="text" name="nom" id="nom" value="<?=$dlc->getNom()?>" required><br>
@@ -69,13 +69,24 @@ FROM jeux_has_support
 	JOIN support ON jeux_has_support.support_id = support.id');
 
 //echo "result : <pre>";var_dump($result);echo "</pre>";
+//echo "dlc/modifier : dlc->getListeSupport()<pre>";var_dump($dlc->getListeSupport());echo "</pre>";
+
+$dlcSupports = array_column($dlc->getListeSupport("Y-m-d"),"dateSortie" , "jeuSupportId") ;
+//echo "dlcSupports:<br><pre>";var_dump($dlcSupports);echo "</pre>";
 
 while ($jeu = $result->fetch(PDO::FETCH_ASSOC)):
+
+if( isset($dlcSupports[$jeu["jeuxSupportId"]]) )
+{$checked=True;} else {$checked=False;};
+
 //echo "jeu : <pre>";var_dump($jeu);echo "</pre>";
 ?>
 			<label for="date_sortie[<?=$jeu["jeuxSupportId"]?>]">Sortie le </label>
-			<input type="date" name="date_sortie[<?=$jeu["jeuxSupportId"]?>]" id="date_sortie[<?=$jeu["jeuxSupportId"]?>]">
-			sur <input name="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" id="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" type="checkbox">
+			<input type="date" name="date_sortie[<?=$jeu["jeuxSupportId"]?>]" id="date_sortie[<?=$jeu["jeuxSupportId"]?>]" 
+			<?php if($checked ){echo ' value="'.$dlcSupports[$jeu["jeuxSupportId"]].'"';}; ?> >
+			sur <input name="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" id="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" type="checkbox"
+			<?php if($checked ){echo " checked ";}; ?>
+			>
 			<strong><?=$jeu["jeuNom"]?></strong> sur <strong><?=$jeu["plateformeNom"]?></strong>
 			<br>
 
@@ -83,7 +94,7 @@ while ($jeu = $result->fetch(PDO::FETCH_ASSOC)):
 endwhile;
 ?>
 
-		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
+		<input type="submit" name="modifier" value="Modifier" id="modifier">
 	</form>
 <?php
 endif; // fin si pas d'erreur
