@@ -16,11 +16,8 @@ include(SITE["installDir"]."include/header.php");
 		<label for="description">Description :</label>
 		<textarea id="description" name="description" placeholder="Ajouter une description du DLC ici..." required></textarea><br>
 
-		<label for="date_sortie">Date de sortie :</label>
-		<input type="date" name="date_sortie" id="date_sortie" required><br>
-
 		<label for="editeurId">Editeur</label>
-		<select id="editeurId" class="" data-live-search="true"><!-- selectpicker -->
+		<select id="editeurId" name="editeurId" class="" data-live-search="true"><!-- selectpicker -->
 			<option selected disabled hidden value>Sélectionnez ...</option>
 <?php
 $editeurManager=new editeursManager($db);
@@ -36,49 +33,46 @@ foreach($editeurListe as $editeur)
 
 		<label for="jeuxSupportId">Jeux pour la plate-forme :</label><br>
 <?php
-$jeuxManager=new jeuManager($db);
-$jeuxListe=$jeuxManager->getList();
-foreach($jeuxListe as $jeu):
-echo "jeu : <pre>";var_dump($jeu);echo "</pre>";
-?>
+//$jeuxManager=new jeuManager($db);
+//$jeuxListe=$jeuxManager->getList();
+//array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
+/*
+$jeuxListe[]=array( "nom" => "Jeux wii", "id" => 1, "Support" => array( "id"=>1,"nom"=>"WII","date"=>""), "jeuxSupportId" => 1 );
+$jeuxListe[]=array( "nom" => "Jeux wii PS", "id" => 2, "Support" => array( "id"=>2,"nom"=>"PS","date"=>""), "jeuxSupportId" => 2 );
+$jeuxListe[]=array( "nom" => "Jeux wii PS", "id" => 2, "Support" => array( "id"=>1,"nom"=>"Wii","date"=>""), "jeuxSupportId" => 3 );
+*/
 
-			<label for="date_sortie[jeuxSupportId]">Sortie le </label>
-			<input type="date" name="date_sortie[jeuxSupportId]" id="date_sortie[jeuxSupportId]">
-			sur <input name="jeuxSupport[jeuxSupportId]" id="jeuxSupport[jeuxSupportId]" type="checkbox">jeuxNom - Plate-formeNom
+// pas propre mais en attendant l'objet jeu
+$result = $db->query('SELECT 
+	jeux.nom as jeuNom, 
+	jeux_has_support.jeux_id as jeuId, 
+	jeux_has_support.support_id as plateformeId, 
+	support.nom as plateformeNom,
+	jeux_has_support.id as jeuxSupportId
+FROM jeux_has_support
+	JOIN jeux ON jeux_has_support.jeux_id = jeux.id
+	JOIN support ON jeux_has_support.support_id = support.id');
+
+//echo "result : <pre>";var_dump($result);echo "</pre>";
+
+//foreach( $jeux as $jeu ):
+while ($jeu = $result->fetch(PDO::FETCH_ASSOC)):
+//echo "jeu : <pre>";var_dump($jeu);echo "</pre>";
+?>
+			<label for="date_sortie[<?=$jeu["jeuxSupportId"]?>]">Sortie le </label>
+			<input type="date" name="date_sortie[<?=$jeu["jeuxSupportId"]?>]" id="date_sortie[<?=$jeu["jeuxSupportId"]?>]">
+			sur <input name="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" id="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" type="checkbox">
+			<strong><?=$jeu["jeuNom"]?></strong> sur <strong><?=$jeu["plateformeNom"]?></strong>
 			<br>
 
 <?php
-endforeach;
+//endforeach;
+endwhile;
 ?>
 
-		<br>
-
-		<label for="plateformeId" required>Plate-forme</label>
-		<select id="plateformeId" class="" data-live-search="true"><!-- selectpicker -->
-			<option selected disabled hidden value>Sélectionnez ...</option>
-<?php
-
-$supportManager=new supportManager($db);
-$supportListe=$supportManager->getList();
-foreach($supportListe as $support)
-	{
-		echo '<option value="'.$support->id().'" data-tokens="'.$support->nom().'">'.$support->nom().'</option>';
-	}
-
-?>
-			<option value="1" data-tokens="Ma Console">Ma Console</option>
-		</select>
-		<br>
-
-<select name="support" required>
-       <option selected disabled hidden value>Sélectionnez une plateforme dans la liste</option>
-      <?php foreach ($supportListe as $support): ?>
-        <option value='<?= $support->id(); ?>'><?= htmlspecialchars($support->nom()); ?></option>
-      <?php endforeach; ?>      
-</select>
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
-	<p><em>(autocompletion pour editeur et jeu et création dynamique si nouveau jeu, support ou éditeur)</em></p>
+	<!--<p><em>(autocompletion pour editeur et jeu et création dynamique si nouveau jeu, support ou éditeur)</em></p>-->
 </main>
 <?php 
 // charge la fin de la page de <footer> à </html>
