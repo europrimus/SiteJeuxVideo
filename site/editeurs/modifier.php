@@ -10,7 +10,9 @@ include(SITE["installDir"]."include/header.php");
 $nom = $_GET['nom'];
 $id = $_GET['id'];
 ?>
+	<?php if (!empty($_SESSION)): ?>
 <main>
+	
 	<h2><?php echo $page->getPage(); ?></h2>
 	<form action="modif_editeur.php" method="POST">
 		<label>Nom :</label>
@@ -19,6 +21,7 @@ $id = $_GET['id'];
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 </main>
+<?php endif; ?>
 <?php
 // charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");

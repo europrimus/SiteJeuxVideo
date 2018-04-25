@@ -4,9 +4,10 @@ require ("../include/config.php");
 $page = new Page("Création d'une Plateforme");
 include(SITE["installDir"]."include/header.php");
 ?>
+<?php if (!empty($_SESSION)): ?>
 <main >
 	<h2></h2>
-	<p>Entrer les informations de la nouvel plateforme</p>
+	<h3>Entrer les informations de la nouvel plateforme</h3>
 	
 	<form action="traitement.php" method="POST">
 		<label>Nom :</label>
@@ -17,4 +18,5 @@ include(SITE["installDir"]."include/header.php");
 	<ul>
 	</ul>
 </main>
+<?php endif; ?>
 <?php include(SITE["installDir"]."include/footer.php"); ?>
