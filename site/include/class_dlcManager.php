@@ -46,8 +46,8 @@ object(dlc)#3 (13) {
 	if(	$objet->getNom() ==! null AND 
 		$objet->getDescription() ==! null AND 
 		$objet->getEditeurId() ==! null AND 
-		$objet->getJeuSupportId() ==! null AND 
-		$objet->getDate() ==! null ){
+		$objet->getJeuId() ==! null AND 
+		$objet->getListeSupport() ==! null){
 
 //La table DLC
 		$q = $this->_db->prepare('INSERT INTO `dlc`( `nom`, `description`, `editeur_id`, `lien`)
@@ -66,18 +66,28 @@ VALUES (:nom, :description, :editeur_id, :lien);');
 //echo "dlcManager > add() > objet : <pre>";var_dump($objet);echo "</pre>";
 
 //La table jeuxsupportdlc
-		$q = $this->_db->prepare('INSERT INTO `jeuxsupportdlc`( `id_jeuxsupport`, `id_dlc`, `datesortie`) 
-VALUES (:id_jeuxsupport, :id_dlc, :datesortie);');
-		if(!$q){echo "add : this->_db->prepare errorInfo():<pre>";var_dump($this->_db->errorInfo()); echo "</pre>";};
-		$q->bindValue( ':id_jeuxsupport', $objet->getJeuSupportId(), PDO::PARAM_INT );
-		$q->bindValue( ':id_dlc', $objet->getId(), PDO::PARAM_INT );
-		$q->bindValue( ':datesortie', $objet->getDate("Y-m-d"), PDO::PARAM_STR );
-//echo "dlcManager > add() > q : <pre>";var_dump($q);echo "</pre>";
+		foreach($objet->getListeSupport("Y-m-d") as $key => $val){
+//			echo "dlcManager > add() > foreach : ($key) <pre>";var_dump($val);echo "</pre>";
+			$q = $this->_db->prepare('INSERT INTO `jeuxsupportdlc`( `id_jeuxsupport`, `id_dlc`, `datesortie`) 
+	VALUES (:id_jeuxsupport, :id_dlc, :datesortie);');
+			if(!$q){echo "add : this->_db->prepare errorInfo():<pre>";var_dump($this->_db->errorInfo()); echo "</pre>";};
+			$q->bindValue( ':id_jeuxsupport', $val["jeuSupportId"], PDO::PARAM_INT );
+			$q->bindValue( ':id_dlc', $objet->getId(), PDO::PARAM_INT );
+			$q->bindValue( ':datesortie', $val["dateSortie"], PDO::PARAM_STR );
+//	echo "dlcManager > add() > q : <pre>";var_dump($q);echo "</pre>";
 
-		$r=$q->execute();
-//echo "dlcManager > add() > r : <pre>";var_dump($r);echo "</pre>";
+			$r=$q->execute();
+	//echo "dlcManager > add() > r : <pre>";var_dump($r);echo "</pre>";
+		}
 
 	return $r;
+	}else{
+		echo "erreur : getNom : ".$objet->getNom()."<br>
+		getDescription : ".$objet->getDescription()."<br>
+		getEditeurId : ".$objet->getEditeurId()."<br>
+		getJeuId : ".$objet->getJeuId()."<br>
+		getListeSupport : ";
+		var_dump($objet->getListeSupport());
 	};
   }
 
@@ -118,6 +128,7 @@ FROM dlc
 		JOIN support ON jeux_has_support.support_id = support.id
 		JOIN jeux ON jeux.id = jeux_has_support.jeux_id
 */
+
   public function getFromNom($nom){
     if(!is_string($nom)){
 		return False;
@@ -128,24 +139,34 @@ FROM dlc
 		dlc.Description as description , 
 		editeur.nom as editeur, 
 		dlc.editeur_id as editeurId, 
-		support.nom as plateforme, 
-		support.id as plateformeId, 
 		jeux.nom as jeu, 
-		jeux.id as jeuId, 
-		jeux_has_support.id as jeuSupportId , 
-		jeuxsupportdlc.id as jeuSupportDlcId , 
-		dlc.lien, 
-		jeuxsupportdlc.datesortie as date
+		jeux.id as jeuId,  
+		dlc.lien
 FROM dlc 
 		JOIN editeur ON editeur_id = editeur.id AND dlc.nom = '.$nom.'
         JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
 		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
-		JOIN support ON jeux_has_support.support_id = support.id
-		JOIN jeux ON jeux.id = jeux_has_support.jeux_id
-		' );
-		//echo "getFromNom($nom):<pre>";var_dump($q);echo "</pre>";
-		$donnees = $q->fetch(PDO::FETCH_ASSOC);
-		return new dlc($donnees);
+		JOIN jeux ON jeux.id = jeux_has_support.jeux_id;');
+		
+		$donnee = $q->fetch(PDO::FETCH_ASSOC);
+		
+//array ("jeuSupportDlcId" => , "jeuSupportId" => , "plateforme" =>, "plateformeId" => , "dateSortie" => )
+		$q = $this->_db->query('SELECT jeuxsupportdlc.id as jeuSupportDlcId,
+    jeux_has_support.id as jeuSupportId , 
+    support.nom as plateforme, 
+    jeux_has_support.support_id as plateformeId, 
+    jeuxsupportdlc.datesortie as dateSortie
+FROM jeuxsupportdlc
+	JOIN dlc ON dlc.id = jeuxsupportdlc.id_dlc AND dlc.nom = '.$nom.'
+	JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
+    JOIN support ON jeux_has_support.support_id=support.id;');
+		$sousDonnees = $q->fetchAll(PDO::FETCH_ASSOC);
+		
+		$data = $donnee+array("listeSupport"=>$sousDonnees);
+		//echo "dlcManager > getFromId : data:<pre>";var_dump($data);echo "</pre>";
+		$dlc = new dlc($data);
+		//echo "dlcManager > getFromId : dlc:<pre>";var_dump($dlc);echo "</pre>";
+		return $dlc;
 	};
   }
 
@@ -160,23 +181,34 @@ FROM dlc
 		dlc.Description as description , 
 		editeur.nom as editeur, 
 		dlc.editeur_id as editeurId, 
-		support.nom as plateforme, 
-		support.id as plateformeId, 
 		jeux.nom as jeu, 
-		jeux.id as jeuId, 
-		jeux_has_support.id as jeuSupportId , 
-		jeuxsupportdlc.id as jeuSupportDlcId , 
-		dlc.lien, 
-		jeuxsupportdlc.datesortie as date
+		jeux.id as jeuId,  
+		dlc.lien
 FROM dlc 
 		JOIN editeur ON editeur_id = editeur.id AND dlc.id = '.$id.'
         JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
 		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
-		JOIN support ON jeux_has_support.support_id = support.id
-		JOIN jeux ON jeux.id = jeux_has_support.jeux_id
-		');
-		$donnees = $q->fetch(PDO::FETCH_ASSOC);
-		return new dlc($donnees);
+		JOIN jeux ON jeux.id = jeux_has_support.jeux_id;');
+		
+		$donnee = $q->fetch(PDO::FETCH_ASSOC);
+		
+//array ("jeuSupportDlcId" => , "jeuSupportId" => , "plateforme" =>, "plateformeId" => , "dateSortie" => )
+		$q = $this->_db->query('
+SELECT jeuxsupportdlc.id as jeuSupportDlcId,
+    jeux_has_support.id as jeuSupportId , 
+    support.nom as plateforme, 
+    jeux_has_support.support_id as plateformeId, 
+    jeuxsupportdlc.datesortie as dateSortie
+FROM jeuxsupportdlc
+	JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id AND jeuxsupportdlc.id_dlc = '.$id.'
+    JOIN support ON jeux_has_support.support_id=support.id;');
+		$sousDonnees = $q->fetchAll(PDO::FETCH_ASSOC);
+		
+		$data = $donnee+array("listeSupport"=>$sousDonnees);
+		//echo "dlcManager > getFromId : data:<pre>";var_dump($data);echo "</pre>";
+		$dlc = new dlc($data);
+		//echo "dlcManager > getFromId : dlc:<pre>";var_dump($dlc);echo "</pre>";
+		return $dlc;
 	};
   }
 
@@ -223,20 +255,19 @@ FROM dlc
 		dlc.Description as description , 
 		editeur.nom as editeur, 
 		dlc.editeur_id as editeurId, 
-		support.nom as plateforme, 
-		support.id as plateformeId, 
 		jeux.nom as jeu, 
 		jeux.id as jeuId, 
 		jeux_has_support.id as jeuSupportId , 
 		jeuxsupportdlc.id as jeuSupportDlcId , 
-		dlc.lien, 
-		jeuxsupportdlc.datesortie as date
+		dlc.lien
 FROM dlc 
 		JOIN editeur ON editeur_id = editeur.id
-        JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
+		JOIN jeuxsupportdlc ON dlc.id = jeuxsupportdlc.id_dlc
 		JOIN jeux_has_support ON jeuxsupportdlc.id_jeuxsupport = jeux_has_support.id
 		JOIN support ON jeux_has_support.support_id = support.id
-		JOIN jeux ON jeux.id = jeux_has_support.jeux_id LIMIT '.$debut.' , '.$fin);
+		JOIN jeux ON jeux.id = jeux_has_support.jeux_id 
+		GROUP BY id,jeuId
+		LIMIT '.$debut.' , '.$fin);
 
 		
 		if(!$q) {return False; }
@@ -257,14 +288,14 @@ FROM dlc
 
 		$q = $this->_db->query('SELECT COUNT( dlc.id ) FROM dlc WHERE dlc.nom = "'.$nom.'" GROUP BY dlc.id');
 		if($q->fetch() == 0){
-			echo "pas trouvé \"$nom\" donc création<br>";
+			//echo "pas trouvé \"$nom\" donc création<br>";
 			return False;
 		}else{
-			echo "trouvé $nom<br>";
+			//echo "trouvé $nom<br>";
 			return True;
 		};
 	}else{
-		echo "Pas une chaine de texte : $nom<br>";
+		//echo "Pas une chaine de texte : $nom<br>";
 		return True;
 	};
   }

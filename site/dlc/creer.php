@@ -9,16 +9,21 @@ include(SITE["installDir"]."include/header.php");
 <main class="container-fluid">
 	<h2><?php echo $page->getPage(); ?></h2>
 <?php 
-echo "_SESSION: <pre>";var_dump($_SESSION);echo "</pre>";
+//echo "_SESSION: <pre>";var_dump($_SESSION);echo "</pre>";
+
+//echo "dlc: <pre>";var_dump(new dlc());echo "</pre>";
 
 ?>
 	<form action="ajout_dlc.php" method="POST">
 
-		<label>Nom :</label>
+		<label for="nom">Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
 
 		<label for="description">Description :</label>
 		<textarea id="description" name="description" placeholder="Ajouter une description du DLC ici..." required></textarea><br>
+
+		<label for="lien">Lien vers le site officiel (facultatif) :</label>
+		<input type="text" name="lien" id="lien"><br>
 
 		<label for="editeurId">Editeur</label>
 		<select id="editeurId" name="editeurId" class="" data-live-search="true"><!-- selectpicker -->
@@ -35,8 +40,10 @@ foreach($editeurListe as $editeur)
 		</select>
 		<br>
 
-		<label for="jeuxSupportId">Jeux pour la plate-forme :</label><br>
+		<p>Jeux pour la plate-forme :<br>
 <?php
+//listeJeuSupport[$jeuSupportDlcId] = array ("_jeuSupportDlcId" => , "jeuSupportId" => , "jeu" => , "jeuId" => , "plateforme" =>, "plateformeId" => , "dateSortie" => )
+
 //$jeuxManager=new jeuManager($db);
 //$jeuxListe=$jeuxManager->getList();
 //array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
@@ -54,21 +61,20 @@ FROM jeux_has_support
 
 //echo "result : <pre>";var_dump($result);echo "</pre>";
 
-//foreach( $jeux as $jeu ):
 while ($jeu = $result->fetch(PDO::FETCH_ASSOC)):
 //echo "jeu : <pre>";var_dump($jeu);echo "</pre>";
 ?>
-			<label for="date_sortie[<?=$jeu["jeuxSupportId"]?>]">Sortie le </label>
-			<input type="date" name="date_sortie[<?=$jeu["jeuxSupportId"]?>]" id="date_sortie[<?=$jeu["jeuxSupportId"]?>]">
-			sur <input name="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" id="jeuxSupport[<?=$jeu["jeuxSupportId"]?>]" type="checkbox">
+			<label for="listeSupport[<?=$jeu["jeuxSupportId"]?>][dateSortie]"</label>Sortie le </label>
+			<input type="hidden" name="listeSupport[<?=$jeu["jeuxSupportId"]?>][jeuId]" value="<?=$jeu["jeuId"]?>">
+			<input type="date" name="listeSupport[<?=$jeu["jeuxSupportId"]?>][dateSortie]" id="listeSupport[<?=$jeu["jeuxSupportId"]?>][dateSortie]">
+			sur <input name="listeSupport[<?=$jeu["jeuxSupportId"]?>][checkbox]" id="listeSupport[<?=$jeu["jeuxSupportId"]?>][checkbox]" type="checkbox">
 			<strong><?=$jeu["jeuNom"]?></strong> sur <strong><?=$jeu["plateformeNom"]?></strong>
 			<br>
 
 <?php
-//endforeach;
 endwhile;
 ?>
-
+		</p>
 		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
 	</form>
 	<!--<p><em>(autocompletion pour editeur et jeu et création dynamique si nouveau jeu, support ou éditeur)</em></p>-->

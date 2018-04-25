@@ -14,7 +14,7 @@ $dlcList = $manager->getList();
 <main class="container-fluid">
 <?php if($dlcList):?>
 	<table>
-		<tr><th>Nom</th><th>Jeu</th><th>Plateforme</th><th>Editeur</th><th>Date</th></tr>
+		<tr><th>Nom</th><th>Jeu</th><!--<th>Plateforme</th>--><th>Editeur</th><!--<th>Date</th>--></tr>
 
 <?php
 foreach($dlcList as $dlc):
@@ -23,9 +23,7 @@ foreach($dlcList as $dlc):
 		<tr>
 			<td><a href="voir.php?id=<?=$dlc->getId()?>"><?=$dlc->getNom()?></a></td>
 			<td><a href="../jeux/voir.php?id=<?=$dlc->getJeuId()?>"><?=$dlc->getJeu()?></a></td>
-			<td><a href="../supports/voir.php?id=<?=$dlc->getPlateformeId()?>"><?=$dlc->getPlateforme()?></a></td>
 			<td><a href="../editeurs/voir.php?id=<?=$dlc->getEditeurId()?>"><?=$dlc->getEditeur()?></a></td>
-			<td><?=$dlc->getDate()?></td>
 		</tr>
 <?php endforeach;?>
 	</table>
