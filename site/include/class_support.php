@@ -33,7 +33,7 @@ class support {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 100 caractères.
     if (is_string($nom) && strlen($nom) <= 100) {
-      $this->_nom = $nom;
+      $this->_nom = strip_tags($nom);
     }
   }
   
@@ -41,7 +41,7 @@ class support {
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     // Dont la longueur est inférieure à 10 caractères.
     if (is_string($DateSortie) && strlen($DateSortie) <= 10) {
-      $this->_DateSortie = $DateSortie;
+      $this->_DateSortie = strip_tags($DateSortie);
     }
   }
   
