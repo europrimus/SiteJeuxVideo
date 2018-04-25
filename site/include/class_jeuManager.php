@@ -38,15 +38,15 @@ class jeuManager  {
 
   public function getbyId($id){
     $id = (int) $id;
-    $q = $this->_db->query('SELECT jeux.id as id, jeux.nom as nom, Editeur_id as editeur, description, pegi, lien, Support_id, support.nom, support.DateSortie
+    $q = $this->_db->query('SELECT jeux.id, jeux.nom, Editeur_id as editeur, description, pegi, lien FROM jeux WHERE jeux.id ='.$id);
+    $donnees1 = $q->fetch(PDO::FETCH_ASSOC);
+    $q = $this->_db->query('SELECT Support_id as id, support.nom as nom, jeux_has_support.DateSortie as date
       FROM jeux LEFT JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id
       JOIN support ON jeux_has_support.Support_id = support.id
       WHERE jeux.id = '.$id);
-   $donnees = $q->fetch(PDO::FETCH_ASSOC);
-   return new jeu($donnees);
-    echo '<pre>';
-    var_dump($donnees);
-    echo '</pre>';
+    $donnees2 = $q->fetchAll(PDO::FETCH_ASSOC);
+    $donnees = $donnees1 + array("Support"=> $donnees2);
+    return new jeu($donnees);
   }    
 
     public function getListSimple() {
