@@ -14,7 +14,7 @@ include(SITE["installDir"]."include/header.php");
 //echo "dlc: <pre>";var_dump(new dlc());echo "</pre>";
 
 ?>
-	<form action="ajout_dlc.php" method="POST">
+	<form action="traitement.php" method="POST">
 
 		<label for="nom">Nom :</label>
 		<input type="text" name="nom" id="nom" required><br>
@@ -75,7 +75,7 @@ while ($jeu = $result->fetch(PDO::FETCH_ASSOC)):
 endwhile;
 ?>
 		</p>
-		<input type="submit" name="envoyer" value="envoyer" id="envoyer">
+		<input type="submit" name="creer" value="Créer" id="creer">
 	</form>
 	<!--<p><em>(autocompletion pour editeur et jeu et création dynamique si nouveau jeu, support ou éditeur)</em></p>-->
 </main>

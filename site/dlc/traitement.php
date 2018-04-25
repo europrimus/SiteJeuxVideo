@@ -28,19 +28,25 @@ foreach($_POST["listeSupport"] as $jeuxSupportId => $val){
 
 //echo "dlcnew: <pre>";var_dump($dlcnew);echo "</pre>";
 
-
-// On vérifie que le nom a été tapé par l'utilisateur
-if(!empty($dlcnew->getNom())){
-	$manager = new dlcManager($db);
-	if( !$manager->existeNom($dlcnew->getNom()) ){
-		$manager->add($dlcnew);
-		
-		echo "Le DLC <strong>". $dlcnew->getNom() ."</strong> a été ajouté avec succès";
-	}else{
-		echo "Le DLC <strong>". $dlcnew->getNom() ."</strong> Existe déjà";
+if(isset($_POST["creer"])){
+	// On vérifie que le nom tapé par l'utilisateur 
+	if(!empty($dlcnew->getNom())){
+		$manager = new dlcManager($db);
+		if( !$manager->existeNom($dlcnew->getNom()) ){
+			$manager->add($dlcnew);
+			
+			echo "Le DLC <strong>". $dlcnew->getNom() ."</strong> a été ajouté avec succès";
+		}else{
+			echo "Le DLC <strong>". $dlcnew->getNom() ."</strong> Existe déjà";
+		}
+	}
+}elseif(isset($_POST["modifier"])){
+	if(!empty($dlcnew->getNom())){
+		$manager = new dlcManager($db);
+//		$manager->update($dlcnew);
+		echo "Vous ne pouvez pas modifier le DLC <strong>". $dlcnew->getNom() ."</strong>";
 	}
 }
-
  
 // charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");
