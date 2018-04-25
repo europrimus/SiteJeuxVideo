@@ -39,12 +39,13 @@ else
     }
     else //On check le mot de passe
     {
-        $query=$db->prepare('SELECT motPass, id, droits, pseudo
+        $query=$db->prepare('SELECT motpass, id, droits, pseudo
         FROM utilisateurs WHERE pseudo = :pseudo');
         $query->bindValue(':pseudo',$_POST['pseudo'], PDO::PARAM_STR);
         $query->execute();
-        $data=$query->fetch();
-        $hash=$data['motPass'];
+        $data=$query->fetch(PDO::FETCH_ASSOC);
+        //var_dump($data);
+        $hash=$data['motpass'];
 		if (password_verify($_POST['password'], $hash)) // Acces OK !
 		{
 		    $_SESSION['pseudo'] = $data['pseudo'];

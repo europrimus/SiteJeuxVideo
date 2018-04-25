@@ -40,7 +40,7 @@ $supports = $manager->getList();
 	?>
 	
 </main>
-<a href="creer.php">Créer une plateforme</a>
+<?php if (!empty($_SESSION)): ?><a href="creer.php">Créer une plateforme</a><?php endif; ?>
 <?php
 // charge la fin de la page de <footer> à </html>
 include(SITE["installDir"]."include/footer.php");

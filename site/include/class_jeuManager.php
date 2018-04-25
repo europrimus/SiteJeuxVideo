@@ -42,11 +42,11 @@ class jeuManager  {
       FROM jeux LEFT JOIN jeux_has_support ON jeux.id = jeux_has_support.Jeux_id
       JOIN support ON jeux_has_support.Support_id = support.id
       WHERE jeux.id = '.$id);
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    return new jeu($donnees);
-//    echo '<pre>';
-//    var_dump($donnees);
-//    echo '</pre>';*/
+   $donnees = $q->fetch(PDO::FETCH_ASSOC);
+   return new jeu($donnees);
+    echo '<pre>';
+    var_dump($donnees);
+    echo '</pre>';
   }    
 
     public function getListSimple() {
