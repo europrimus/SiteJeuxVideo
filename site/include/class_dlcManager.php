@@ -69,12 +69,8 @@ VALUES (:nom, :description, :editeur_id, :lien);');
 		$q = $this->_db->prepare('INSERT INTO `jeuxsupportdlc`( `id_jeuxsupport`, `id_dlc`, `datesortie`) 
 VALUES (:id_jeuxsupport, :id_dlc, :datesortie);');
 		if(!$q){echo "add : this->_db->prepare errorInfo():<pre>";var_dump($this->_db->errorInfo()); echo "</pre>";};
-
-//echo "objet->getJeuSupportId() : ".var_dump($objet->getJeuSupportId())."<br>";
 		$q->bindValue( ':id_jeuxsupport', $objet->getJeuSupportId(), PDO::PARAM_INT );
-//echo "objet->getId() : ".var_dump($objet->getId())."<br>";
 		$q->bindValue( ':id_dlc', $objet->getId(), PDO::PARAM_INT );
-//echo "objet->getDate() : ".var_dump($objet->getDate("Y-m-d"))."<br>";
 		$q->bindValue( ':datesortie', $objet->getDate("Y-m-d"), PDO::PARAM_STR );
 //echo "dlcManager > add() > q : <pre>";var_dump($q);echo "</pre>";
 
@@ -283,7 +279,8 @@ FROM dlc
 
 // Supprime - Delete
   public function delete(dlc $objet){
-    $this->_db->exec('DELETE FROM dlc WHERE id = '.$objet->getId());
+    $this->_db->exec('DELETE FROM jeuxsupportdlc WHERE jeuxsupportdlc.id_dlc = '.$objet->getId().';
+    DELETE FROM dlc WHERE id = '.$objet->getId());
   }
 
 

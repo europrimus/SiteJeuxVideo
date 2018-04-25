@@ -8,6 +8,10 @@ include(SITE["installDir"]."include/header.php");
 ?>
 <main class="container-fluid">
 	<h2><?php echo $page->getPage(); ?></h2>
+<?php 
+echo "_SESSION: <pre>";var_dump($_SESSION);echo "</pre>";
+
+?>
 	<form action="ajout_dlc.php" method="POST">
 
 		<label>Nom :</label>
@@ -36,11 +40,6 @@ foreach($editeurListe as $editeur)
 //$jeuxManager=new jeuManager($db);
 //$jeuxListe=$jeuxManager->getList();
 //array( idsupport => array ("id"=>id, "nom"=>nom, "date"=>date ) )
-/*
-$jeuxListe[]=array( "nom" => "Jeux wii", "id" => 1, "Support" => array( "id"=>1,"nom"=>"WII","date"=>""), "jeuxSupportId" => 1 );
-$jeuxListe[]=array( "nom" => "Jeux wii PS", "id" => 2, "Support" => array( "id"=>2,"nom"=>"PS","date"=>""), "jeuxSupportId" => 2 );
-$jeuxListe[]=array( "nom" => "Jeux wii PS", "id" => 2, "Support" => array( "id"=>1,"nom"=>"Wii","date"=>""), "jeuxSupportId" => 3 );
-*/
 
 // pas propre mais en attendant l'objet jeu
 $result = $db->query('SELECT 
