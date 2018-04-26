@@ -35,7 +35,7 @@ if(isset($_POST["creer"])){
 		if( !$manager->existeNom($dlcnew->getNom()) ){
 			$manager->add($dlcnew);
 			
-			echo "Le DLC <strong>". $dlcnew->getNom() ."</strong> a été ajouté avec succès";
+			echo 'Le DLC <a href="../dlc/voir.php?id='.$dlcnew->getId().'&nom='.$dlcnew->getNom().'"><strong>'. $dlcnew->getNom() .'</strong></a> a été ajouté avec succès';
 		}else{
 			echo "Le DLC <strong>". $dlcnew->getNom() ."</strong> Existe déjà";
 		}

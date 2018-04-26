@@ -42,8 +42,11 @@ if (!$erreur):
 	<p><a href="modifier.php?id=<?=$dlc->getId()?>">Modifier</a> | 
 	<a href="supprimer.php?id=<?=$dlc->getId()?>">Supprimer</a></p>
 <?php
+else:
+?>
+<p>DLC non trouvé, vous pouvez  retourner à la <a href="./">liste des DLC</a> ou le <a href="creer.php">créer</a>.</p>
+<?php
 endif;
-if($erreur){echo '<p>DLC non trouvé, vous pouvez  retourner à la <a href="./">liste des DLC</a> ou le <a href="creer.php">créer</a>.</p>';};
 ?>
 </main>
 

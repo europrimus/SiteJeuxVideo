@@ -106,14 +106,18 @@ class dlc {
 		//echo "<p>pas de jeuSupportId (".$array["jeuSupportId"].") ou de dateSortie(".$array["dateSortie"].")</p>";
 		return False;
 	};
-	
-	$this->_listeSupport[] = array (
-	"jeuSupportDlcId" => $this->_formatJeuSupportDlcId($array["jeuSupportDlcId"]), 
+	$i=count($this->_listeSupport);
+	$this->_listeSupport[$i] = array (
 	"jeuSupportId" => $this->_formatJeuSupportId($array["jeuSupportId"]), 
-	"plateforme" => $this->_formatPlateforme($array["plateforme"]), 
-	"plateformeId" => $this->_formatPlateformeId($array["plateformeId"]), 
 	"dateSortie" => $this->_formatDate($array["dateSortie"]),
 	);
+	if(array_key_exists("jeuSupportDlcId" , $array ) ){
+		$this->_listeSupport[$i] += array (
+		"jeuSupportDlcId" => $this->_formatJeuSupportDlcId($array["jeuSupportDlcId"]), 
+		"plateformeId" => $this->_formatPlateformeId($array["plateformeId"]), 
+		"plateforme" => $this->_formatPlateforme($array["plateforme"]), 
+		);
+	};
   }
 
 // Support , Plateforme, console

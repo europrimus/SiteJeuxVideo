@@ -287,7 +287,7 @@ FROM dlc
     if(is_string($nom)){
 
 		$q = $this->_db->query('SELECT COUNT( dlc.id ) FROM dlc WHERE dlc.nom = "'.$nom.'" GROUP BY dlc.id');
-		if($q->fetch() == 0){
+		if($q->fetch(PDO::FETCH_ASSOC) == 0){
 			//echo "pas trouvé \"$nom\" donc création<br>";
 			return False;
 		}else{
