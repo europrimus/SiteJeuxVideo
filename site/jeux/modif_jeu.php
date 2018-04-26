@@ -19,8 +19,6 @@ $id= $donnees['id'];
 $managerjeu = new jeuManager($db);
 $jeu = $managerjeu->getbyId($id);
 
-
-
 $jeu->setNom($donnees['nom']);
 $jeu->setEditeur($donnees['editeur']);
 $jeu->setDescription($donnees['description']);
@@ -28,14 +26,12 @@ $jeu->setPegi($donnees['pegi']);
 $jeu->setLien($donnees['lien']);
 
 
-
 // Accès base de donnéees
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-/*$newJeu= new jeu($donnees);
 $manager = new jeuManager($db);
-$manager->add($newJeu);
-*/
+$manager->update($jeu);
+
 // A FAIRE LA VERIFICATION DE L'EXISTENCE PRECEDENTE DU JEU
 
 include(SITE["installDir"]."/include/footer.php");
