@@ -79,23 +79,25 @@ class jeuManager  {
   }
 
   public function update(jeu $game) {
-    // Préparation de la requête d'insertion. Assignation des valeurs. Exécution de la requête.
-    $q = $this->_db->prepare(
-     'update INTO jeux(nom, editeur_id, description, pegi, lien) VALUES(:nom, :editeur, :description, :pegi, :lien);');    
+    // Préparation de la requête update. Assignation des valeurs. Exécution de la requête.
+     $q = $this->_db->prepare(
+     'UPDATE jeux SET nom=:nom, editeur_id=:editeur, description=:description, pegi=:pegi, lien=:lien WHERE id=:id;');
+
+    $q->bindValue(':id', $game->id(), PDO::PARAM_INT);     
     $q->bindValue(':nom', $game->nom(), PDO::PARAM_STR);
     $q->bindValue(':editeur', $game->editeur(), PDO::PARAM_INT);    
     $q->bindValue(':description', $game->description(), PDO::PARAM_STR);
     $q->bindValue(':pegi', $game->pegi(), PDO::PARAM_INT);
     $q->bindValue(':lien', $game->lien(), PDO::PARAM_STR);
     $q->execute();
-	  $jeuid = $this->_db->lastInsertId();
-	  foreach($game->support() as $idsupport => $tableau){
-		$q = $this->_db->prepare('update INTO jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(:jeuid, :Support_id, :DateSortie);');     
-		$q->bindValue(':jeuid', $jeuid, PDO::PARAM_INT);    
-		$q->bindValue(':Support_id', $idsupport, PDO::PARAM_INT);    
-		$q->bindValue(':DateSortie', $tableau["date"], PDO::PARAM_STR);
-		$q->execute();
-	}
+//	  $jeuid = $this->_db->lastInsertId();
+//	  foreach($game->support() as $idsupport => $tableau){
+//		$q = $this->_db->prepare('UPDATE jeux_has_support (Jeux_id, Support_id, DateSortie) VALUES(:jeuid, :Support_id, //:DateSortie);');     
+//		$q->bindValue(':jeuid', $jeuid, PDO::PARAM_INT);    
+//		$q->bindValue(':Support_id', $idsupport, PDO::PARAM_INT);    
+//		$q->bindValue(':DateSortie', $tableau["date"], PDO::PARAM_STR);
+//		$q->execute();
+//	   }
   }
   public function setDb(PDO $db) {
     $this->_db = $db;
