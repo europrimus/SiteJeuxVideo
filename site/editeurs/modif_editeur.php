@@ -16,7 +16,7 @@ $erreur = "";
 // On vérifie que le nom a été tapé par l'utilisateur
 if(!empty($nom) && !empty($id)){
 
-	$manager = new EditeursManager($db);
+	$manager = new editeursManager($db);
 	$editeurs = $manager->getList();
 	$new_editeur = new Editeur([
 		'id' => $id,
